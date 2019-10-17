@@ -4,7 +4,12 @@
 		<view class="text-area">
 			
 			  <van-button type="info"><navigator url="../homepage/homepage">点击</navigator></van-button>
-			
+			  <van-tabbar :active="active" @change="onChange">
+			    <van-tabbar-item name="home" icon="home-o">标签</van-tabbar-item>
+			    <van-tabbar-item name="search" icon="search">标签</van-tabbar-item>
+			    <van-tabbar-item name="friends" icon="friends-o">标签</van-tabbar-item>
+			    <van-tabbar-item name="setting" icon="setting-o">标签</van-tabbar-item>
+			  </van-tabbar>
 		</view>
 	</view>
 </template>
@@ -13,30 +18,23 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello',
-				ColorList: [{
-        title: '嫣红',
-        name: 'red',
-        color: '#e54d42'
-      },
-      {
-        title: '桔橙',
-        name: 'orange',
-        color: '#f37b1d'
-      },
-      {
-        title: '明黄',
-        name: 'yellow',
-        color: '#fbbd08'
-      }],
-			}
-		},
-		onLoad() {
-
+				 active: 'home'
+				}
 		},
 		methods: {
-
+			onChange:function(event) {
+				if (event.detail == "search"){
+					this.$data.active = 'search'
+					
+				}
+				else if (event.detail == "friends"){
+					this.$data.active = 'friends'
+				}
+				else if (event.detail == "setting"){
+					this.$data.active = 'setting'
+				} 
 		}
+	},
 	}
 </script>
 

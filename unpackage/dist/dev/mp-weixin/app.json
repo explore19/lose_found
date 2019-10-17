@@ -1,8 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/homepage/homepage",
-    "pages/chat/chat"
+    "pages/announce/announce",
+    "pages/message/message",
+    "pages/user/user"
   ],
   "subPackages": [],
   "window": {
@@ -12,7 +13,8 @@
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {
-    "van-button": "/wxcomponents/vant-weapp/dist/button/index"
-  },
-  "sitemapLocation": "sitemap73.json"
+    "van-button": "/wxcomponents/vant-weapp/dist/button/index",
+    "van-tabbar": "/wxcomponents/vant-weapp/dist/tabbar/index",
+    "van-tabbar-item": "/wxcomponents/vant-weapp/dist/tabbar-item/index"
+  }
 }
