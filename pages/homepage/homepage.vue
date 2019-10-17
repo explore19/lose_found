@@ -1,0 +1,63 @@
+<template>
+	<view>
+		<view class="cu-bar bg-black search">
+		    <view class="cu-avatar round" style="background-image:url(https://image.weilanwl.com/img/square-3.jpg);"></view>
+		    <view class="content">
+		      ColorUI
+		    </view>
+		    <view class="action">
+		      <text class="cuIcon-more"></text>
+		    </view>
+		  </view>
+			 <view class="cu-bar search bg-white">
+		      <view class="search-form round">
+		        <text class="cuIcon-search"></text>
+		        <input type="text" placeholder="搜索图片、文章、视频" confirm-type="search"></input>
+			  </view>
+			      <view class="action">
+			        <button class="cu-btn bg-green shadow-blur round">搜索</button>
+			      </view>
+		   </view>
+			<view class="cu-bar bg-white margin-top solid-bottom">
+			  <view class="action">
+			    <text class="cuIcon-title text-orange"></text> 图标
+			  </view>
+			</view>
+			
+			  
+			  
+			   
+			   
+	</view>  
+</template>
+
+<script>
+	
+
+   
+
+	export default {
+		data() {
+			
+			return {
+				index:'fhghg',
+					items:[
+					]
+				}
+ 
+		
+			
+		},
+	
+
+		methods: {
+			
+		  
+		}
+	};
+	 
+</script>
+
+<style>
+	
+</style>
