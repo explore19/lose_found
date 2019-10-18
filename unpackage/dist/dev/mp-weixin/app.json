@@ -47,6 +47,12 @@
     "van-tabbar-item": "/wxcomponents/vant-weapp/dist/tabbar-item/index",
     "van-search": "/wxcomponents/vant-weapp/dist/search/index",
     "van-tab": "/wxcomponents/vant-weapp/dist/tab/index",
-    "van-tabs": "/wxcomponents/vant-weapp/dist/tabs/index"
-  }
+    "van-tabs": "/wxcomponents/vant-weapp/dist/tabs/index",
+    "van-cell": "/wxcomponents/vant-weapp/dist/cell/index",
+    "van-cell-group": "/wxcomponents/vant-weapp/dist/cell-group/index",
+    "van-field": "/wxcomponents/vant-weapp/dist/field/index",
+    "van-datetime-picker": "/wxcomponents/vant-weapp/dist/datetime-picker/index",
+    "van-popup": "/wxcomponents/vant-weapp/dist/popup/index"
+  },
+  "sitemapLocation": "sitemap49.json"
 }
