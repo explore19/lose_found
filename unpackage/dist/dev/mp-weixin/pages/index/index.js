@@ -112,7 +112,23 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -124,34 +140,51 @@ var _default =
 {
   data: function data() {
     return {
-      active: 'home' };
+      active: 'home',
+      cardCur: 0,
+      swiperList: [{
+        id: 0,
+        type: 'image',
+        url: '/static/images/test1.jpg' },
+      {
+        id: 1,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84001.jpg' },
+      {
+        id: 2,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big39000.jpg' },
+      {
+        id: 3,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg' },
+      {
+        id: 4,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big25011.jpg' },
+      {
+        id: 5,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big21016.jpg' },
+      {
+        id: 6,
+        type: 'image',
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg' }] };
+
 
   },
   methods: {
+    cardSwiper: function cardSwiper(e) {
+      this.setData({
+        cardCur: e.detail.current });
 
-    /*onChange:function(event) {
-            	if (event.detail == "search"){  //跳转到发布的界面
-            		this.$data.active = 'search'
-            		uni.navigateTo({
-            			url: '/pages/announce/announce',
-            			success: res => {},
-            			fail: () => {},
-            			complete: () => {}
-            		});
-            	}
-            	else if (event.detail == "friends"){  //跳转到消息的界面
-            		this.$data.active = 'friends',
-            		uni.navigateTo({
-            			url:'/pages/message/message'
-            		})
-            	}
-            	else if (event.detail == "setting"){  //跳转到用户的界面
-            		this.$data.active = 'setting',
-            		uni.navigateTo({
-            			url:'/pages/user/user'
-            		})
-            	} 
-            }*/} };exports.default = _default;
+    },
+    focus: function focus() {
+      uni.redirectTo({
+        url: "/pages/search/search" });
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 17 */

@@ -1,0 +1,1 @@
+<view><van-search vue-id="1" value="" placeholder="请输入搜索关键词" use-action-slot="true" data-com-type="wx" bind:__l="__l"></van-search></view>
