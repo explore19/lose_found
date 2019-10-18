@@ -43,23 +43,23 @@
 	"tabBar":{
 		"list":[{
 			"pagePath":"pages/index/index",
-			"iconPath":"images/index.png",
-			"selectedIconPath":"images/index.png",
+			"iconPath":"static/images/index.png",
+			"selectedIconPath":"static/images/index.png",
 			"text":"主页"
 		},{
 			"pagePath":"pages/announce/announce",
-			"iconPath":"images/announce.png",
-			"selectedIconPath":"images/announce.png",
+			"iconPath":"static/images/announce.png",
+			"selectedIconPath":"static/images/announce.png",
 			"text":"发布"
 		},{
 			"pagePath":"pages/message/message",
-			"iconPath":"images/message.png",
-			"selectedIconPath":"images/message.png",
+			"iconPath":"static/images/message.png",
+			"selectedIconPath":"static/images/message.png",
 			"text":"消息"
 		},{
 			"pagePath":"pages/user/user",
-			"iconPath":"images/user.png",
-			"selectedIconPath":"images/user.png",
+			"iconPath":"static/images/user.png",
+			"selectedIconPath":"static/images/user.png",
 			"text":"我的"
 		}
 		]
