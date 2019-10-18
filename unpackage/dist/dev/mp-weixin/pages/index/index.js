@@ -120,14 +120,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -136,18 +128,30 @@ var _default =
 
   },
   methods: {
-    onChange: function onChange(event) {
-      if (event.detail == "search") {
-        this.$data.active = 'search';
 
-      } else
-      if (event.detail == "friends") {
-        this.$data.active = 'friends';
-      } else
-      if (event.detail == "setting") {
-        this.$data.active = 'setting';
-      }
-    } } };exports.default = _default;
+    /*onChange:function(event) {
+            	if (event.detail == "search"){  //跳转到发布的界面
+            		this.$data.active = 'search'
+            		uni.navigateTo({
+            			url: '/pages/announce/announce',
+            			success: res => {},
+            			fail: () => {},
+            			complete: () => {}
+            		});
+            	}
+            	else if (event.detail == "friends"){  //跳转到消息的界面
+            		this.$data.active = 'friends',
+            		uni.navigateTo({
+            			url:'/pages/message/message'
+            		})
+            	}
+            	else if (event.detail == "setting"){  //跳转到用户的界面
+            		this.$data.active = 'setting',
+            		uni.navigateTo({
+            			url:'/pages/user/user'
+            		})
+            	} 
+            }*/} };exports.default = _default;
 
 /***/ }),
 /* 17 */
@@ -175,5 +179,5 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 /***/ })
-],[[19,"common/runtime","common/vendor"]]]);
+],[[11,"common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/index/index.js.map
