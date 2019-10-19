@@ -123,19 +123,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      show: false,
+      actions: [
+      { name: '选项', color: '07c160' },
+      { loading: true },
+      { name: '禁用选项', disabled: true }] };
 
 
   },
   methods: {
-    onSearch: function onSearch() {
+    onCancel: function onCancel() {
       uni.switchTab({
         url: "/pages/index/index" });
 
       console.log(1);
+    },
+    onClose: function onClose() {
+      this.setData({ show: false });
+      console.log(1);
+    },
+    onSearch: function onSearch() {
+      uni.navigateTo({
+        url: "/pages/list/list" });
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

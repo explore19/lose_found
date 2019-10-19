@@ -5,7 +5,8 @@
     "pages/message/message",
     "pages/search/search",
     "pages/user/user",
-    "pages/introduction/introduction"
+    "pages/introduction/introduction",
+    "pages/list/list"
   ],
   "subPackages": [],
   "window": {
@@ -58,7 +59,7 @@
     "van-row": "/wxcomponents/vant-weapp/dist/row/index",
     "van-col": "/wxcomponents/vant-weapp/dist/col/index",
     "van-grid": "/wxcomponents/vant-weapp/dist/grid/index",
-    "van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index"
-  },
-  "sitemapLocation": "sitemap99.json"
+    "van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index",
+    "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index"
+  }
 }

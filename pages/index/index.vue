@@ -22,7 +22,7 @@
 									<view class="cu-item">
 										<view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
 										<view class="content flex-sub">
-											<view>凯尔</view>
+											<view>小麻</view>
 											<view class="text-gray text-sm flex justify-between">
 												2019年12月3日
 											</view>

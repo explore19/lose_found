@@ -37,7 +37,14 @@
 		{
 			"path": "pages/introduction/introduction",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "物品介绍"
+			}
+			
+		},
+		{
+			"path": "pages/list/list",
+			"style": {
+				"navigationBarTitleText": "物品清单"
 			}
 			
 		}
@@ -63,7 +70,8 @@
 			"van-row": "/wxcomponents/vant-weapp/dist/row/index",
 			"van-col": "/wxcomponents/vant-weapp/dist/col/index",
 			"van-grid": "/wxcomponents/vant-weapp/dist/grid/index",
-			"van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index"
+			"van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index",
+			"van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index"
 		}
 		
 	},
