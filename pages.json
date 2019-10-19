@@ -33,6 +33,13 @@
 				"navigationBarTitleText": "我的"
 			}
 			
+		},
+		{
+			"path": "pages/introduction/introduction",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+			
 		}
     ],
 	"globalStyle": {
@@ -51,7 +58,12 @@
 			"van-cell-group": "/wxcomponents/vant-weapp/dist/cell-group/index",
 			"van-field": "/wxcomponents/vant-weapp/dist/field/index",
 			"van-datetime-picker": "/wxcomponents/vant-weapp/dist/datetime-picker/index",
-			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index"
+			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
+			"van-tag": "/wxcomponents/vant-weapp/dist/tag/index",
+			"van-row": "/wxcomponents/vant-weapp/dist/row/index",
+			"van-col": "/wxcomponents/vant-weapp/dist/col/index",
+			"van-grid": "/wxcomponents/vant-weapp/dist/grid/index",
+			"van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index"
 		}
 		
 	},
