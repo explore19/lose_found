@@ -141,7 +141,7 @@ var _default =
       uni.switchTab({
         url: "/pages/index/index" });
 
-      console.log(1);
+      //console.log(1)
     },
     onClose: function onClose() {
       this.setData({ show: false });

@@ -60,6 +60,8 @@
     "van-col": "/wxcomponents/vant-weapp/dist/col/index",
     "van-grid": "/wxcomponents/vant-weapp/dist/grid/index",
     "van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index",
-    "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index"
-  }
+    "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
+    "van-card": "/wxcomponents/vant-weapp/dist/card/index"
+  },
+  "sitemapLocation": "sitemap27.json"
 }
