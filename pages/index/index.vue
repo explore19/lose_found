@@ -13,14 +13,14 @@
 			</swiper>
 		</view>
 		<view>
-			<van-tabs @click="onClick">
+			<van-tabs @click="onClick">  
 				<van-tab title="失物寻物">
-					<view style="border: #F0FFF0">
+					<view style="border: #F0FFF0" @click="getToinfo()">
 						<view class="cu-card dynamic isCard?'no-card':''">
 							<view class="cu-item shadow">
 								<view class="cu-list menu-avatar">
 									<view class="cu-item">
-										<view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
+										<view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);" ></view>
 										<view class="content flex-sub">
 											<view>小麻</view>
 											<view class="text-gray text-sm flex justify-between">
@@ -46,7 +46,7 @@
 					</view>
 				</van-tab>
 				<van-tab title="拾物寻主">
-					<view style="border: #F0FFF0">
+					<view style="border: #F0FFF0" @click="getToinfo()">
 						<view class="cu-card dynamic isCard?'no-card':''">
 							<view class="cu-item shadow">
 								<view class="cu-list menu-avatar">
@@ -128,6 +128,11 @@
 			},
 			onClick: function() {
 
+			},
+			getToinfo:function(){  // 用来跳转到物品的详细信息的页面
+				uni.navigateTo({
+					url:"/pages/introduction/introduction"
+				})
 			}
 		}
 	}

@@ -8,7 +8,12 @@
 		<van-card
 		:thumb="imageURL">
 		 <view slot="desc" class="information">
-		     1700300655户就
+			 
+			
+				 学号：1700300655
+				  姓名：小黄
+			
+		     
 		   </view>
 		 </van-card>
 	</view>
