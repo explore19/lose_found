@@ -33,12 +33,19 @@
 									if(user.status===3){
 										wx.getUserInfo({
 											success: (res) => {
+												console.log(1)
 												
 											}
 										})
 									}
 									if(user.status===2){
-									 																	
+									 	wx.getUserInfo({
+									 		success: (res) => {
+									 			console.log(res.userInfo.nickName)
+												console.log(res.userInfo.province)
+												
+									 		}
+									 	})																
 									}
 									
 								},
