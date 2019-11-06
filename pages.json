@@ -33,7 +33,10 @@
 		{
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"usingComponents":{},
+				"navigationBarTitleText": "我的",
+				"navigationBarTextStyle":"black",
+				"navigationStyle":"custom"
 			}
 			
 		},

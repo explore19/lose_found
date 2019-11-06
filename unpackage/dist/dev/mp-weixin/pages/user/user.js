@@ -154,14 +154,44 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      imageURL: '/static/images/头像.jpg' };
+      name: "小黄",
+      sno: 1700300616 };
+
 
 
   },
+
   methods: {} };exports.default = _default;
 
 /***/ }),
