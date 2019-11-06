@@ -6,13 +6,13 @@
 			</van-search>
 
 		</view>
-		<view class="tags">
+		<!-- <view class="tags">
 			<van-tag plain size="large">标签</van-tag>
 			<van-tag plain type="primary" size="large">标签</van-tag>
 			<van-tag plain type="success" size="large">标签</van-tag>
 			<van-tag plain type="danger" size="large">标签</van-tag>
 			<van-tag plain type="warning" size="large">标签</van-tag>
-		</view>
+		</view> -->
 		
 	</view>
 </template>

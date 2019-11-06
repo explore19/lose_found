@@ -4,11 +4,11 @@
 			<van-search value="" placeholder="请输入搜索关键词" @focus="focus" />
 		</view>
 		<view>
-			<swiper class="card-swiper square-dot" :indicator-dots="true" :autoplay="true" :interval="2000" :duration="500">
-				<swiper-item v-for="item in swiperList" :key="item.id">
-					<view class="swiper-item">
-						<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
-					</view>
+			<swiper class="screen-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
+			 :autoplay="true" interval="5000" duration="500">
+				<swiper-item v-for="(item,index) in swiperList" :key="index">
+					<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
+					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
 				</swiper-item>
 			</swiper>
 		</view>
@@ -37,9 +37,9 @@
 									</view>
 								</view>
 								<view class="text-gray text-sm text-right padding">
-								      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10
-								      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
-								      <text class="cuIcon-messagefill margin-lr-xs"></text> 30
+								      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10w
+								      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20w
+								      <text class="cuIcon-messagefill margin-lr-xs"></text> 30w
 								</view>
 							</view>
 						</view>
@@ -55,7 +55,7 @@
 										<view class="content flex-sub">
 											<view>小黃</view>
 											<view class="text-gray text-sm flex justify-between">
-												2019年110月3日
+												2019年11月3日
 											</view>
 										</view>
 									</view>
@@ -68,9 +68,9 @@
 									</view>
 								</view>
 								<view class="text-gray text-sm text-right padding">
-								      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10w
-								      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20w
-								      <text class="cuIcon-messagefill margin-lr-xs"></text> 30w
+								      <text class="cuIcon-attentionfill margin-lr-xs"></text> 1
+								      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 2
+								      <text class="cuIcon-messagefill margin-lr-xs"></text> 3
 								</view>
 							</view>
 						</view>
@@ -139,7 +139,7 @@
 </script>
 
 <style>
-	.content {
+	/* .content {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -169,5 +169,5 @@
 		transform: scale(calc(0.5 + var(--index) / 10));
 		margin-left: calc(var(--left) * 100rpx - 150rpx);
 		z-index: var(--index);
-	}
+	} */
 </style>

@@ -64,5 +64,6 @@
     "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
     "van-card": "/wxcomponents/vant-weapp/dist/card/index",
     "van-loading": "/wxcomponents/vant-weapp/dist/loading/index"
-  }
+  },
+  "sitemapLocation": "sitemap20.json"
 }
