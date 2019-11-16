@@ -78,7 +78,26 @@
 				</van-tab>
 			</van-tabs>
 		</view>
-		
+		<!--<div class="dialog">
+		      <div class="dialog-cover back"  v-if="isShow"  @click="closeMyself"></div>
+		      <transition name="drop">
+		        <div class="dialog-content" :style="{top:topDistance+'%',width:widNum+'%',left:leftSite+'%'}"  v-if="isShow">
+		          <div class="dialog_head back">
+		              <slot name="header">提示信息</slot>
+		          </div>
+		          <div class="dialog_main" :style="{paddingTop:pdt+'px',paddingBottom:pdb+'px'}">
+		            <slot name="main">弹窗内容</slot>
+		          </div>
+		          <div  class="foot_close" @click="closeMyself">
+		              <div class="close_img back"></div>
+		          </div>
+		        </div>
+		    </transition>
+		  </div>-->
+		<view class="popup window">
+			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="getToperfect"  position:margin-top/>
+			<!-- <van-popup show="" @click="onClose" closeable>内容</van-popup> -->
+		</view>
 		
 	</view>
 </template>
@@ -89,6 +108,7 @@
 			return {
 				active: 'home',
 				cardCur: 0,
+				
 				swiperList: [{
 					id: 0,
 					type: 'image',
@@ -133,11 +153,21 @@
 				uni.navigateTo({
 					url:"/pages/introduction/introduction"
 				})
+			},
+			getToperfect:function(){//用来跳转到信息完善界面
+			   uni.navigateTo({
+					url:"/pages/perfect/perfect"
+				})
+			},
+			perfect:function(){
+				
+				// if(status==2||3)({
+				// 	show="true"
+				// })
 			}
 		}
 	}
 </script>
-
 <style>
 	/* .content {
 		display: flex;
@@ -170,4 +200,35 @@
 		margin-left: calc(var(--left) * 100rpx - 150rpx);
 		z-index: var(--index);
 	} */
+	
+	 // 最外层 设置position定位 
+	  .dialog {
+	    position: relative;
+	    color: #2e2c2d;
+	    font-size: 16px;
+		show:true;
+		
+	  }
+	  // 遮罩 设置背景层，z-index值要足够大确保能覆盖，高度 宽度设置满 做到全屏遮罩
+	  .dialog-cover {
+	    background: rgba(0,0,0, 0.8);
+	    position: fixed;
+	    z-index: 200;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	  }
+	  // 内容层 z-index要比遮罩大，否则会被遮盖，
+	  .dialog-content{
+	    position: fixed;
+	    top: 35%;
+	    // 移动端使用felx布局 
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	    z-index: 300;
+	 }
+	
 </style>
