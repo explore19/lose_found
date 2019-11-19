@@ -1,13 +1,13 @@
 {
   "pages": [
+    "pages/entrance/entrance",
     "pages/index/index",
     "pages/announce/announce",
     "pages/message/message",
     "pages/search/search",
     "pages/user/user",
     "pages/introduction/introduction",
-    "pages/list/list",
-    "pages/entrance/entrance"
+    "pages/list/list"
   ],
   "subPackages": [],
   "window": {
@@ -64,6 +64,5 @@
     "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
     "van-card": "/wxcomponents/vant-weapp/dist/card/index",
     "van-loading": "/wxcomponents/vant-weapp/dist/loading/index"
-  },
-  "sitemapLocation": "sitemap55.json"
+  }
 }

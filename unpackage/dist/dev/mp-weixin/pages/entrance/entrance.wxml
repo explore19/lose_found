@@ -1,1 +1,1 @@
-<view><van-loading class="loding" vue-id="1" type="spinner" color="blue" vertical data-com-type="wx" bind:__l="__l" vue-slots="{{['default']}}"><view slots="default">加载中</view></van-loading></view>
+<view clsss="bgd"><view class="bg-white flex-sub radius shadow-lg" style="height:600px;"><image class="gif-white response" style="height:600px;" src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit"></image></view></view>

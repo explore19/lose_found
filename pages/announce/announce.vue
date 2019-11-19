@@ -14,7 +14,7 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input name="input"></input>
+						<input name="input" @keyup.enter="search" @input="search($event)"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
@@ -71,7 +71,7 @@
 					</van-popup>
 
 
-					<van-button type="primary" size="large">发布</van-button>
+					<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
 				</van-cell-group>
 
 			</van-tab>
@@ -141,7 +141,7 @@
 						</van-popup>
 
 
-						<van-button type="primary" size="large">发布</van-button>
+						<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
 					</van-cell-group>
 
 
@@ -225,6 +225,36 @@
 					}
 				})
 			},
+			
+			subInfo:function(){
+				
+				wx.request({
+					url:"http://localhost:8080/post/test",
+					method:'POST',
+					data:{
+						id:1
+					},
+					success: (res) => {
+						console.log(res)
+					}
+				
+				})
+			},
+			search(event){
+				          console.log(event.currentTarget.value)
+				        }
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			// 			onInput(event) {
 			// 				this.$data.currentDate = event.detail
 			// 			},

@@ -1,9 +1,8 @@
 <template>
-	<view>
-	
-		<van-loading class="loding" type="spinner" color="blue" vertical >
-			<view slots="default" >加载中</view>
-		</van-loading>
+	<view clsss="bgd">
+		<view class="bg-white flex-sub radius shadow-lg" style="height: 600px;">
+		    <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit" class="gif-white response" style="height: 600px;"></image>
+		</view>
 	</view>
 </template>
 
@@ -28,24 +27,35 @@
 							wx.request({
 								url: "http://localhost:8080/user/get_user_info",
 								method: 'GET',
-								success: res => {
+								success: (res) => {
 									let user = res.data.data
-									if(user.status===3){
+									if(user.status===3){          //注册后的完善信息
 										wx.getUserInfo({
-											success: (res) => {
-												console.log(1)
-												
+											success: (res) => {	
+												let user_info = res.userInfo
+												console.log(res)
+												wx.request({
+													url:'http://localhost:8080/user/update_info',
+													method:'post',
+													data:{
+														id: user.id,
+														nickName:'小黄',
+														headPortrait:user_info.avatarUrl,
+														sex:user_info.gender,
+														realName:'黄培'
+													},
+													success: (res) => {
+														wx.navigateTo({
+															url:"../index/index"
+														})
+													}
+												})								
 											}
 										})
-									}
-									if(user.status===2){
-									 	wx.getUserInfo({
-									 		success: (res) => {
-									 			console.log(res.userInfo.nickName)
-												console.log(res.userInfo.province)
-												
-									 		}
-									 	})																
+									}else{
+										wx.navigateTo({
+											url:"../index/index"
+										})
 									}
 									
 								},
@@ -61,8 +71,11 @@
 	}
 </script>
 
-<style >
-.loding{
-margin:auto 0;
-}
+<style >		
+	.bgd{
+		background: white;
+	}
+	.loding{
+	margin:auto 0;
+	}
 </style>
