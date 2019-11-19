@@ -1610,23 +1610,6 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 11:
-/*!***********************************************************************************!*\
-  !*** C:/Users/le/Desktop/留言板/lose_found/main.js?{"page":"pages%2Findex%2Findex"} ***!
-  \***********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_index.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 19:
 /*!*****************************************************************************************!*\
   !*** C:/Users/le/Desktop/留言板/lose_found/main.js?{"page":"pages%2Fentrance%2Fentrance"} ***!
   \*****************************************************************************************/
@@ -1637,8 +1620,25 @@ createPage(_index.default);
 /* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
 
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _entrance = _interopRequireDefault(__webpack_require__(/*! ./pages/entrance/entrance.vue */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _entrance = _interopRequireDefault(__webpack_require__(/*! ./pages/entrance/entrance.vue */ 12));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_entrance.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 19:
+/*!***********************************************************************************!*\
+  !*** C:/Users/le/Desktop/留言板/lose_found/main.js?{"page":"pages%2Findex%2Findex"} ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./pages/index/index.vue */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_index.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ }),
@@ -7733,6 +7733,23 @@ createPage(_introduction.default);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _list = _interopRequireDefault(__webpack_require__(/*! ./pages/list/list.vue */ 62));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_list.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
+
+/***/ }),
+
+/***/ 67:
+/*!***************************************************************************************!*\
+  !*** C:/Users/le/Desktop/留言板/lose_found/main.js?{"page":"pages%2Fperfect%2Fperfect"} ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
+var _perfect = _interopRequireDefault(__webpack_require__(/*! ./pages/perfect/perfect.vue */ 68));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_perfect.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ })

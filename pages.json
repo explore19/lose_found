@@ -1,11 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
-		
 		{
 			"path" : "pages/entrance/entrance",
 			"style" : {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "哈啊哈"
 			}
 		},
 		{
@@ -59,8 +57,16 @@
 				"navigationBarTitleText": "物品清单"
 			}
 			
+
+		},
+
+		{
+			"path": "pages/perfect/perfect",
+			"style": {
+				"navigationBarTitleText": "完善界面"
+			}
 		}
-     
+
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -86,7 +92,9 @@
 			"van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index",
 			"van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
 			"van-card": "/wxcomponents/vant-weapp/dist/card/index",
-			 "van-loading": "/wxcomponents/vant-weapp/dist/loading/index"
+			"van-loading": "/wxcomponents/vant-weapp/dist/loading/index",
+			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index"
+			
 		}
 		
 	},
