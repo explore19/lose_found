@@ -7,7 +7,7 @@
 	vertical-align: middle;
 }
 #user_img{
-	margin-top: 104rpx;
+	margin-top: 120rpx;
 	
 	/* display: inline-block;
 	vertical-align: middle; */

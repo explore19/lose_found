@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/entrance/entrance",
     "pages/index/index",
     "pages/announce/announce",
     "pages/message/message",
@@ -8,7 +7,8 @@
     "pages/user/user",
     "pages/introduction/introduction",
     "pages/list/list",
-    "pages/perfect/perfect"
+    "pages/perfect/perfect",
+    "pages/entrance/entrance"
   ],
   "subPackages": [],
   "window": {
@@ -21,26 +21,26 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "static/images/index.png",
-        "selectedIconPath": "static/images/index.png",
+        "iconPath": "static/images/house.png",
+        "selectedIconPath": "static/images/house_fill.png",
         "text": "主页"
       },
       {
         "pagePath": "pages/announce/announce",
-        "iconPath": "static/images/announce.png",
-        "selectedIconPath": "static/images/announce.png",
+        "iconPath": "static/images/outline.png",
+        "selectedIconPath": "static/images/outline_fill.png",
         "text": "发布"
       },
       {
         "pagePath": "pages/message/message",
-        "iconPath": "static/images/message.png",
-        "selectedIconPath": "static/images/message.png",
+        "iconPath": "static/images/round.png",
+        "selectedIconPath": "static/images/round_fill.png",
         "text": "消息"
       },
       {
         "pagePath": "pages/user/user",
         "iconPath": "static/images/user.png",
-        "selectedIconPath": "static/images/user.png",
+        "selectedIconPath": "static/images/user_fill.png",
         "text": "我的"
       }
     ]
@@ -65,5 +65,6 @@
     "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
     "van-card": "/wxcomponents/vant-weapp/dist/card/index",
     "van-loading": "/wxcomponents/vant-weapp/dist/loading/index"
-  }
+  },
+  "sitemapLocation": "sitemap33.json"
 }

@@ -1,7 +1,7 @@
 <template>
 	<view clsss="bgd">
-		<view class="bg-white flex-sub radius shadow-lg" style="height: 600px;">
-		    <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit" class="gif-white response" style="height: 600px;"></image>
+		<view class="bg-white flex-sub radius shadow-lg" style="height: 600rpx;">
+		    <image src="https://image.weilanwl.com/gif/loading-white.gif" mode="aspectFit" class="gif-white response" style="height: 600rpx;"></image>
 		</view>
 	</view>
 </template>
@@ -10,7 +10,7 @@
 	export default {
 		data() {
 			return {
-				
+				r
 			};
 		},
 		methods:{
