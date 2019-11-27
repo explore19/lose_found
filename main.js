@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import App from './App'
-
+import api from 'utils/api.js'
+import request from 'utils/request.js'
+	
+Vue.prototype.$api = api
+Vue.prototype.$request = request
+		
 
 
 Vue.config.productionTip = false

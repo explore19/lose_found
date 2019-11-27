@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/entrance/entrance",
     "pages/announce/announce",
     "pages/message/message",
     "pages/search/search",
@@ -8,7 +9,8 @@
     "pages/introduction/introduction",
     "pages/list/list",
     "pages/perfect/perfect",
-    "pages/entrance/entrance"
+    "pages/user_details/user_details",
+    "pages/user_edit/user_edit"
   ],
   "subPackages": [],
   "window": {
@@ -64,7 +66,7 @@
     "van-grid-item": "/wxcomponents/vant-weapp/dist/grid-item/index",
     "van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
     "van-card": "/wxcomponents/vant-weapp/dist/card/index",
-    "van-loading": "/wxcomponents/vant-weapp/dist/loading/index"
-  },
-  "sitemapLocation": "sitemap33.json"
+    "van-loading": "/wxcomponents/vant-weapp/dist/loading/index",
+    "van-dialog": "/wxcomponents/vant-weapp/dist/dialog/index"
+  }
 }

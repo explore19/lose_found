@@ -1,54 +1,25 @@
 <template>
-	<!-- <view>
-
-		<view class="container">
-
-		</view>
-		<view class="header">
-			<van-card :thumb="imageURL">
-				<view slot="desc" class="information">
-
-
-					学号：1700300655
-					姓名：小黄
-
-
-				</view>
-			</van-card>
-		</view>
-		<view class="body1">
-			<van-cell title="我的发布" />
-		</view>
-		<view class="body2">
-			<van-cell title="我的回复" />
-		</view>
-		<view class="body3">
-			<van-cell title="意见反馈" />
-		</view>
-
-	</view> -->
 	<view class="">
-		
-	
-	<view class="user_info">
-		<view class="cu-avatar xl round margin-left" id="user_img" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg);"></view>
-		<view class="nick_name">
-			{{name}}
+		<view class="user_info">
+			<view class="cu-avatar xl round margin-left" id="user_img" :style="'background-image:url('+head_portrait+');'"  ></view>
+			<view class="nick_name">
+				{{name}}
+			</view>
+			<view class="sno">
+				学号：{{sno}}
+			</view>
 		</view>
-		<view class="sno">
-			学号：{{sno}}
+		<view class="padding bg-white text-left">
+			
+			<view class="padding margin-top" @click="jump">我的信息</view>
+			
+			<view class="padding margin-top" >我的发布</view>
+			
+			<view class="padding margin-top" >我的回复</view>
+			
+			<view class="padding margin-top" >意见反馈</view>
 			
 		</view>
-	</view>
-	<view class="padding bg-white text-left">
-		
-		<view class="padding margin-top" :class="size?'solids-bottom':'solid-bottom'">我的发布</view>
-		
-		<view class="padding margin-top" :class="size?'solids-bottom':'solid-bottom'">我的回复</view>
-		
-		<view class="padding margin-top" >意见反馈</view>
-		
-	</view>
 	</view>
 	
 	
@@ -61,15 +32,29 @@
 	export default {
 		data() {
 		return{
-			name:"小黄",
-			sno:1700300616
-			
+			name:"",
+			sno:"",
+			head_portrait:"",
 		}
 
 			},
-		
 		methods: {
-
+			jump:function(){
+				wx.navigateTo({
+					url:"../user_details/user_details"
+				})
+			},
+			requestData(){
+				this.$api.getUserInfo().then(res =>{
+					console
+					this.name=res.data.nickName
+					this.sno = res.data.sno
+					this.head_portrait=res.data.headPortrait
+				})
+			}
+		},
+		created(){
+			this.requestData()
 		}
 	}
 </script>

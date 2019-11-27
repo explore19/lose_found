@@ -17,7 +17,8 @@
 				return {
 					
 					TabCur: 0,
-					scrollLeft: 0
+					scrollLeft: 0,
+					index:1
 				}
 			},
 			methods: {

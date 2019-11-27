@@ -2,7 +2,7 @@
 	<view class=" ">
 		<van-cell-group>
 		
-			<view class="cu-form-group margin-top">
+			<view id="first" class="cu-form-group margin-top" ref="input">
 				<view class="title">学号（工号）</view>
 				<input name="input"></input>
 			</view>
@@ -26,7 +26,9 @@
 				<view class="title">宿舍号</view>
 				<input name="input"></input>
 			</view>
-			<van-button type="primary" size="large" >提交</van-button>
+			<van-button type="primary" size="large"  @click="tap">提交</van-button>
+		
+			
 			<view class="cu-form-group">
 				<view class="grid col-4 grid-square flex-sub">
 					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
@@ -48,6 +50,32 @@
 </template>
 
 <script>
+	
+	export default {
+			data() {
+				return {
+					
+				}
+				
+					
+			},
+			methods: {
+				tap:function(){				
+					uni.showModal({
+						content: '完善信息成功',
+						showCancel: false,
+						success: (res) => {
+							uni.switchTab({
+								url:'../index/index'
+							})
+						}
+					});
+					
+				}
+				
+			}
+		}
+
 </script>
 
 <style>

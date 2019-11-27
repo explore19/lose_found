@@ -169,8 +169,6 @@
 				modalName: null,
 				textareaAValue: '',
 				textareaBValue: '',
-
-
 			}
 		},
 		methods: {

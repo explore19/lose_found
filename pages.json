@@ -7,6 +7,12 @@
 				"navigationBarTitleText": "主页"
 			}
 		},
+		{
+			"path" : "pages/entrance/entrance",
+			"style" : {
+				"navigationBarTitleText": "载入中"
+			}
+		},
 		
 		{
 			"path": "pages/announce/announce",
@@ -60,14 +66,17 @@
 			"style": {
 				"navigationBarTitleText": "完善界面"
 			}
-		},
-		{
-			"path" : "pages/entrance/entrance",
-			"style" : {
-				"navigationBarTitleText": "载入中"
-			}
 		}
-
+        ,{
+            "path" : "pages/user_details/user_details",
+            "style" : {
+				"navigationBarTitleText":"用户信息"
+			}
+        }
+        ,{
+            "path" : "pages/user_edit/user_edit",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -94,7 +103,10 @@
 			"van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
 			"van-card": "/wxcomponents/vant-weapp/dist/card/index",
 			"van-loading": "/wxcomponents/vant-weapp/dist/loading/index",
-			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index"
+			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
+			"van-dialog": "/wxcomponents/vant-weapp/dist/dialog/index"
+			
+			
 			
 		}
 		
