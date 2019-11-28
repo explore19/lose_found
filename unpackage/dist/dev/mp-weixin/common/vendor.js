@@ -1627,7 +1627,30 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var api = {};
 
 //用户信息api接口
-api.getUserInfo = function () {return _request.default.get('/user/get_user_info');};var _default =
+api.getUserInfo = function () {return _request.default.get('/user/get_user_info');};
+
+
+
+//用于修改用户的信息的api
+api.updateInfo = function (data) {return _request.default.post('/user/update_info', data);};
+
+// api.updateInfo=up
+// function up(data){
+// 	request.post('/user/update_info',data)
+// }
+// 
+
+//帖子信息的api接口
+api.getPost = function (data) {return _request.default.get('/post', data);};
+
+
+
+//用于上传帖子的api
+api.savePost = function (data) {return _request.default.post('/post', data);};
+
+
+//用于删除贴子的api
+api.removePost = function (data) {return _request.default.delete('/post', data);};var _default =
 
 
 api;exports.default = _default;
@@ -1657,7 +1680,7 @@ request.post = function (url, data) {
     header: headers }).
   then(function (res) {
     return res[1].data;
-  }).catch(function (parmas) {
+  }).catch(function (resp) {
 
   });
 };
@@ -1672,7 +1695,7 @@ request.get = function (url, parmas) {
     header: headers }).
   then(function (res) {
     return res[1].data;
-  }).catch(function (parmas) {
+  }).catch(function (resp) {
 
   });
 };
@@ -1687,7 +1710,7 @@ request.put = function (url, data) {
     header: headers }).
   then(function (res) {
     return res[1].data;
-  }).catch(function (parmas) {
+  }).catch(function (resp) {
 
   });
 };
@@ -1701,7 +1724,7 @@ request.delete = function (url, id) {
     header: headers }).
   then(function (res) {
     return res[1].data;
-  }).catch(function (parmas) {
+  }).catch(function (resp) {
 
   });
 };var _default =
@@ -7871,23 +7894,6 @@ createPage(_perfect.default);
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
 var _user_details = _interopRequireDefault(__webpack_require__(/*! ./pages/user_details/user_details.vue */ 76));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 createPage(_user_details.default);
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
-
-/***/ }),
-
-/***/ 86:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/le/Desktop/留言板/lose_found/main.js?{"page":"pages%2Fuser_edit%2Fuser_edit"} ***!
-  \*******************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ 4);
-
-var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _user_edit = _interopRequireDefault(__webpack_require__(/*! ./pages/user_edit/user_edit.vue */ 87));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-createPage(_user_edit.default);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createPage"]))
 
 /***/ })

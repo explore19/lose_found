@@ -15,7 +15,7 @@
 		<view>
 			<van-tabs @click="onClick">  
 				<van-tab title="失物寻物">
-					<view style="border: #F0FFF0" @click="getToinfo()">
+					<view style="border: #F0FFF0">
 						<view class="cu-card dynamic isCard?'no-card':''">
 							<view class="cu-item shadow">
 								<view class="cu-list menu-avatar">
@@ -29,24 +29,26 @@
 										</view>
 									</view>
 								</view>
-								<view class="text-content">
-									折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
-								</view>
-								<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
-									<view class="bg-img isCard?'':'only-img'" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
+								<!-- <view @click="getToinfo()"> -->
+									<view class="text-content">
+										{{name}}
 									</view>
-								</view>
+									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
+										<view class="bg-img isCard?'':'only-img'" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
+										</view>
+									</view>
+								<!-- </view>	 -->						
 								<view class="text-gray text-sm text-right padding">
-								      <text class="cuIcon-attentionfill margin-lr-xs"></text> 10w
-								      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20w
-								      <text class="cuIcon-messagefill margin-lr-xs"></text> 30w
+								      <text class="cuIcon-attentionfill margin-lr-xs" @click="add1()">{{browser}}</text> 
+								      <text class="cuIcon-appreciatefill margin-lr-xs" @click="add2()">{{likenum}}</text>
+								      <text class="cuIcon-messagefill margin-lr-xs" @click="add3()">{{reply}}</text>
 								</view>
 							</view>
 						</view>
 					</view>
 				</van-tab>
 				<van-tab title="拾物寻主">
-					<view style="border: #F0FFF0" @click="getToinfo()">
+					<view style="border: #F0FFF0">
 						<view class="cu-card dynamic isCard?'no-card':''">
 							<view class="cu-item shadow">
 								<view class="cu-list menu-avatar">
@@ -60,17 +62,19 @@
 										</view>
 									</view>
 								</view>
-								<view class="text-content">
-									折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
-								</view>
-								<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
-									<view class="bg-img isCard?'':'only-img'" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
+								<!-- <view  @click="getToinfo()"> -->
+									<view class="text-content">
+										折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
 									</view>
-								</view>
+									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
+										<view class="bg-img isCard?'':'only-img'" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
+										</view>
+									</view>
+								<!-- </view> -->							
 								<view class="text-gray text-sm text-right padding">
-								      <text class="cuIcon-attentionfill margin-lr-xs"></text> 1
-								      <text class="cuIcon-appreciatefill margin-lr-xs"></text> 2
-								      <text class="cuIcon-messagefill margin-lr-xs"></text> 3
+								      <text class="cuIcon-attentionfill margin-lr-xs" @click="add1()">{{browser}}</text>
+								      <text class="cuIcon-appreciatefill margin-lr-xs" @click="add2()">{{likenum}}</text>
+								      <text class="cuIcon-messagefill margin-lr-xs" @click="add3()">{{reply}}</text>
 								</view>
 							</view>
 						</view>
@@ -96,7 +100,6 @@
 		  </div>-->
 		<view class="popup window">
 			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="getToperfect"  position:margin-top/>
-			<!-- <van-popup show="" @click="onClose" closeable>内容</van-popup> -->
 		</view>
 		
 	</view>
@@ -137,7 +140,11 @@
 					id: 6,
 					type: 'image',
 					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
-				}]
+				}],
+				browser:"0",
+				likenum:"0",
+				reply:"0",
+				name:"嘿嘿嘿"
 			}
 		},
 		methods: {
@@ -164,7 +171,29 @@
 				// if(status==2||3)({
 				// 	show="true"
 				// })
+			},
+			add1:function(){
+				this.browser++;
+			},
+			add2:function(){
+				this.likenum++;
+			},
+			add3:function(){
+				this.reply++;
+			},
+			requestData(){
+				this.$api.getPost({   //用来获取
+					id:"1"
+				}).then(
+					res=>{
+						this.name = res.data.details
+						console.log(res)
+					}
+				)
 			}
+		},
+		created(){
+			this.requestData()
 		}
 	}
 </script>

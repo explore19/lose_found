@@ -126,16 +126,48 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
+      //个人的数据
       head: "",
       nick: "",
       sno: "",
       realName: "",
       gender: "",
-      phone: "" };
+      phone: "",
+      // 修改界面的数据
+      heady: "",
+      nicky: "",
+      snoy: "",
+      realNamey: "",
+      gendery: "",
+      phoney: "",
+      seen: true,
+      look: false };
 
   },
   methods: {
@@ -157,7 +189,30 @@ var _default =
         }
         _this.phone = res.data.phone;
       });
+    },
+    Edit1: function Edit1() {
+      this.seen = false;
+      this.look = true;
+
+    },
+
+
+    Edit2: function Edit2() {
+      this.$api.updateInfo({
+        headPortrait: this.heady,
+        nickName: this.nicky,
+        sno: this.snoy,
+        realName: this.realNamey,
+        sex: this.gendery,
+        phone: this.phoney }).
+      then(function (res) {
+        console.log(res);
+      });
+      this.seen = true;
+      this.look = false;
     } },
+
+
 
   created: function created() {
     this.requestData();

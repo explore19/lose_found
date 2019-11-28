@@ -11,7 +11,7 @@
 		</view>
 		<view class="padding bg-white text-left">
 			
-			<view class="padding margin-top" @click="jump">我的信息</view>
+			<view class="padding margin-top van-hairline--surround" @click="jump">我的信息</view>
 			
 			<view class="padding margin-top" >我的发布</view>
 			
@@ -21,11 +21,6 @@
 			
 		</view>
 	</view>
-	
-	
-	
-	
-	
 </template>
 
 <script>
@@ -46,7 +41,6 @@
 			},
 			requestData(){
 				this.$api.getUserInfo().then(res =>{
-					console
 					this.name=res.data.nickName
 					this.sno = res.data.sno
 					this.head_portrait=res.data.headPortrait

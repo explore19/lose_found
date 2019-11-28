@@ -301,6 +301,7 @@ var _default =
         sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], //从相册选择
         success: function success(res) {
+
           if (_this.imgList.length != 0) {
             _this.imgList = _this.imgList.concat(res.tempFilePaths);
           } else {

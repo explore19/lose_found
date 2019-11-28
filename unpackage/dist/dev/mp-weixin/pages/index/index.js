@@ -218,6 +218,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -252,8 +255,12 @@ var _default =
       {
         id: 6,
         type: 'image',
-        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg' }] };
+        url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg' }],
 
+      browser: "0",
+      likenum: "0",
+      reply: "0",
+      name: "嘿嘿嘿" };
 
   },
   methods: {
@@ -280,7 +287,30 @@ var _default =
       // if(status==2||3)({
       // 	show="true"
       // })
-    } } };exports.default = _default;
+    },
+    add1: function add1() {
+      this.browser++;
+    },
+    add2: function add2() {
+      this.likenum++;
+    },
+    add3: function add3() {
+      this.reply++;
+    },
+    requestData: function requestData() {var _this = this;
+      this.$api.getPost({ //用来获取
+        id: "1" }).
+      then(
+      function (res) {
+        _this.name = res.data.details;
+        console.log(res);
+      });
+
+    } },
+
+  created: function created() {
+    this.requestData();
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

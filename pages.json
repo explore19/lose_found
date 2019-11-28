@@ -73,10 +73,6 @@
 				"navigationBarTitleText":"用户信息"
 			}
         }
-        ,{
-            "path" : "pages/user_edit/user_edit",
-            "style" : {}
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -104,7 +100,9 @@
 			"van-card": "/wxcomponents/vant-weapp/dist/card/index",
 			"van-loading": "/wxcomponents/vant-weapp/dist/loading/index",
 			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
-			"van-dialog": "/wxcomponents/vant-weapp/dist/dialog/index"
+			"van-dialog": "/wxcomponents/vant-weapp/dist/dialog/index",
+			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
+			"van-icon": "/wxcomponents/vant-weapp/dist/icon/index"
 			
 			
 			

@@ -130,11 +130,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
-//
-//
-//
-//
 var _default =
 {
   data: function data() {
@@ -153,7 +148,6 @@ var _default =
     },
     requestData: function requestData() {var _this = this;
       this.$api.getUserInfo().then(function (res) {
-        console;
         _this.name = res.data.nickName;
         _this.sno = res.data.sno;
         _this.head_portrait = res.data.headPortrait;

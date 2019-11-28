@@ -13,7 +13,7 @@ request.post = (url, data) => {
         header: headers
     }).then(res => {
        return res[1].data
-    }).catch(parmas => {
+    }).catch(resp => {
 　　　　
 　　})
  } 
@@ -28,7 +28,7 @@ request.get = (url, parmas) => {
         header: headers
     }).then(res => {
       return res[1].data
-    }).catch(parmas => {
+    }).catch(resp => {
 　　　　
 　　})
  } 
@@ -43,7 +43,7 @@ request.get = (url, parmas) => {
          header: headers
      }).then(res => {
 		return res[1].data
-     }).catch(parmas => {
+     }).catch(resp => {
  　　　　
  　　})
   } 
@@ -57,7 +57,7 @@ request.get = (url, parmas) => {
           header: headers
       }).then(res => {
            return res[1].data
-      }).catch(parmas => {
+      }).catch(resp => {
   　　　　
   　　})
    } 
