@@ -99,10 +99,11 @@
 			"van-action-sheet": "/wxcomponents/vant-weapp/dist/action-sheet/index",
 			"van-card": "/wxcomponents/vant-weapp/dist/card/index",
 			"van-loading": "/wxcomponents/vant-weapp/dist/loading/index",
-			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
 			"van-dialog": "/wxcomponents/vant-weapp/dist/dialog/index",
-			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
-			"van-icon": "/wxcomponents/vant-weapp/dist/icon/index"
+			"van-icon": "/wxcomponents/vant-weapp/dist/icon/index",
+			"van-sidebar": "/wxcomponents/vant-weapp/dist/sidebar/index",
+			"van-sidebar-item": "/wxcomponents/vant-weapp/dist/sidebar-item/index",
+			"van-skeleton": "/wxcomponents/vant-weapp/dist/skeleton/index"
 			
 			
 			
