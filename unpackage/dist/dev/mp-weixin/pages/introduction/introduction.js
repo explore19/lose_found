@@ -186,8 +186,34 @@ var _default =
 {
   data: function data() {
     return {
-      isCard: true };
+      isCard: true,
+      name: "",
+      content: "",
+      date: "",
+      img: "",
+      awatar: "" };
 
+  },
+  methods: {
+    requestData: function requestData() {var _this = this;
+      this.$api.getUserInfo().then(
+      function (res) {
+        _this.name = res.data.nickName;
+        _this.awatar = res.data.headPortrait;
+      });
+
+      this.$api.getPost({
+        id: "1" }).
+      then(function (res) {
+        _this.content = res.data.details;
+        _this.date = res.data.loseTime;
+        _this.img = res.data.image;
+        console.log(res);
+      });
+    } },
+
+  created: function created() {
+    this.requestData();
   } };exports.default = _default;
 
 /***/ })

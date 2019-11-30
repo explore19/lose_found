@@ -227,6 +227,7 @@ var _default =
     return {
       active: 'home',
       cardCur: 0,
+      awatar: "",
 
       swiperList: [{
         id: 0,
@@ -260,7 +261,10 @@ var _default =
       browser: "0",
       likenum: "0",
       reply: "0",
-      name: "嘿嘿嘿" };
+      content: "嘿嘿嘿",
+      user_name: "",
+      img: "",
+      date: "" };
 
   },
   methods: {
@@ -288,24 +292,25 @@ var _default =
       // 	show="true"
       // })
     },
-    add1: function add1() {
+    add: function add() {
       this.browser++;
-    },
-    add2: function add2() {
-      this.likenum++;
-    },
-    add3: function add3() {
-      this.reply++;
     },
     requestData: function requestData() {var _this = this;
       this.$api.getPost({ //用来获取
         id: "1" }).
       then(
       function (res) {
-        _this.name = res.data.details;
+        _this.content = res.data.details;
+        _this.img = res.data.image;
+        _this.date = res.data.loseTime;
         console.log(res);
       });
 
+      this.$api.getUserInfo().then(function (res) {
+        console.log(res);
+        _this.user_name = res.data.nickName;
+        _this.awatar = res.data.headPortrait;
+      });
     } },
 
   created: function created() {
