@@ -28,5 +28,8 @@ api.savePost=(data) => request.post('/post',data)
 //用于删除贴子的api
 api.removePost=(data) => request.delete('/post',data)
 
+//发布帖子
+api.addPost=(data) => request.post('/post',data)
+
 
 export default api

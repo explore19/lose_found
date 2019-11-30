@@ -1,67 +1,72 @@
 <template>
 	<view class="">
 		<van-tabs animated>
-			<van-tab title="我是失主">
+			<van-tab title="我是失主" >
 				<van-cell-group>
-					<!-- <van-field :value="lostThing" clearable label="失物名称" placeholder="请输入失物名称" :click-icon="onClickIcon" />
-					<van-field :value="lostPalce" clearable label="丢失地点" placeholder="请输入丢失地点" :click-icon="onClickIcon" />
-					<van-field :value="lostTime" clearable label="丢失时间" placeholder="请输入丢失时间" @focus="showPopup" />
-					<van-field :value="phone" clearable label="联系方式" placeholder="请输入手机号码" :click-icon="onClickIcon" />
-					<van-field value="" label="失物详情" type="textarea"  autosize :border=" false "  show-confirm-bar/>
-					<van-popup :show="show" @click="onClose" position="bottom" @click-overlay="show = false">
-					<van-datetime-picker type="datetime" :value="currentDate"  @cancel="show = false" />
-					-->
+
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input name="input" @keyup.enter="search" @input="search($event)"></input>
+						<input v-model="form.name"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
-						<input name="input"></input>
+						<input v-model="form.lostPlace"></input>
 					</view>
+					
+				<view class="cu-form-group ">
+					<view class="title">物品类型</view>
+					<picker @change="PickerChange" :value="form.index" :range="picker">
+						<view class="picker">
+							{{form.index>-1?picker[form.index]:'无'}}
+						</view>
+					</picker>
+				</view>
+					
 					<view class="cu-form-group">
 						<view class="title">时间选择</view>
-						<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
+						<picker mode="time" v-model="form.time" start="09:01" end="21:01" @change="TimeChange">
 							<view class="picker">
-								{{time}}
+								{{form.time}}
 							</view>
 						</picker>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">日期选择</view>
-						<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+						<picker mode="date" v-model="form.date" start="2015-09-01" end="2020-09-01" @change="DateChange">
 							<view class="picker">
-								{{date}}
+								{{form.date}}
 							</view>
 						</picker>
 					</view>
+
+
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input name="input"></input>
+						<input name="input" v-model="form.contact"></input>
 
 					</view>
 					<view class="cu-form-group align-start">
 						<view class="title">失物详情</view>
-						<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaAInput"></textarea>
+						<textarea maxlength="-1"  v-model="form.details" @input="textareaAInput"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
 							图片上传
 						</view>
 						<view class="action">
-							{{imgList.length}}/4
+							{{form.imgList.length}}/4
 						</view>
 					</view>
 					<view class="cu-form-group">
 						<view class="grid col-4 grid-square flex-sub">
-							<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-								<image :src="imgList[index]" mode="aspectFill"></image>
+							<view class="bg-img" v-for="(item,index) in form.imgList" :key="index" @tap="ViewImage" :data-url="form.imgList[index]">
+								<image :src="form.imgList[index]" mode="aspectFill"></image>
 								<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 									<text class='cuIcon-close'></text>
 								</view>
 							</view>
-							<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+							<view class="solids" @tap="ChooseImage" v-if="form.imgList.length<4">
 								<text class='cuIcon-cameraadd'></text>
 							</view>
 						</view>
@@ -75,74 +80,86 @@
 				</van-cell-group>
 
 			</van-tab>
-			<van-tab title="我是拾主">
-				
+			<van-tab title="我是拾主" >
+
+
+				<van-cell-group>
+
+					<view class="cu-form-group margin-top">
+						<view class="title">拾物名称</view>
+						<input v-model="form.name"></input>
+					</view>
+					<view class="cu-form-group">
+						<view class="title">拾到地点</view>
+						<input v-model="form.lostPlace"></input>
+					</view>
 					
-					<van-cell-group>
+				<view class="cu-form-group ">
+					<view class="title">物品类型</view>
+					<picker @change="PickerChange" :value="form.index" :range="picker">
+						<view class="picker">
+							{{form.index>-1?picker[form.index]:'无'}}
+						</view>
+					</picker>
+				</view>
+					
+					<view class="cu-form-group">
+						<view class="title">时间选择</view>
+						<picker mode="time" v-model="form.time" start="09:01" end="21:01" @change="TimeChange">
+							<view class="picker">
+								{{form.time}}
+							</view>
+						</picker>
+					</view>
+					<view class="cu-form-group">
+						<view class="title">日期选择</view>
+						<picker mode="date" v-model="form.date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+							<view class="picker">
+								{{form.date}}
+							</view>
+						</picker>
+					</view>
+
+
+					<view class="cu-form-group">
+						<view class="title">手机号码</view>
+						<input name="input" v-model="form.contact"></input>
+
+					</view>
+
 						
-
-						<view class="cu-form-group margin-top">
-							<view class="title">拾物名称</view>
-							<input name="input"></input>
-						</view>
-						<view class="cu-form-group">
-							<view class="title">拾到地点</view>
-							<input name="input"></input>
-						</view>
-						<view class="cu-form-group">
-							<view class="title">时间选择</view>
-							<picker mode="time" :value="time" start="09:01" end="21:01" @change="TimeChange">
-								<view class="picker">
-									{{time}}
-								</view>
-							</picker>
-						</view>
-						<view class="cu-form-group">
-							<view class="title">日期选择</view>
-							<picker mode="date" :value="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
-								<view class="picker">
-									{{date}}
-								</view>
-							</picker>
-						</view>
-						<view class="cu-form-group">
-							<view class="title">手机号码</view>
-							<input name="input"></input>
-
-						</view>
 						<view class="cu-form-group align-start">
 							<view class="title">拾物详情</view>
-							<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput"></textarea>
+							<textarea maxlength="-1" :disabled="modalName!=null" v-model="form.details" @input="textareaBInput"></textarea>
 						</view>
 						<view class="cu-bar bg-white margin-top">
 							<view class="action">
 								图片上传
 							</view>
 							<view class="action">
-								{{imgList.length}}/4
+								{{form.imgList.length}}/4
 							</view>
 						</view>
 						<view class="cu-form-group">
 							<view class="grid col-4 grid-square flex-sub">
-								<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-									<image :src="imgList[index]" mode="aspectFill"></image>
+								<view class="bg-img" v-for="(item,index) in form.imgList" :key="index" @tap="ViewImage" :data-url="form.imgList[index]">
+									<image :src="form.imgList[index]" mode="aspectFill"></image>
 									<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 										<text class='cuIcon-close'></text>
 									</view>
 								</view>
-								<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
+								<view class="solids" @tap="ChooseImage" v-if="form.imgList.length<4">
 									<text class='cuIcon-cameraadd'></text>
 								</view>
 							</view>
 						</view>
-						
 
 
-						</van-popup>
+									</van-popup>
 
 
 						<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
-					</van-cell-group>
+				</van-cell-group>
 
 
 			</van-tab>
@@ -158,17 +175,22 @@
 		data() {
 			return {
 				// lostname:''
-				show: false,
-				currentDate: new Date().getTime(),
-				lostThing: "",
-				lostTime: "",
-				lostPlace: "",
-				time: '12:01',
-				date: '2018-12-25',
-				imgList: [],
-				modalName: null,
+				picker: ['手表', '钥匙', '校园卡','银行卡','耳机','钱包'],
+				
 				textareaAValue: '',
-				textareaBValue: '',
+				form: {
+					name: "",
+					lostPlace: '',
+					index: -1,
+					loseTime:this.date+" "+this.time+":00",
+					details:'',
+					contact: '',
+					time: '12:01',
+					date: '2018-12-25',
+					imgList: [],
+					postType:''
+				}
+
 			}
 		},
 		methods: {
@@ -178,30 +200,36 @@
 					icon: 'none'
 				});
 			},
-			showPopup() {
-				this.$data.show = true
-			},
-			onClose() {
-				this.$data.show = false
-			},
+
 			TimeChange(e) {
-				this.time = e.detail.value
+				this.form.time = e.detail.value
 			},
 			DateChange(e) {
-				this.date = e.detail.value
+				this.form.date = e.detail.value
 			},
 			ChooseImage() {
 				uni.chooseImage({
 					count: 4, //默认9
-					sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-					sourceType: ['album'], //从相册选择
+					sizeType:["compressed"],
 					success: (res) => {
-						
-						if (this.imgList.length != 0) {
-							this.imgList = this.imgList.concat(res.tempFilePaths)
-						} else {
-							this.imgList = res.tempFilePaths
-						}
+						console.log(res)
+						  const tempFilePaths = res.tempFilePaths
+						uni.uploadFile({
+							url:"http:localhost:8888/upload/img",
+							filePath:tempFilePaths[0],
+							name:"img",
+							fileType:"image",
+							// files:res.tempFiles,
+							success:(uploadFileRes) => {
+								let data=JSON.parse(uploadFileRes.data)
+								console.log(data.status)
+								if(data.status === 0){
+									this.form.imgList.push("http://localhost:8888/img/"+data.data)
+								}else{
+									
+								}						
+							}						
+						})
 					}
 				});
 			},
@@ -213,52 +241,33 @@
 			},
 			DelImg(e) {
 				uni.showModal({
-					
+
 					content: '要删除这张照片吗？',
 					cancelText: '取消',
 					confirmText: '删除',
 					success: res => {
 						if (res.confirm) {
-							this.imgList.splice(e.currentTarget.dataset.index, 1)
+							this.form.imgList.splice(e.currentTarget.dataset.index, 1)
 						}
 					}
 				})
 			},
-			
-			subInfo:function(){
-				
-				wx.request({
-					url:"http://localhost:8080/post/test",
-					method:'POST',
-					data:{
-						id:1
-					},
-					success: (res) => {
-						console.log(res)
-					}
-				
-				})
+			PickerChange(e) {
+				this.form.index = e.detail.value
 			},
-			search(event){
-				          console.log(event.currentTarget.value)
-				        }
-			 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			// 			onInput(event) {
-			// 				this.$data.currentDate = event.detail
-			// 			},
+
+			subInfo: function() {
+				this.$api.addPost(this.form).then(res => {
+						uni.showModal({
+							content: '发表成功',
+							showCancel: false,
+						});
+						
+				})
+			}
 
 		}
+
 	}
 </script>
 
