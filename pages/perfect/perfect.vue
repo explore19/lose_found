@@ -81,7 +81,7 @@ return false;
 	var sex;
 	var QQ;
 	var housenum;
-		var  graceChecker = require("E:/小程序2/lose_found/js/graceChecker.js");
+		var  graceChecker = require("E:/小程序2/lose_found/utils/graceChecker.js");
 	
 	// const rules = {
 	//     sno: {

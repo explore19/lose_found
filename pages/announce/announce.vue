@@ -175,7 +175,7 @@
 </template>
 
 <script>
-	var  graceChecker = require("E:/小程序2/lose_found/js/graceChecker.js");
+	var  graceChecker = require("E:/小程序2/lose_found/utils/graceChecker.js");
 	export default {
 		data() {
 			return {
