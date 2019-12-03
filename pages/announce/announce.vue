@@ -175,7 +175,7 @@
 </template>
 
 <script>
-	var  graceChecker = require("E:/小程序2/lose_found/utils/graceChecker.js");
+	var  graceChecker = require("../../utils/graceChecker.js");
 	export default {
 		data() {
 			return {
@@ -220,7 +220,7 @@
 								                if(checkRes){
 								                    uni.showToast({title:"发布成功!", icon:"none"});
 								                }else{
-								                    uni.showToast({ title: graceChecker.error, icon: "none" });
+								                    uni.showToast({ title: graceChecker.error, icon: " " });
 								                }
 								            },
 			onClick(event) {

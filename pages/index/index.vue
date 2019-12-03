@@ -15,33 +15,35 @@
 		<view>
 			<van-tabs @click="onClick">
 				<van-tab title="失物寻物">
-					<view style="border: #F0FFF0">
-						<view class="cu-card dynamic isCard?'no-card':''">
-							<view class="cu-item shadow">
-								<view class="cu-list menu-avatar">
-									<view class="cu-item">
-										<view class="cu-avatar round lg" :style="'background-image:url('+awatar+');'"></view>
-										<view class="content flex-sub">
-											<view>{{user_name}}</view>
+					<view v-for="post in posts">
+						<view style="border: #F0FFF0">
+							<view class="cu-card dynamic isCard?'no-card':''">
+								<view class="cu-item shadow">
+									<view class="cu-list menu-avatar">
+										<view class="cu-item">
+											<view class="cu-avatar round lg" :style="'background-image:url('+post.awatar+');'"></view>
+											<view class="content flex-sub">
+												<view>{{post.user_name}}</view>
 											<view class="text-gray text-sm flex justify-between">
-												{{date}}
+												{{post.date}}
+											</view>
 											</view>
 										</view>
 									</view>
-								</view>
-								<view @click="getToinfo()">
-								<view class="text-content">
-									{{content}}
-								</view>
-								<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
-									<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+img+');'">
+									<view @click="getToinfo()">
+									<view class="text-content">
+										{{post.content}}
 									</view>
-								</view>
-								</view>	
-								<view class="text-gray text-sm text-right padding">
-									<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{browser}}</text>
-									<text class="cuIcon-appreciatefill margin-lr-xs">{{likenum}}</text>
-									<text class="cuIcon-messagefill margin-lr-xs">{{reply}}</text>
+									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
+										<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+post.img+');'">
+										</view>
+									</view>
+									</view>	
+									<view class="text-gray text-sm text-right padding">
+										<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{browser}}</text>
+										<text class="cuIcon-appreciatefill margin-lr-xs">{{likenum}}</text>
+										<text class="cuIcon-messagefill margin-lr-xs">{{reply}}</text>
+									</view>
 								</view>
 							</view>
 						</view>
@@ -101,7 +103,43 @@
 		<view class="popup window">
 			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="getToperfect" position:margin-top />
 		</view>
-
+		
+		
+		
+		<!-- <view v-for="post in posts"> 
+			<view style="border: #F0FFF0">
+				<view class="cu-card dynamic isCard?'no-card':''">
+					<view class="cu-item shadow">
+						<view class="cu-list menu-avatar">
+							<view class="cu-item">
+								<view class="cu-avatar round lg" :style="'background-image:url('+post.awatar+');'"></view>
+								<view class="content flex-sub">
+									<view>{{post.user_name}}</view>
+								<view class="text-gray text-sm flex justify-between">
+									{{post.date}}
+								</view>
+								</view>
+							</view>
+						</view>
+						<view @click="getToinfo()">
+						<view class="text-content">
+							{{post.content}}
+						</view>
+						<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
+							<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+post.img+');'">
+							</view>
+						</view>
+						</view>	
+						<view class="text-gray text-sm text-right padding">
+							<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{browser}}</text>
+							<text class="cuIcon-appreciatefill margin-lr-xs">{{likenum}}</text>
+							<text class="cuIcon-messagefill margin-lr-xs">{{reply}}</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		 -->
 	</view>
 </template>
 
@@ -109,6 +147,13 @@
 	export default {
 		data() {
 			return {
+				posts:[{
+					date:"2019-11-13 00:05:06",
+					content:'我是梁家耀，我是个铁憨憨',
+					img:"http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erSw1mEgM3BvAbSypP1iakzrYYEL9lYTZKBIe5ch6XCn23D5bpzuKdxMcuBqQVAzsxbjWTLyYFEnsA/132",
+					awatar:"http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erSw1mEgM3BvAbSypP1iakzrYYEL9lYTZKBIe5ch6XCn23D5bpzuKdxMcuBqQVAzsxbjWTLyYFEnsA/132",
+					user_name:'小花'
+				}],
 				active: 'home',
 				cardCur: 0,
 				awatar:"",
@@ -194,11 +239,42 @@
 					this.user_name = res.data.nickName	
 					this.awatar = res.data.headPortrait
 				})
+			},
+			uploadData(){  //用来重复刷新页面 重复像后端获取数据
+				this.$api.getUserInfo().then(res=>{
+					this.awatar = res.data.headPortrait
+					this.user_name = res.data.nickName
+				})
+			
+				this.$api.getPost({ //用来获取
+					id: "1"
+				}).then(
+					res => {
+						this.content = res.data.details
+						this.img = res.data.image
+						this.date = res.data.loseTime
+						this.posts.push({	
+							content:res.data.details,
+							img:res.data.image,
+							date:res.data.createTime,
+							awatar:this.awatar,
+							user_name:this.user_name
+						})
+						
+					}
+				)
+				
 			}
+	
 		},
 		created() {
 			this.requestData()
+		},
+			
+		onReachBottom(){
+			this.uploadData()
 		}
+		
 	}
 </script>
 <style>
@@ -264,5 +340,8 @@
 		justify-content: center;
 		align-items: center;
 		z-index: 300;
+	}
+	.svp{
+		height: 200px;
 	}
 </style>
