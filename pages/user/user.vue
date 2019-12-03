@@ -41,6 +41,7 @@
 			},
 			requestData(){
 				this.$api.getUserInfo().then(res =>{
+					console.log(res)
 					this.name=res.data.nickName
 					this.sno = res.data.sno
 					this.head_portrait=res.data.headPortrait

@@ -1,6 +1,6 @@
 <template>
 	<view class="">
-		<van-tabs animated>
+		<van-tabs animated  :active=" form.postType " @change="onChange">
 			<van-tab title="我是失主" >
 				<van-cell-group>
 
@@ -16,26 +16,26 @@
 					
 				<view class="cu-form-group ">
 					<view class="title">物品类型</view>
-					<picker @change="PickerChange" :value="form.index" :range="picker">
+					<picker @change="PickerChange" :value="pickerIndex" :range="picker" range-key="name">
 						<view class="picker">
-							{{form.index>-1?picker[form.index]:'无'}}
+							{{picker[pickerIndex].name}}
 						</view>
 					</picker>
 				</view>
 					
 					<view class="cu-form-group">
 						<view class="title">时间选择</view>
-						<picker mode="time" v-model="form.time" start="09:01" end="21:01" @change="TimeChange">
+						<picker mode="time" v-model="time" start="09:01" end="21:01" @change="TimeChange">
 							<view class="picker">
-								{{form.time}}
+								{{time}}
 							</view>
 						</picker>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">日期选择</view>
-						<picker mode="date" v-model="form.date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+						<picker mode="date" v-model="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
 							<view class="picker">
-								{{form.date}}
+								{{date}}
 							</view>
 						</picker>
 					</view>
@@ -59,18 +59,18 @@
 							图片上传
 						</view>
 						<view class="action">
-							{{form.imgList.length}}/4
+							{{imgList.length}}/4
 						</view>
 					</view>
 					<view class="cu-form-group">
 						<view class="grid col-4 grid-square flex-sub">
-							<view class="bg-img" v-for="(item,index) in form.imgList" :key="index" @tap="ViewImage" :data-url="form.imgList[index]">
-								<image :src="form.imgList[index]" mode="aspectFill"></image>
+							<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+								<image :src="imgList[index]" mode="aspectFill"></image>
 								<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 									<text class='cuIcon-close'></text>
 								</view>
 							</view>
-							<view class="solids" @tap="ChooseImage" v-if="form.imgList.length<4">
+							<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
 								<text class='cuIcon-cameraadd'></text>
 							</view>
 						</view>
@@ -98,28 +98,28 @@
 						<input v-model="form.findPlace" name="findpalce"></input>
 					</view>
 					
-				<view class="cu-form-group ">
+			<!-- 	<view class="cu-form-group ">
 					<view class="title">物品类型</view>
 					<picker @change="PickerChange" :value="form.index" :range="picker">
 						<view class="picker">
 							{{form.index>-1?picker[form.index]:'无'}}
 						</view>
 					</picker>
-				</view>
+				</view> -->
 					
 					<view class="cu-form-group">
 						<view class="title">时间选择</view>
-						<picker mode="time" v-model="form.time" start="09:01" end="21:01" @change="TimeChange">
+						<picker mode="time" v-model="time" start="09:01" end="21:01" @change="TimeChange">
 							<view class="picker">
-								{{form.time}}
+								{{time}}
 							</view>
 						</picker>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">日期选择</view>
-						<picker mode="date" v-model="form.date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+						<picker mode="date" v-model="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
 							<view class="picker">
-								{{form.date}}
+								{{date}}
 							</view>
 						</picker>
 					</view>
@@ -141,18 +141,18 @@
 								图片上传
 							</view>
 							<view class="action">
-								{{form.imgList.length}}/4
+								{{imgList.length}}/4
 							</view>
 						</view>
 						<view class="cu-form-group">
 							<view class="grid col-4 grid-square flex-sub">
-								<view class="bg-img" v-for="(item,index) in form.imgList" :key="index" @tap="ViewImage" :data-url="form.imgList[index]">
-									<image :src="form.imgList[index]" mode="aspectFill"></image>
+								<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+									<image :src="imgList[index]" mode="aspectFill"></image>
 									<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
 										<text class='cuIcon-close'></text>
 									</view>
 								</view>
-								<view class="solids" @tap="ChooseImage" v-if="form.imgList.length<4">
+								<view class="solids" @tap="ChooseImage" v-if="imgList.length<4">
 									<text class='cuIcon-cameraadd'></text>
 								</view>
 							</view>
@@ -162,7 +162,7 @@
 									</van-popup>
 
 
-						<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
+						<van-button type="primary" size="large" @click= "subInfo()">发布</van-button>
 				</van-cell-group>
 
 
@@ -179,21 +179,24 @@
 	export default {
 		data() {
 			return {
-				// lostname:''
-				picker: ['手表', '钥匙', '校园卡','银行卡','耳机','钱包'],
-				
+				// picker: ['无','手表', '钥匙', '校园卡','银行卡','耳机','钱包'],
+				picker:[{'id':1,name:'不限'},{'id':2,name:'披风'},{'id':3,name:'鞋子'}],
+				time: '12:01',
+				date: '2018-12-25',
 				textareaAValue: '',
+				imgList: [],
+				pickerIndex:0,
+				// loseTime:this.date+" "+this.time+":00",
 				form: {
 					lostname: "",
 					lostPlace: '',
-					index: -1,
-					loseTime:this.date+" "+this.time+":00",
+					type: 1,
+					loseTime:'',
 					details:'',
 					contact: '',
-					time: '12:01',
-					date: '2015-09-01',
-					imgList: [],
-					postType:''
+					image:[],
+					postType:'',
+					
 				}
 
 			}
@@ -231,10 +234,10 @@
 			},
 
 			TimeChange(e) {
-				this.form.time = e.detail.value
+				this.time = e.detail.value
 			},
 			DateChange(e) {
-				this.form.date = e.detail.value
+				this.date = e.detail.value
 			},
 			ChooseImage() {
 				uni.chooseImage({
@@ -253,7 +256,7 @@
 								let data=JSON.parse(uploadFileRes.data)
 								console.log(data.status)
 								if(data.status === 0){
-									this.form.imgList.push("http://localhost:8888/img/"+data.data)
+									this.imgList.push("http://localhost:8888/img/"+data.data)
 								}else{
 									
 								}						
@@ -276,30 +279,41 @@
 					confirmText: '删除',
 					success: res => {
 						if (res.confirm) {
-							this.form.imgList.splice(e.currentTarget.dataset.index, 1)
+							this.imgList.splice(e.currentTarget.dataset.index, 1)
 						}
 					}
 				})
 			},
 			PickerChange(e) {
-				this.form.index = e.detail.value
+				console.log(e)
+				this.form.type=this.picker[e.detail.value].id
+				this.pickerIndex = e.detail.value
 			},
 
-// 			subInfo: function() {
-// 			// 	this.$api.addPost(this.form).then(res => {
-// 			// 			uni.showModal({
-// 			// 				content: '发表成功',
-// 			// 				showCancel: false,
-// 			// 			});
-// 			// 			
-// 			// 	})
-// 			// }
-// 
-// 		}
+			subInfo: function() {
+				this.form.postType =  this.active
+				this.form.loseTime = this.date+" "+this.time+":00"
+				let image = ''
+				for(let i = 0;i<this.imgList.length;i++){
+					if(i === this.imgList.length-1){
+						image +=this.imgList[i]
+						continue
+					}
+					image +=this.imgList[i] + '&&&'
+				}
+				this.form.image = image
+				this.$api.addPost(this.form).then(res => {
+					console.log(this.form)
+						// uni.showModal({
+						// 	content: '发表成功',
+						// 	showCancel: false,
+						// });
+						
+				})
+			}
 
-	},
-	
-		
+		}
+
 	}
 </script>
 

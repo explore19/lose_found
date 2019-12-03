@@ -1,1 +1,0 @@
-<view><view><van-search vue-id="1" value="" placeholder="请输入搜索关键词" use-action-slot="true" data-event-opts="{{[['^search',[['onSearch']]]]}}" data-com-type="wx" bind:search="__e" bind:__l="__l" vue-slots="{{['action']}}"><view slot="action" data-event-opts="{{[['tap',[['onCancel',['$event']]]]]}}" bindtap="__e">取消</view></van-search></view></view>
