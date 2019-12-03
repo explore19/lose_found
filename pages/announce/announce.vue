@@ -180,7 +180,7 @@
 		data() {
 			return {
 				// picker: ['无','手表', '钥匙', '校园卡','银行卡','耳机','钱包'],
-				picker:[{'id':1,name:'不限'},{'id':2,name:'披风'},{'id':3,name:'鞋子'}],
+				picker:[],
 				time: '12:01',
 				date: '2018-12-25',
 				textareaAValue: '',
@@ -285,7 +285,6 @@
 				})
 			},
 			PickerChange(e) {
-				console.log(e)
 				this.form.type=this.picker[e.detail.value].id
 				this.pickerIndex = e.detail.value
 			},
@@ -312,9 +311,15 @@
 				})
 			}
 
-		}
-
+		},
+	created(){
+		this.$api.getAllType().then(res =>{
+			console.log(res)
+			this.picker=res.data
+		})
 	}
+	}
+
 </script>
 
 <style>

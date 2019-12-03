@@ -15,34 +15,34 @@
 		<view>
 			<van-tabs @click="onClick">
 				<van-tab title="失物寻物">
-					<view v-for="post in posts">
+					<view v-for="item in data">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic isCard?'no-card':''">
 								<view class="cu-item shadow">
 									<view class="cu-list menu-avatar">
 										<view class="cu-item">
-											<view class="cu-avatar round lg" :style="'background-image:url('+post.awatar+');'"></view>
+											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
 											<view class="content flex-sub">
-												<view>{{post.user_name}}</view>
+												<view>{{item.nickName}}</view>
 											<view class="text-gray text-sm flex justify-between">
-												{{post.date}}
+												{{item.post.createTime}}
 											</view>
 											</view>
 										</view>
 									</view>
 									<view @click="getToinfo()">
 									<view class="text-content">
-										{{post.content}}
+										{{item.post.details}}
 									</view>
 									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
-										<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+post.img+');'">
+										<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 										</view>
 									</view>
 									</view>	
 									<view class="text-gray text-sm text-right padding">
-										<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{browser}}</text>
-										<text class="cuIcon-appreciatefill margin-lr-xs">{{likenum}}</text>
-										<text class="cuIcon-messagefill margin-lr-xs">{{reply}}</text>
+										<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{item.post.browsePoints}}</text>
+										<text class="cuIcon-appreciatefill margin-lr-xs">{{item.post.praisePoints}}</text>
+										<text class="cuIcon-messagefill margin-lr-xs">{{item.post.reply}}</text>
 									</view>
 								</view>
 							</view>
@@ -84,62 +84,14 @@
 				</van-tab>
 			</van-tabs>
 		</view>
-		<!--<div class="dialog">
-		      <div class="dialog-cover back"  v-if="isShow"  @click="closeMyself"></div>
-		      <transition name="drop">
-		        <div class="dialog-content" :style="{top:topDistance+'%',width:widNum+'%',left:leftSite+'%'}"  v-if="isShow">
-		          <div class="dialog_head back">
-		              <slot name="header">提示信息</slot>
-		          </div>
-		          <div class="dialog_main" :style="{paddingTop:pdt+'px',paddingBottom:pdb+'px'}">
-		            <slot name="main">弹窗内容</slot>
-		          </div>
-		          <div  class="foot_close" @click="closeMyself">
-		              <div class="close_img back"></div>
-		          </div>
-		        </div>
-		    </transition>
-		  </div>-->
+	
 		<view class="popup window">
 			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="getToperfect" position:margin-top />
 		</view>
 		
 		
 		
-		<!-- <view v-for="post in posts"> 
-			<view style="border: #F0FFF0">
-				<view class="cu-card dynamic isCard?'no-card':''">
-					<view class="cu-item shadow">
-						<view class="cu-list menu-avatar">
-							<view class="cu-item">
-								<view class="cu-avatar round lg" :style="'background-image:url('+post.awatar+');'"></view>
-								<view class="content flex-sub">
-									<view>{{post.user_name}}</view>
-								<view class="text-gray text-sm flex justify-between">
-									{{post.date}}
-								</view>
-								</view>
-							</view>
-						</view>
-						<view @click="getToinfo()">
-						<view class="text-content">
-							{{post.content}}
-						</view>
-						<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
-							<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+post.img+');'">
-							</view>
-						</view>
-						</view>	
-						<view class="text-gray text-sm text-right padding">
-							<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{browser}}</text>
-							<text class="cuIcon-appreciatefill margin-lr-xs">{{likenum}}</text>
-							<text class="cuIcon-messagefill margin-lr-xs">{{reply}}</text>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-		 -->
+		
 	</view>
 </template>
 
@@ -147,13 +99,7 @@
 	export default {
 		data() {
 			return {
-				posts:[{
-					date:"2019-11-13 00:05:06",
-					content:'我是梁家耀，我是个铁憨憨',
-					img:"http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erSw1mEgM3BvAbSypP1iakzrYYEL9lYTZKBIe5ch6XCn23D5bpzuKdxMcuBqQVAzsxbjWTLyYFEnsA/132",
-					awatar:"http://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83erSw1mEgM3BvAbSypP1iakzrYYEL9lYTZKBIe5ch6XCn23D5bpzuKdxMcuBqQVAzsxbjWTLyYFEnsA/132",
-					user_name:'小花'
-				}],
+				data:[],
 				active: 'home',
 				cardCur: 0,
 				awatar:"",
@@ -186,13 +132,8 @@
 					type: 'image',
 					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 				}],
-				browser: "0",
-				likenum: "0",
-				reply: "0",
-				content: "嘿嘿嘿",
-				user_name: "",   //丢失物品的人 
-				img:"",  //丢失物品的照片
-				date:"" //丢失物品的日期
+				page:1,
+				pageSize:5
 			}
 		},
 		methods: {
@@ -223,46 +164,32 @@
 			add: function() {
 				this.browser++;
 			},
-			requestData() {
-				this.$api.getPost({ //用来获取
-					id: "1"
-				}).then(
-					res => {
-						this.content = res.data.details
-						this.img = res.data.image
-						this.date = res.data.loseTime
-						console.log(res)
-					}
-				)
-				this.$api.getUserInfo().then(res=>{
-					console.log(res)
-					this.user_name = res.data.nickName	
-					this.awatar = res.data.headPortrait
-				})
-			},
-			uploadData(){  //用来重复刷新页面 重复像后端获取数据
-				this.$api.getUserInfo().then(res=>{
-					this.awatar = res.data.headPortrait
-					this.user_name = res.data.nickName
-				})
+			requestData(){  //用来重复刷新页面 重复像后端获取数据
+				// this.$api.getUserInfo().then(res=>{
+				// 	this.awatar = res.data.headPortrait
+				// 	this.user_name = res.data.nickName
+				// })
 			
-				this.$api.getPost({ //用来获取
-					id: "1"
-				}).then(
-					res => {
-						this.content = res.data.details
-						this.img = res.data.image
-						this.date = res.data.loseTime
-						this.posts.push({	
-							content:res.data.details,
-							img:res.data.image,
-							date:res.data.createTime,
-							awatar:this.awatar,
-							user_name:this.user_name
-						})
-						
-					}
-				)
+				// this.$api.getPost({ //用来获取
+				// 	id: "1"
+				// }).then(res => {
+				// 		this.content = res.data.details
+				// 		this.img = res.data.image
+				// 		this.date = res.data.loseTime
+				// 		this.posts.push({	
+				// 			content:res.data.details,
+				// 			img:res.data.image,
+				// 			date:res.data.createTime,
+				// 			awatar:this.awatar,
+				// 			user_name:this.user_name
+				// 		})			
+				// 	})
+				this.$api.queryPost({ //用来获取
+					page: this.page,
+					pageSize:this.pageSize
+				}).then(res => {
+						this.data=this.data.concat(res.data)
+					})
 				
 			}
 	
@@ -272,7 +199,8 @@
 		},
 			
 		onReachBottom(){
-			this.uploadData()
+			this.page+=1
+			this.requestData()
 		}
 		
 	}
