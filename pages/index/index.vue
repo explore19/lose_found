@@ -15,7 +15,7 @@
 		<view>
 			<van-tabs @click="onClick">
 				<van-tab title="失物寻物">
-					<view v-for="item in data">
+					<view v-for="item in data" :key="item.post.id">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic isCard?'no-card':''">
 								<view class="cu-item shadow">

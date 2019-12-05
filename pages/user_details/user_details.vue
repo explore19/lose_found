@@ -1,17 +1,13 @@
 <template>
 	<view>
 		<view v-if="seen">
-			<view class="cu-bar bg-white">
-				<view class="action" @click="tap">
-					<text class="cuIcon-back text-gray"></text> 返回
-				</view>
-				<view class="content text-bold">
-					个人信息
-				</view>
-			</view>
+		<view class="cu-form-group margin-top">
+			<view class="title">头像</view>
+			<view class="cu-avatar radius bg-gray"></view>
+		</view>
 			
 				<!-- <van-cell title="头像" v-model="head" value="" border="true" /> -->
-				<view v-model="head" class="cu-avatar xl round margin-right" id="user_img" :style="'background-image:url('+head+');'"  />
+				<!-- <view v-model="head" class="cu-avatar xl round margin-right" id="user_img" :style="'background-image:url('+head+');'"  /> -->
 			<van-cell-group>
 				<van-cell title="昵称" v-model="nick" value="" border="true"/>
 				<van-cell title="学号" v-model="sno" value="" border="true" />
@@ -22,16 +18,12 @@
 			</van-cell-group>
 		</view>
 		<view v-if="look">
-			<view class="cu-bar bg-white">
-				<view class="action" @click="tap">
-					<text class="cuIcon-back text-gray"></text> 返回
-				</view>
-				<view class="content text-bold">
-					修改个人信息
-				</view>
-			</view>
+
 			<van-cell-group>
-				<van-field label="头像" value="heady" border="false"/>
+				<view class="cu-form-group margin-top">
+					<view class="title">头像</view>
+					<view class="cu-avatar radius bg-gray"></view>
+				</view>
 				<van-field label="昵称" value="nicky" border="false"/>
 				<van-field label="学号" value="snoy" border="false"/>
 				<van-field label="真实姓名" value="realNamey" border="false"/>

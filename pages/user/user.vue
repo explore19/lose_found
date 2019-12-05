@@ -9,17 +9,37 @@
 				学号：{{sno}}
 			</view>
 		</view>
-		<view class="padding bg-white text-left">
+	
+	
+	
+		<view class="cu-list menu" :class="[true?'sm-border':'',false?'card-menu margin-top':'']">
+		<view class="cu-item arrow"  @click="jump">
+			<view class="content">
+				<text class="cuIcon-my text-grey"></text>
+				<text class="text-grey">我的信息</text>
+			</view>
 			
-			<view class="padding margin-top van-hairline--surround" @click="jump">我的信息</view>
-			
-			<view class="padding margin-top" >我的发布</view>
-			
-			<view class="padding margin-top" >我的回复</view>
-			
-			<view class="padding margin-top" >意见反馈</view>
-			
+			</view>
+			<view class="cu-item arrow" >
+			<view class="content">
+				<text class="cuIcon-text text-grey"></text>
+				<text class="text-grey">我的发布</text>
+			</view>
+			</view>
+			<view class="cu-item arrow" >
+			<view class="content">
+				<text class="cuIcon-comment text-grey"></text>
+				<text class="text-grey">我的回复</text>
+			</view>
+			</view>
+			<view class="cu-item arrow" >
+			<view class="content">
+				<text class="cuIcon-service text-grey"></text>
+				<text class="text-grey">意见反馈</text>
 		</view>
+		</view>
+		</view>
+	
 	</view>
 </template>
 
