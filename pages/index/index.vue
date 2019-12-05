@@ -13,7 +13,7 @@
 			</swiper>
 		</view>
 		<view>
-			<van-tabs @click="onClick">
+			<van-tabs v-on:change="onChange()">
 				<van-tab title="失物寻物">
 					<view v-for="item in data">
 						<view style="border: #F0FFF0">
@@ -30,7 +30,7 @@
 											</view>
 										</view>
 									</view>
-									<view @click="getToinfo()">
+									<view @click="getToInfo()">
 									<view class="text-content">
 										{{item.post.details}}
 									</view>
@@ -64,7 +64,7 @@
 										</view>
 									</view>
 								</view>
-								<!-- <view  @click="getToinfo()"> -->
+								<view  @click="getToInfo()">
 								<view class="text-content">
 									折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
 								</view>
@@ -72,7 +72,7 @@
 									<view class="bg-img isCard?'':'only-img'" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
 									</view>
 								</view>
-								<!-- </view> -->
+								</view>
 								<view class="text-gray text-sm text-right padding">
 									<text class="cuIcon-attentionfill margin-lr-xs" @click="add1()">{{browser}}</text>
 									<text class="cuIcon-appreciatefill margin-lr-xs" @click="add2()">{{likenum}}</text>
@@ -133,7 +133,9 @@
 					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 				}],
 				page:1,
-				pageSize:5
+				pageSize:5,
+				postType:0,
+				count:0
 			}
 		},
 		methods: {
@@ -142,10 +144,8 @@
 					url: "/pages/search/search"
 				})
 			},
-			onClick: function() {
 
-			},
-			getToinfo: function() { // 用来跳转到物品的详细信息的页面
+			getToInfo: function() { // 用来跳转到物品的详细信息的页面
 				uni.navigateTo({
 					url: "/pages/introduction/introduction"
 				})
@@ -160,9 +160,6 @@
 				// if(status==2||3)({
 				// 	show="true"
 				// })
-			},
-			add: function() {
-				this.browser++;
 			},
 			requestData(){  //用来重复刷新页面 重复像后端获取数据
 				// this.$api.getUserInfo().then(res=>{
@@ -184,15 +181,17 @@
 				// 			user_name:this.user_name
 				// 		})			
 				// 	})
-				this.$api.queryPost({ //用来获取
+				this.$api.queryPost({ //用来批量获取
 					page: this.page,
-					pageSize:this.pageSize
+					pageSize:this.pageSize,
+					//postType:this.postType
 				}).then(res => {
 						this.data=this.data.concat(res.data)
-					})
-				
+					})	
+			},
+			onChange(e){
+				this.postType = e.detail.name
 			}
-	
 		},
 		created() {
 			this.requestData()

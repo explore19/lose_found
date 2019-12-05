@@ -3,17 +3,17 @@
 			<view class="cu-item shadow">
 				<view class="cu-list menu-avatar">
 					<view class="cu-item">
-						<view class="cu-avatar round lg" :style="'background-image:url('+awatar+');'"></view>
+						<view class="cu-avatar round lg" :style="'background-image:url('+headPortrait+');'"></view>
 						<view class="content flex-sub">
-							<view>{{name}}</view>
+							<view>{{nickName}}</view>
 							<view class="text-gray text-sm flex justify-between">
-								{{date}}
+								{{createTime}}
 							</view>
 						</view>
 					</view>
 				</view>
 				<view class="text-content">
-					{{content}}
+					{{detail}}
 				</view>
 				<view class="grid flex-sub padding-lr" :class="isCard?'col-3 grid-square':'col-1'">
 					<view class="bg-img" :class="isCard?'':'only-img'" :style="'background-image:url('+img+');'"
@@ -82,27 +82,23 @@
 		data() {
 			return {
 				isCard: true,
-				name:"",
-				content:"",
-				date:"",
+				nickName:"",
+				detail:"",
+				createTime:"",
 				img:"",
-				awatar:""
+				headPortrait:""
 			};
 		},
 		methods:{
 			requestData(){
-				this.$api.getUserInfo().then(
-					res=>{
-						this.name = res.data.nickName
-						this.awatar = res.data.headPortrait
-					}
-				)
 				this.$api.getPost({
-					id:"1"
+					id:1
 				}).then(res=>{
-					this.content = res.data.details
-					this.date = res.data.loseTime
-					this.img = res.data.image
+					this.headPortrait = res.data.headPortrait
+					this.nickName = res.data.nickName
+					this.createTime = res.data.post.createTime
+					this.detail = res.data.post.detail
+					this.img = res.data.post.image
 					console.log(res)
 				})
 			}
