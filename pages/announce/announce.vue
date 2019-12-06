@@ -7,11 +7,11 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input v-model="form.name" name="name" style="direction:rtl" ></input>
+						<input v-model="form.name" name="name" style="text-align: right;" ></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
-						<input v-model="form.lostPlace" name="lostplace"></input>
+						<input v-model="form.lostPlace" name="lostplace" style="text-align: right;"></input>
 					</view>
 
 					<view class="cu-form-group ">
@@ -43,12 +43,12 @@
 
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input v-model="form.contact" name="contact"></input>
+						<input v-model="form.contact" name="contact" style="text-align: right;"></input>
 					</view>
 
 					<view class="cu-form-group">
 						<view class="title">QQ号</view>
-						<input v-model="form.QQ" name="QQ"></input>
+						<input v-model="form.QQ" name="QQ" style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group align-start">
 						<view class="title">失物详情</view>
@@ -91,11 +91,11 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">拾物名称</view>
-						<input v-model="form.name" name="name"></input>
+						<input v-model="form.name" name="name" style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">拾到地点</view>
-						<input v-model="form.lostPlace" name="lostPlace"></input>
+						<input v-model="form.lostPlace" name="lostPlace" style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group ">
 						<view class="title">物品类型</view>
@@ -127,12 +127,12 @@
 
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input name="contact" v-model="form.contact"></input>
+						<input name="contact" v-model="form.contact" style="text-align: right;"></input>
 
 					</view>
 					<view class="cu-form-group">
 						<view class="title">QQ号</view>
-						<input v-model="form.QQ" name="QQ"></input>
+						<input v-model="form.QQ" name="QQ" style="text-align: right;"></input>
 					</view>
 
 
@@ -267,7 +267,7 @@
 					count: 4, //默认9
 					sizeType: ["compressed"],
 					success: (res) => {
-						console.log(res)
+						
 						const tempFilePaths = res.tempFilePaths
 						uni.uploadFile({
 							url: "http:localhost:8888/upload/img",
@@ -277,7 +277,7 @@
 							// files:res.tempFiles,
 							success: (uploadFileRes) => {
 								let data = JSON.parse(uploadFileRes.data)
-								console.log(data.status)
+								
 								if (data.status === 0) {
 									this.imgList.push("http://localhost:8888/img/" + data.data)
 								} else {
@@ -329,11 +329,11 @@
 				}
 				this.form.image = image
 				this.$api.addPost(this.form).then(res => {
-					console.log(this.form)
-					// uni.showModal({
-					// 	content: '发表成功',
-					// 	showCancel: false,
-					// });
+					
+					uni.showModal({
+						content: '发表成功',
+						showCancel: false,
+					});
 
 				})
 			}
