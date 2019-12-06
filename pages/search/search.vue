@@ -7,15 +7,16 @@
 			
 			<view class="cu-form-group">
 				<van-dropdown-menu>
-					<van-dropdown-item :options="option1" title="种类"/>
+					<van-dropdown-item :options="option3" title="种类" v-on:change="onChange()"/>
 				</van-dropdown-menu>	
-				<van-field placeholder="请输入要查询的内容" border="true" @search="onSearch()"/>
-				<button class="cu-btn bg-white" @click="onCancel()">取消</button>
+				<van-field placeholder="请输入要查询的内容" border="true"/>
+				<button class="cu-btn bg-white" @click="onSearch()">搜索</button>
+				<!-- <van-icon name="search" @click="onSearch()"/> -->
 			</view>
 
 			<van-dropdown-menu>
-			  <van-dropdown-item  :options="option1" title="物品种类"/>
-			  <van-dropdown-item  :options="option2" title="啥啥啥"/>
+			  <van-dropdown-item  :options="option1" title="物品种类" v-on:change="onChange()"/>
+			  <van-dropdown-item  :options="option2" title="排序" v-on:change="onChange()"/>
 			</van-dropdown-menu>
 		</view>	
 		
@@ -33,29 +34,28 @@
 				      { text: '物品类型2', value: 2 }
 				    ],
 					option2: [
-					   { text: '默认排序', value: 'a' },
-					   { text: '好评排序', value: 'b' },
-					   { text: '销量排序', value: 'c' }
-					]
+					   { text: '默认排序', value: '3' },
+					   { text: '好评排序', value: '4' },
+					   { text: '销量排序', value: '5' }
+					],
+					option3:[{
+						text:'第一个',value:'a'
+					},{
+						text:'第二个',value:'b'
+					},{
+						text:'第三个',value:'c'
+					}]
 			}
 		},
 		methods: {
-			onCancel: function() {
-				uni.switchTab({
-					url: "/pages/index/index"
-				})
-				//console.log(1)
-			},
-			onClose:function(){
-				this.setData({ show: false });
-				console.log(1)
-			},
-			onSearch:function(){
+			onSearch:function(){ //用来跳转物品详情页
 				uni.navigateTo({
 					url:"/pages/list/list"
 				})
+			},
+			onChange:function(e){
+				console.log(e.detail)
 			}
-			
 				
 		}
 	}
