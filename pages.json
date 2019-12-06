@@ -1,11 +1,15 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "主页"
-			}
-		},
+	
+	
+	
+	{
+		"path": "pages/index/index",
+		"style": {
+			"navigationBarTitleText": "主页"
+		}
+	},
+		
 		
 		{
 			"path" : "pages/entrance/entrance",
@@ -101,7 +105,9 @@
 			"van-card": "/wxcomponents/vant-weapp/dist/card/index",
 			"van-loading": "/wxcomponents/vant-weapp/dist/loading/index",
 			"van-dialog": "/wxcomponents/vant-weapp/dist/dialog/index",
-			 "van-icon": "/wxcomponents/vant-weapp/dist/icon/index"
+			"van-icon": "/wxcomponents/vant-weapp/dist/icon/index",
+			"van-dropdown-menu": "/wxcomponents/vant-weapp/dist/dropdown-menu/index",
+			  "van-dropdown-item": "/wxcomponents/vant-weapp/dist/dropdown-item/index"
 			// "van-sidebar": "/wxcomponents/vant-weapp/dist/sidebar/index",
 			// "van-sidebar-item": "/wxcomponents/vant-weapp/dist/sidebar-item/index",
 			// "van-skeleton": "/wxcomponents/vant-weapp/dist/skeleton/index"

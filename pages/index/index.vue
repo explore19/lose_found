@@ -140,7 +140,7 @@
 		},
 		methods: {
 			focus: function() {
-				uni.redirectTo({
+				uni.navigateTo({
 					url: "/pages/search/search"
 				})
 			},

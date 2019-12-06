@@ -179,12 +179,15 @@ return false;
 				// 		}
 				formSubmit:function(){
 					var rule = [
+						                {name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
+										{name:"realname", checkType : "notnull", checkRule:"",  errorMsg:"请输入真实姓名"},
 					                    {name:"realname", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
 					                    {name:"sex", checkType : "in", checkRule:"男,女",  errorMsg:"请选择性别"},
+										{name:"tel", checkType : "notnull", checkRule:"",  errorMsg:"请输入联系方式"},
 					                    {name:"tel", checkType : "string", checkRule:"11",  errorMsg:"请输入正确格式的联系方式"},
-										{name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
-										{name:"housenum", checkType : "notnull", checkRule:"",  errorMsg:"请输入宿舍号"},
-										{name:"QQ", checkType : "string", checkRule:"8,11",  errorMsg:"请输入QQ号"}
+										{name:"QQ", checkType : "string", checkRule:"8,11",  errorMsg:"请输入QQ号"},
+										{name:"housenum", checkType : "notnull", checkRule:"",  errorMsg:"请输入宿舍号"}
+										
 					                ];
 									let form = {
 										realname:'adad'
