@@ -1,32 +1,42 @@
 <template>
 	<view>
 		<view>
-			<van-search value="" placeholder="请输入搜索关键词" use-action-slot="true" @search="onSearch">
+			<!-- <van-search label="你好" value="" placeholder="请输入搜索关键词" use-action-slot="true" @search="onSearch">
 				<view slot="action" @click="onCancel">取消</view>
-			</van-search>
+			</van-search> -->
+			
+			<view class="cu-form-group">
+				<van-dropdown-menu>
+					<van-dropdown-item :options="option1" title="种类"/>
+				</van-dropdown-menu>	
+				<van-field placeholder="请输入要查询的内容" border="true" @search="onSearch()"/>
+				<button class="cu-btn bg-white" @click="onCancel()">取消</button>
+			</view>
 
-		</view>
-		<!-- <view class="tags">
-			<van-tag plain size="large">标签</van-tag>
-			<van-tag plain type="primary" size="large">标签</van-tag>
-			<van-tag plain type="success" size="large">标签</van-tag>
-			<van-tag plain type="danger" size="large">标签</van-tag>
-			<van-tag plain type="warning" size="large">标签</van-tag>
-		</view> -->
+			<van-dropdown-menu>
+			  <van-dropdown-item  :options="option1" title="物品种类"/>
+			  <van-dropdown-item  :options="option2" title="啥啥啥"/>
+			</van-dropdown-menu>
+		</view>	
 		
 	</view>
 </template>
 
 <script>
+	
 	export default {
 		data() {
 			return {
-				show: false,
-				actions: [
-				      { name: '选项', color: '07c160' },
-				      { loading: true },
-				      { name: '禁用选项', disabled: true }
-				    ]
+				 option1: [
+				      { text: '不限', value: 0 },
+				      { text: '物品类型1', value: 1 },
+				      { text: '物品类型2', value: 2 }
+				    ],
+					option2: [
+					   { text: '默认排序', value: 'a' },
+					   { text: '好评排序', value: 'b' },
+					   { text: '销量排序', value: 'c' }
+					]
 			}
 		},
 		methods: {
