@@ -46,16 +46,16 @@
 				</view>
 				<view class="cu-form-group ">
 					<view class="title">昵称</view>
-					<input v-model="form.nickName" ></input>
+					<input v-model="form.nickName" name="nickName" ></input>
 				</view>
 				
 				<view class="cu-form-group ">
 					<view class="title">学号</view>
-					<input v-model="form.sno" ></input>
+					<input v-model="form.sno" name="sno" ></input>
 				</view>
 				<view class="cu-form-group  ">
 					<view class="title">真实姓名</view>
-					<input v-model="form.realName" ></input>
+					<input v-model="form.realName" name="realName" ></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">性别</view>
@@ -67,11 +67,11 @@
 				</view>
 				<view class="cu-form-group  ">
 					<view class="title">QQ</view>
-					<input v-model="form.qq" ></input>
+					<input v-model="form.qq"name="QQ" ></input>
 				</view>
 				<view class="cu-form-group ">
 					<view class="title">手机号</view>
-					<input v-model="form.phone" ></input>
+					<input v-model="form.phone" name="tel"></input>
 				</view>
 				<van-button type="primary" size="large" @click="Edit2" >保存信息</van-button>
 			</van-cell-group>
@@ -80,6 +80,7 @@
 </template>
 
 <script>
+	var  graceChecker = require("../../utils/graceChecker.js");
 	export default {
 		data() {
 			return {
@@ -100,6 +101,32 @@
 			}
 		},
 		methods: {
+			formSubmit:function(){
+				var rule = [
+					                {name:"nickName", checkType : "notnull", checkRule:"",  errorMsg:"请输入需要修改的昵称"},
+					                {name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
+									{name:"realName", checkType : "notnull", checkRule:"",  errorMsg:"请输入真实姓名"},
+				                    {name:"realName", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
+									{name:"QQ", checkType : "notnull", checkRule:"",  errorMsg:"请输入QQ号"},
+									{name:"QQ", checkType : "string", checkRule:"8,11",  errorMsg:"请输入正确格式的QQ号"},
+									{name:"tel", checkType : "notnull", checkRule:"",  errorMsg:"请输入联系方式"},
+				                    {name:"tel", checkType : "string", checkRule:"11",  errorMsg:"请输入正确格式的联系方式"},
+									{name:"housenum", checkType : "notnull", checkRule:"",  errorMsg:"请输入宿舍号"}
+									
+				                ];
+								let form = {
+									realname:'adad'
+									
+								}
+								var formData =this.form;
+								
+								                var checkRes = graceChecker.check(formData, rule);
+								                if(checkRes){
+								                    uni.showToast({title:"修改成功!", icon:"none"});
+								                }else{
+								                    uni.showToast({ title: graceChecker.error, icon: "none" });
+								                }
+								            },
 			tap: function() {
 				wx.navigateBack({})
 			},
