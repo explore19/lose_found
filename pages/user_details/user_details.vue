@@ -3,13 +3,13 @@
 		<view v-if="seen">
 		<view class="cu-form-group " style="height: 180rpx;">
 			<view class="title">头像</view>
-			<view class="cu-avatar xl radius margin-left" style="background-image:form.headPortrait;"></view>
+			<view class="cu-avatar xl radius margin-left" :style="'background-image:url('+form.headPortrait+');'"></view>
 		</view>
 		
 			<van-cell-group>
 				<view class="cu-form-group " >
 					<view class="title">昵称</view>
-					<input v-model="form.realName" disabled="true" style="text-align: right;" name="realName"></input>
+					<input v-model="form.nickName" disabled="true" style="text-align: right;" name="realName"></input>
 				</view>
 				
 				<view class="cu-form-group ">
@@ -42,10 +42,11 @@
 			<van-cell-group>
 				<view class="cu-form-group " style="height: 180rpx;" @tap="ChooseImage">
 					<view class="title">头像</view>
-					<view class="cu-avatar xl radius margin-left" style="background-image:form.headPortrait;"></view>
+					<view class="cu-avatar xl radius margin-left" :style="'background-image:url('+form.headPortrait+');'"></view>
 				</view>
 				<view class="cu-form-group ">
 					<view class="title">昵称</view>
+					
 					<input v-model="form.nickName" name="nickName" ></input>
 				</view>
 				
@@ -132,6 +133,7 @@
 			},
 			requestData() {
 				this.$api.getUserInfo().then(res => {
+					
 					this.form.headPortrait = res.data.headPortrait;
 					this.form.nickName = res.data.nickName;
 					this.form.sno = res.data.sno;
@@ -145,6 +147,7 @@
 					}
 					this.form.phone = res.data.phone;
 					this.form.qq = res.data.qq
+					
 				})
 			},
 			PickerChange(e) {
@@ -160,7 +163,7 @@
 					count: 1, //默认9
 					sizeType: ["compressed"],
 					success: (res) => {
-						console.log(res)
+						
 						const tempFilePaths = res.tempFilePaths
 						uni.uploadFile({
 							url: "http:localhost:8888/upload/img",
@@ -185,11 +188,11 @@
 	
 			Edit2:function(){									
 				this.$api.updateInfo(this.form).then(res=>{
-					console.log(this.form)
-					uni.navigateTo({
-						url: './user_details',
-					});
-					this.requestData()
+					
+					// uni.navigateTo({
+					// 	url: './user_details',
+					// });
+					
 				})
 				
 			}

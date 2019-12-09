@@ -341,7 +341,7 @@
 		},
 		created() {
 			this.$api.getAllType().then(res => {
-				console.log(res)
+				
 				this.picker = res.data
 			})
 		}

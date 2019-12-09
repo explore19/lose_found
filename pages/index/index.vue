@@ -31,7 +31,8 @@
 										</view>
 									</view>
 									<view @click="getToInfo()">
-									<view class="text-content">
+									<view class="text-content" style="margin: 20upx 30upx;">
+										
 										{{item.post.details}}
 									</view>
 									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
@@ -65,7 +66,7 @@
 									</view>
 								</view>
 								<view  @click="getToInfo()">
-								<view class="text-content">
+								<view class="text-content" style="margin: 28rpx 28rpx;">
 									折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
 								</view>
 								<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
@@ -187,6 +188,7 @@
 					//postType:this.postType
 				}).then(res => {
 						this.data=this.data.concat(res.data)
+						
 					})	
 			},
 			onChange(e){
