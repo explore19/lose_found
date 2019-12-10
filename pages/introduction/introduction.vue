@@ -35,10 +35,39 @@
 			<view class="text-gray text-sm text-right padding">
 				<text class="cuIcon-attentionfill margin-lr-xs"></text>{{form.browsePoints}}
 				<text class="cuIcon-appreciatefill margin-lr-xs"></text> {{form.praisePoints}}
-				<text class="cuIcon-messagefill margin-lr-xs"></text> 
+				<text class="cuIcon-messagefill margin-lr-xs" v-on:click="reply()"></text> 
 			</view>
 
-			<view class="cu-list menu-avatar comment solids-top">
+
+			<view v-for="(reply,index) in replys" :key=index>
+				<view class="cu-list menu-avatar comment solids-top">
+					<view class="cu-item">
+						<view class="cu-avatar round" :style="'background-image:url('+reply.headPortrait+');'"></view>
+						<view class="content">
+							<view class="text-grey">{{reply.nickName}}</view>
+							<view class="text-gray text-content text-df">
+								{{reply.reply.info}}
+							</view>
+							<view class="margin-top-sm flex justify-between">
+								<view class="text-gray text-df">{{reply.reply.updateTime}}</view>
+								<view>
+									<text class="cuIcon-appreciatefill text-red"></text>
+									<text class="cuIcon-messagefill text-gray margin-left-sm" v-on:click="reply"></text>
+								</view>
+								<view>
+									<van-popup :show="show" position="bottom" custom-style="height: 40%;" v-on:close="onClose">
+										<van-field value="" placeholder="回复" right-icon="upgrade" @blur="submit()">
+										</van-field>
+									</van-popup>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+
+		
+			<!-- <view class="cu-list menu-avatar comment solids-top">
 				<view class="cu-item">
 					<view class="cu-avatar round" :style="'background-image:url('+img+');'"></view>
 					<view class="content">1
@@ -61,7 +90,7 @@
 						</view>
 					</view>
 				</view>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -86,8 +115,12 @@
 					browsePoints: 0,
 					praisePoints: 0,
 					type:''
-
-				}
+				},
+				userId:"",
+				replys: [],
+				postId: '',
+				datas: [],
+				list: []
 			};
 		},
 		methods: {
@@ -105,8 +138,49 @@
 					this.form.lostPlace = res.data.post.lostPlace
 					this.form.name = res.data.post.name
 					this.form.type = res.data.post.type
+					this.userId = res.data.post.id;
 				})
+				
+				this.$api.queryPostReply({ //根据帖子的id查询所有的回复
+					postId: 1
+				}).then(res => {
+					let result = res.data
+					for (var i = 0; i < result.length; i++) { //分类根据reply的replyId是否等于 发帖人的id
+						if (result[i].reply.replyId == this.userId) {
+							var len = this.replys.push(result[i])
+						} else {
+							var len = this.list.push(result[i])
+						}
+					}
+					for (var i = 0; i < this.list.length; i++) { //筛选
+						for (var j = 0; j < this.replys.length; j++) {
+							if (this.list[i].reply.replyId == this.replys[j].reply.userId) {
+								this.list[i].nickName = this.list[i].nickName + " 回复:" + this.replys[j].nickName
+								this.replys.splice(j + 1, 0, this.list[i])
+							}
+						}
+					}
+					console.log(this.replys)
+				})
+			},
+			reply: function() { //回复消息的方法
+				this.show = true
+				console.log("欢迎你")
+			},
+			onClose: function() { //关闭弹出层的方法
+				this.show = false
+			},
+			submit: function(e) { //提交回复内容的方法
+				this.$api.addReply({
+					id: 7,
+					info: e.detail.value
+				}).then(res => {
+					console.log(res)
+				})
+				console.log(e)
 			}
+			
+			
 		},
 		created() {
 			this.requestData()
