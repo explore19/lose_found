@@ -12,8 +12,8 @@
 	
 	
 	
-		<view class="cu-list menu" :class="[true?'sm-border':'',false?'card-menu margin-top':'']">
-			<view class="cu-item arrow" @click="jump">
+		<view class="cu-list menu sm-border">
+		<view class="cu-item arrow line"  @click="jump" >
 			<view class="content">
 				<text class="cuIcon-my text-grey"></text>
 				<text class="text-grey">我的信息</text>
@@ -25,13 +25,13 @@
 				<text class="text-grey">我的发布</text>
 			</view>
 			</view>
-			<view class="cu-item arrow" >
+			<view class="cu-item arrow line" >
 			<view class="content">
 				<text class="cuIcon-comment text-grey"></text>
 				<text class="text-grey">我的回复</text>
 			</view>
 			</view>
-			<view class="cu-item arrow" >
+			<view class="cu-item arrow line" >
 			<view class="content">
 				<text class="cuIcon-service text-grey"></text>
 				<text class="text-grey">意见反馈</text>
@@ -98,6 +98,9 @@
 	}
 	.sno,.nick_name{
 		margin-top: 15upx;
+		}
+		.line{
+			border-bottom: 1upx solid #FFFAFA;
 		}
 	/* .header {
 		position: relative;

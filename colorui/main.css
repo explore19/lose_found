@@ -25,6 +25,7 @@ input,
 textarea,
 label,
 navigator,
+div,
 image {
 	box-sizing: border-box;
 }

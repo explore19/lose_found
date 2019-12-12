@@ -189,9 +189,11 @@
 			Edit2:function(){									
 				this.$api.updateInfo(this.form).then(res=>{
 					
-					// uni.navigateTo({
-					// 	url: './user_details',
-					// });
+					uni.navigateTo({
+						url: './user_details',
+					}).catch(resp => {
+　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
+　					　});
 					
 				})
 				
