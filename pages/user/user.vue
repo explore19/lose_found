@@ -13,14 +13,13 @@
 	
 	
 		<view class="cu-list menu" :class="[true?'sm-border':'',false?'card-menu margin-top':'']">
-		<view class="cu-item arrow"  @click="jump">
+			<view class="cu-item arrow" @click="jump">
 			<view class="content">
 				<text class="cuIcon-my text-grey"></text>
 				<text class="text-grey">我的信息</text>
 			</view>
-			
 			</view>
-			<view class="cu-item arrow" >
+			<view class="cu-item arrow" @click="tapMyPost()">
 			<view class="content">
 				<text class="cuIcon-text text-grey"></text>
 				<text class="text-grey">我的发布</text>
@@ -57,6 +56,11 @@
 			jump:function(){
 				wx.navigateTo({
 					url:"../user_details/user_details"
+				})
+			},
+			tapMyPost:function(){
+				wx.navigateTo({
+					url:"../mypost/mypost"
 				})
 			},
 			requestData(){

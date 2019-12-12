@@ -78,6 +78,10 @@
 			}
         }
         
+        ,{
+            "path" : "pages/mypost/mypost",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

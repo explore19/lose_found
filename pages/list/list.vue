@@ -1,12 +1,9 @@
 <template>
 	<view>
-		<scroll-view scroll-x class="bg-white nav">
-			<view class="flex text-center">
-				<view class="cu-item flex-sub" :class="index==TabCur?'text-orange cur':''" v-for="(item,index) in 4" :key="index" @tap="tabSelect" :data-id="index">
-					{{index}}
-				</view>
-			</view>
-		</scroll-view>
+		<van-dropdown-menu>
+		  <van-dropdown-item  :options="option1" title="物品种类" v-on:change="onChange()"/>
+		  <van-dropdown-item  :options="option2" title="排序" v-on:change="onChange()"/>
+		</van-dropdown-menu>
 	</view>
 </template>
 
@@ -15,17 +12,20 @@
 	export default {
 			data() {
 				return {
-					
-					TabCur: 0,
-					scrollLeft: 0,
-					index:1
+					option1: [
+					     { text: '不限', value: 0 },
+					     { text: '地点', value: 1 },
+					     { text: '物品类型2', value: 2 }
+					   ],
+					option2: [
+					   { text: '默认排序', value: '3' },
+					   { text: '好评排序', value: '4' },
+					   { text: '销量排序', value: '5' }
+					],				
 				}
 			},
 			methods: {
-				tabSelect(e) {
-					this.TabCur = e.currentTarget.dataset.id;
-					this.scrollLeft = (e.currentTarget.dataset.id - 1) * 60
-				}
+				
 			}
 		}
 </script>

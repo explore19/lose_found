@@ -32,7 +32,6 @@
 									</view>
 									<view @click="getToInfo()">
 									<view class="text-content" style="margin: 20upx 30upx;">
-										
 										{{item.post.details}}
 									</view>
 									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
@@ -184,12 +183,12 @@
 				// 	})
 				this.$api.queryPost({ //用来批量获取
 					page: this.page,
-					pageSize:this.pageSize,
-					//postType:this.postType
+					pageSize:this.pageSize
 				}).then(res => {
+					console.log(res)
 						this.data=this.data.concat(res.data)
 						
-					})	
+				})	
 			},
 			onChange(e){
 				this.postType = e.detail.name

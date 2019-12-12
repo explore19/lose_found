@@ -2,7 +2,7 @@
 const request = {}
 const headers = {}
 const baseUrl="http://localhost:8888"
-    
+    //39.108.220.199
 request.post = (url, data) => {
 	// headers["Cookie"]		//设置请求头cookie
     return uni.request({
