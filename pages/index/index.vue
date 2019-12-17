@@ -34,7 +34,7 @@
 									<view class="text-content" style="margin: 20upx 30upx;">
 										{{item.post.details}}
 									</view>
-									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
+									<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="img" :img = "item.post.image!=null?'true':'false'" >
 										<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 										</view>
 									</view>
@@ -101,6 +101,7 @@
 	export default {
 		data() {
 			return {
+				img:'',
 				data: [],
 				active: 'home',
 				cardCur: 0,
@@ -167,8 +168,9 @@
 				this.$api.queryPost({ //用来批量获取
 					page: this.page,
 					pageSize: this.pageSize,
-					postType: this.postType
+					// postType: this.postType
 				}).then(res => {
+					console.log(res)
 					this.data = res.data
 				})
 			},

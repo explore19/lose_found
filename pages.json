@@ -126,7 +126,6 @@
 			"pagePath":"pages/index/index",
 			"iconPath":"static/images/house.png",
 			"selectedIconPath":"static/images/house_fill.png",
-			
 			"text":"主页"
 		},{
 			"pagePath":"pages/announce/announce",
