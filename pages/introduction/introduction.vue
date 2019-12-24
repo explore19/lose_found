@@ -14,15 +14,15 @@
 			</view>
 			<view class="flex-sub text-left">
 				<view class="solid-bottom text-lg padding">
-					<text class="text-black text-bold">{{form.name}}</text>
+					<text class="text-black text-bold">{{post.name}}</text>
 				</view>
-				<view style="margin:10upx 30upx;">丢失地点：{{form.lostPlace}}</view>
-				<view style="margin:10upx 30upx;">丢失时间：{{form.loseTime}}</view>
-				<view style="margin:10upx 30upx;">联系方式：{{form.contact}}</view>
-				<view style="margin:10upx 30upx;">物品类型：{{form.type}}</view>
-				<view class="padding">详情：{{form.details}}</view>
+				<view style="margin:10upx 30upx;">丢失地点：{{post.lostPlace}}</view>
+				<view style="margin:10upx 30upx;">丢失时间：{{post.loseTime}}</view>
+				<view style="margin:10upx 30upx;">联系方式：{{post.contact}}</view>
+				<view style="margin:10upx 30upx;">物品类型：{{post.type}}</view>
+				<view class="padding">详情：{{post.details}}</view>
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="img" >
-					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in form.image" :key="index">
+					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in post.image" :key="index">
 						
 					</view>
 				</view>
@@ -30,8 +30,8 @@
 
 		
 			<view class="text-gray text-sm text-right padding">
-				<text class="cuIcon-attentionfill margin-lr-xs"></text>{{form.browsePoints}}
-				<text class="cuIcon-appreciatefill margin-lr-xs"></text> {{form.praisePoints}}
+				<text class="cuIcon-attentionfill margin-lr-xs"></text>{{post.browsePoints}}
+				<text class="cuIcon-appreciatefill margin-lr-xs"></text> {{post.praisePoints}}
 				<text class="cuIcon-messagefill margin-lr-xs" @click="reply"></text>
 			</view>
 
@@ -97,8 +97,7 @@
 				replys: [],
 				postId: '',
 				datas: [],
-				list: [],
-				// str: '',
+				lisAAt: [],
 				str:{
 					replierPortrait:'',
 					replierName:'',
@@ -124,14 +123,14 @@
 					this.headPortrait = res.data.headPortrait
 					this.nickName = res.data.nickName
 					this.createTime = res.data.post.createTime
-					this.form.details = res.data.post.details
-					this.form.contact = res.data.post.contact
-					this.form.loseTime = res.data.post.loseTime
-					this.form.lostPlace = res.data.post.lostPlace
-					this.form.name = res.data.post.name
-					this.form.type = res.data.post.type
-					this.form.image = res.data.post.image.split("&&&")
-					this.img=this.form.image==null?'false':'true'
+					this.post.details = res.data.post.details
+					this.post.contact = res.data.post.contact
+					this.post.loseTime = res.data.post.loseTime
+					this.post.lostPlace = res.data.post.lostPlace
+					this.post.name = res.data.post.name
+					this.post.type = res.data.post.type
+					this.post.image = res.data.post.image.split("&&&")
+					this.img=this.post.image==null?'false':'true'
 				})
 
 				this.$api.queryPostReply({ //根据帖子的id查询所有的回复

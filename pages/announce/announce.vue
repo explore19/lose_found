@@ -7,7 +7,7 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input v-model="form.name" name="name" style="text-align: right;" ></input>
+						<input v-model="form.name" name="name" style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
@@ -105,7 +105,7 @@
 							</view>
 						</picker>
 					</view>
-					
+
 
 					<view class="cu-form-group">
 						<view class="title">时间选择</view>
@@ -179,7 +179,6 @@
 	export default {
 		data() {
 			return {
-				// picker: ['无','手表', '钥匙', '校园卡','银行卡','耳机','钱包'],
 				picker: [],
 				time: '12:01',
 				date: '2018-12-25',
@@ -267,7 +266,7 @@
 					count: 4, //默认9
 					sizeType: ["compressed"],
 					success: (res) => {
-						
+
 						const tempFilePaths = res.tempFilePaths
 						uni.uploadFile({
 							url: "http:localhost:8888/upload/img",
@@ -277,7 +276,7 @@
 							// files:res.tempFiles,
 							success: (uploadFileRes) => {
 								let data = JSON.parse(uploadFileRes.data)
-								
+
 								if (data.status === 0) {
 									this.imgList.push("http://localhost:8888/img/" + data.data)
 								} else {
@@ -308,16 +307,20 @@
 				})
 			},
 			PickerChange(e) {
-				this.form.type = this.picker[e.detail.value].id
 				this.pickerIndex = e.detail.value
+				if(this.picker[e.detail.value].id === -1){
+					this.form.type = null
+				}else{
+					this.form.type = this.picker[e.detail.value].id
+				}
+				
+				
 			},
 			onChange(event) {
 				this.form.postType = event.detail.name
 			},
 
 			subInfo: function() {
-				
-				
 				this.form.loseTime = this.date + " " + this.time + ":00"
 				let image = ''
 				for (let i = 0; i < this.imgList.length; i++) {
@@ -329,7 +332,7 @@
 				}
 				this.form.image = image
 				this.$api.addPost(this.form).then(res => {
-					
+
 					uni.showModal({
 						content: '发表成功',
 						showCancel: false,
@@ -341,8 +344,11 @@
 		},
 		created() {
 			this.$api.getAllType().then(res => {
-				
-				this.picker = res.data
+				let defaultItemType = [{
+					id: -1,
+					name: '不限'
+				}]
+				this.picker = defaultItemType.concat(res.data)
 			})
 		}
 	}

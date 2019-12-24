@@ -3,6 +3,9 @@ import request from 'utils/request.js'
 const api = {}
 
 //用户信息api接口
+api.login=(code) => request.post('/user/login?code='+code)
+
+//用户信息api接口
 api.getUserInfo=() => request.get('/user/get_user_info')
 
 //用于修改用户的信息的api

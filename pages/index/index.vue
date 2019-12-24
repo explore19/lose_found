@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view>
-			<van-search value="" placeholder="请输入搜索关键词" @focus="focus" />
+		<view @click="focus">
+			<van-search  placeholder="请输入搜索关键词"  />
 		</view>
 		<view>
 			<swiper class="screen-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
@@ -30,7 +30,7 @@
 											</view>
 										</view>
 									</view>
-									<view @click="getToInfo()">
+									<view @click="goToInfo()">
 									<view class="text-content" style="margin: 20upx 30upx;">
 										{{item.post.details}}
 									</view>
@@ -40,8 +40,8 @@
 									</view>
 									<view class="text-gray text-sm text-right padding">
 										<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{item.post.browsePoints}}</text>
-										<text class="cuIcon-appreciatefill margin-lr-xs">{{item.post.praisePoints}}</text>
-										<text class="cuIcon-messagefill margin-lr-xs">{{item.post.reply}}</text>
+										<text class="cuIcon-appreciatefill margin-lr-xs">{{item.praiseNumber}}</text>
+										<text class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 									</view>
 								</view>
 							</view>
@@ -65,7 +65,7 @@
 										</view>
 									</view>
 								</view>
-								<view @click="getToInfo()">
+								<view @click="goToInfo()">
 									<view class="text-content" style="margin: 28rpx 28rpx;">
 										折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
 									</view>
@@ -88,7 +88,7 @@
 		</view>
 
 		<view class="popup window">
-			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="getToperfect" position:margin-top />
+			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 		</view>
 
 
@@ -148,12 +148,12 @@
 				})
 			},
 
-			getToInfo: function() { // 用来跳转到物品的详细信息的页面
+			goToInfo: function() { // 用来跳转到物品的详细信息的页面
 				uni.navigateTo({
 					url: "/pages/introduction/introduction"
 				})
 			},
-			getToperfect: function() { //用来跳转到信息完善界面
+			goToperfect: function() { //用来跳转到信息完善界面
 				uni.navigateTo({
 					url: "/pages/perfect/perfect"
 				})
@@ -164,14 +164,24 @@
 				// 	show="true"
 				// })
 			},
+			isBottom(){
+				//检查到是否到最底层
+				let page=this.form.page
+				let pageSize=this.form.pageSize
+				let total =this.total
+				if(page*pageSize<total){
+					return false
+				}
+				return true
+			},
 			requestData() { //用来重复刷新页面 重复像后端获取数据		
 				this.$api.queryPost({ //用来批量获取
 					page: this.page,
 					pageSize: this.pageSize,
 					// postType: this.postType
 				}).then(res => {
-					console.log(res)
-					this.data = res.data
+
+					this.data = res.data.data
 				})
 			},
 			onChange(e) {
@@ -184,13 +194,16 @@
 		},
 
 		onReachBottom() {
+			if(this.isBottom()){
+				return
+			}
 			this.page += 1
 			this.$api.queryPost({ //用来批量获取
 				page: this.page,
 				pageSize: this.pageSize,
 				// postType: this.postType
 			}).then(res => {
-				this.data = this.data.concat(res.data)
+				this.data = this.data.concat(res.data.data)
 			})
 		}
 
