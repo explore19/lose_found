@@ -166,8 +166,8 @@
 			},
 			isBottom(){
 				//检查到是否到最底层
-				let page=this.form.page
-				let pageSize=this.form.pageSize
+				let page=this.page
+				let pageSize=this.pageSize
 				let total =this.total
 				if(page*pageSize<total){
 					return false
