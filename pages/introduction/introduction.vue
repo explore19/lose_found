@@ -3,26 +3,26 @@
 		<view class="cu-item shadow">
 			<view class="cu-list menu-avatar">
 				<view class="cu-item">
-					<view class="cu-avatar round lg" :style="'background-image:url('+headPortrait+');'"></view>
+					<view class="cu-avatar round lg" :style="'background-image:url('+data.headPortrait+');'"></view>
 					<view class="content flex-sub">
-						<view>{{nickName}}</view>
+						<view>{{data.nickName}}</view>
 						<view class="text-gray text-sm flex justify-between">
-							{{createTime}}
+							{{data.post.createTime}}
 						</view>
 					</view>
 				</view>
 			</view>
 			<view class="flex-sub text-left">
 				<view class="solid-bottom text-lg padding">
-					<text class="text-black text-bold">{{post.name}}</text>
+					<text class="text-black text-bold">{{data.post.name}}</text>
 				</view>
-				<view style="margin:10upx 30upx;">丢失地点：{{post.lostPlace}}</view>
-				<view style="margin:10upx 30upx;">丢失时间：{{post.loseTime}}</view>
-				<view style="margin:10upx 30upx;">联系方式：{{post.contact}}</view>
-				<view style="margin:10upx 30upx;">物品类型：{{post.type}}</view>
-				<view class="padding">详情：{{post.details}}</view>
-				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="img" >
-					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in post.image" :key="index">
+				<view style="margin:10upx 30upx;">丢失地点：{{data.post.lostPlace}}</view>
+				<view style="margin:10upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
+				<view style="margin:10upx 30upx;">联系方式：{{data.post.contact}}</view>
+				<view v-if="data.post.type" style="margin:10upx 30upx;">物品类型：{{data.post.type}}</view>
+				<view class="padding">详情：{{data.post.details}}</view>
+				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg" >
+					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
 						
 					</view>
 				</view>
@@ -30,9 +30,9 @@
 
 		
 			<view class="text-gray text-sm text-right padding">
-				<text class="cuIcon-attentionfill margin-lr-xs"></text>{{post.browsePoints}}
-				<text class="cuIcon-appreciatefill margin-lr-xs"></text> {{post.praisePoints}}
-				<text class="cuIcon-messagefill margin-lr-xs" @click="reply"></text>
+				<text class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
+				<text class="cuIcon-appreciatefill margin-lr-xs">{{data.praiseNumber}}</text> 
+				<text class="cuIcon-messagefill margin-lr-xs" @click="reply">{{data.replyNumber}}</text>
 			</view>
 
 
@@ -75,24 +75,10 @@
 	export default {
 		data() {
 			return {
-				img:true,
+				hasImg:false,
 				isCard: true,
-				nickName: "",
-				detail: "",
-				createTime: "",
-				img: "",
-				headPortrait: "",
-				form: {
-					name: '',
-					loseTime: '',
-					lostPlace: '',
-					contact: '',
-					image: [],
-					details: '',
-					browsePoints: 0,
-					praisePoints: 0,
-					type: ''
-				},
+				image:[],
+				data:{},
 				userId: "",
 				replys: [],
 				postId: '',
@@ -117,20 +103,13 @@
 		methods: {
 			requestData() {
 				this.$api.getPost({
-					id: 1
+					id: this.$global.postId
 				}).then(res => {
-					// console.log(res)
-					this.headPortrait = res.data.headPortrait
-					this.nickName = res.data.nickName
-					this.createTime = res.data.post.createTime
-					this.post.details = res.data.post.details
-					this.post.contact = res.data.post.contact
-					this.post.loseTime = res.data.post.loseTime
-					this.post.lostPlace = res.data.post.lostPlace
-					this.post.name = res.data.post.name
-					this.post.type = res.data.post.type
-					this.post.image = res.data.post.image.split("&&&")
-					this.img=this.post.image==null?'false':'true'
+					if(res.status===0){
+						this.data=res.data
+						this.image = res.data.post.image.split("&&&")
+						this.hasImg=res.data.post.image==null?false:true
+					}			
 				})
 
 				this.$api.queryPostReply({ //根据帖子的id查询所有的回复
@@ -185,11 +164,11 @@
 			},
 			reply: function() { //回复消息的方法
 				this.show = true
-				this.$api.addReply({
-					info:this.detail
-				}).then(res => {
-					console.log(res)
-				})
+				// this.$api.addReply({
+				// 	info:this.detail
+				// }).then(res => {
+				// 	console.log(res)
+				// })
 			},
 			
 			onClose: function() { //关闭弹出层的方法
@@ -217,6 +196,7 @@
 
 		},
 		created() {
+			console.log(this.$postId)
 			this.requestData()
 		}
 

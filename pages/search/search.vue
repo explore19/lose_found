@@ -32,7 +32,7 @@
 											</view>
 										</view>
 									</view>
-									<view @click="getToInfo()">
+									<view @click="goToInfo(item.post.id)">
 										<view class="text-content" style="margin: 20upx 30upx;">
 											{{item.post.details}}
 										</view>
@@ -114,6 +114,12 @@
 					this.form.keyWords = this.detail
 				}
 				this.requestData()
+			},
+			goToInfo: function(postId) { // 用来跳转到物品的详细信息的页面
+			this.$global.postId=postId
+				uni.navigateTo({
+					url: "/pages/introduction/introduction"
+				})
 			},
 			itemChange: function(e) { //现在需要一个页面重新加载的渲染的方法
 				this.form.itemType = e.detail

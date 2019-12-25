@@ -30,7 +30,7 @@
 											</view>
 										</view>
 									</view>
-									<view @click="goToInfo()">
+									<view @click="goToInfo(item.post.id)">
 									<view class="text-content" style="margin: 20upx 30upx;">
 										{{item.post.details}}
 									</view>
@@ -147,8 +147,8 @@
 					url: "/pages/search/search"
 				})
 			},
-
-			goToInfo: function() { // 用来跳转到物品的详细信息的页面
+			goToInfo: function(postId) { // 用来跳转到物品的详细信息的页面
+				this.$global.setPostId(postId)
 				uni.navigateTo({
 					url: "/pages/introduction/introduction"
 				})
