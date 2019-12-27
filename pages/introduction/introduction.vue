@@ -30,40 +30,41 @@
 
 		
 			<view class="text-gray text-sm text-right padding">
-				<text class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
-				<text class="cuIcon-appreciatefill margin-lr-xs">{{data.praiseNumber}}</text> 
-				<text class="cuIcon-messagefill margin-lr-xs" @click="reply">{{data.replyNumber}}</text>
+				<text style="font-size:130%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
+				<text style="font-size:130%"  @click="perfect(data.post.id)" :class="'cuIcon-appreciatefill '+(data.isPraise?'text-red':'')" >{{data.praiseNumber}}</text> 
+				<text  @click="postReply" style="font-size:130%" class="cuIcon-messagefill margin-lr-xs "  >{{data.replyNumber}}</text>
 			</view>
 
 
 
 			<view class="cu-list menu-avatar comment solids-top">
 				<view class="cu-item" v-for="(item,index) in replyList" :key="index">
-					<view class="cu-avatar round" :style="'background-image:url('+item.replierPortrait+');'"></view>
+					<view class="cu-avatar round" :style="'background-image:url('+item.replyUserPortrait+');'"></view>
 					<view class="content">
-						<view class="text-grey">{{item.replierName}}</view>
-						<view class=" text-gray text-content text-df">
+						<view class="text-grey">{{item.replyUserName}}</view>
+						<view  @click="otherReply(item.id)" class=" text-gray text-content text-df">
 							{{item.info}}
 						</view>
 						<view class="bg-grey padding-sm radius margin-top-sm  text-sm" v-for="(item2,index2) in item.replys" :key = "index2">
-							<view class="flex">
-								<view>{{item2.nickName}}:</view>
-								<view class="flex-sub">{{item2.info}}</view>
+							<view  class="flex">
+								<view v-if="item.id==item2.reply.replyId">{{item2.nickName}}:</view>
+								<view v-if="item.id!=item2.reply.replyId">{{item2.nickName}}回复{{item2.replyedUserNickName}}:</view>
+								<view @click="otherReply(item2.reply.id)" class="flex-sub">{{item2.reply.info}}</view>
 							</view>
 						</view>
 						<view class="margin-top-sm flex justify-between">
-							<view class="text-gray text-df">{{item.createTime}}</view>		
+							<view class="text-gray text-df">{{item.reply.createTime}}</view>		
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="cu-bar input reply" >
-			<view class="cu-avatar round" :style="'background-image:url('+headPortrait+');'"></view>
+			<view class="cu-avatar round" :style="'background-image:url('+data.headPortrait+');'"></view>
 			
-			<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" class="solid-bottom" maxlength="300" cursor-spacing="10" v-model="detail"></input>
+			<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" class="solid-bottom" maxlength="300" cursor-spacing="10" v-model="replyForm.info"></input>
 			
-			<button class="cu-btn bg-green shadow-blur" @click="subreply()">发送</button>
+			<button :adjust-position="true" class="cu-btn bg-green shadow-blur" @click="subreply()">发送</button>
 		</view>
 		<view class="blank">
 			
@@ -79,23 +80,19 @@
 				isCard: true,
 				image:[],
 				data:{},
-				userId: "",
-				replys: [],
-				postId: '',
-				datas: [],
-				lisAAt: [],
-				str:{
-					replierPortrait:'',
-					replierName:'',
+				replyId:-1,
+				firstFloorReply:{
+					replyUserPortrait:'',
+					replyUserName:'',
 					info:'',
 					createTime:'',
 					replys:[]	
 				},
-				replyss:{
-					userId:'',
-					replyId:'',
-					info:'',
-					createTime:''
+				replyForm:{
+					replyId:-1,
+					type:0,
+					postId:this.$global.postId,
+					info:''
 				},
 				replyList:[]
 			};
@@ -107,54 +104,58 @@
 				}).then(res => {
 					if(res.status===0){
 						this.data=res.data
-						this.image = res.data.post.image.split("&&&")
+						// this.image = res.data.post.image.split("&&&")
 						this.hasImg=res.data.post.image==null?false:true
 					}			
 				})
 
+				
+			},
+			requestReply(){
 				this.$api.queryPostReply({ //根据帖子的id查询所有的回复
-					postId: 1
+					postId: this.$global.postId
 				}).then(res => {
-					console.log(res.data)
-					this.test(res.data)
+					if(res.status==0){
+						let replyList = []
+						this.recursionReply(res.data,replyList)
+						console.log(replyList)
+						this.replyList=replyList
+					}
+					
 				})
 			},
-			test: function(node) {
+			recursionReply: function(node,replyList) {
 				if (node.reply.status === null) { //-null代表根节点
 					if (node.children == null) {
 						return
 					}
 					for (var i = 0; i < node.children.length; i++) {
-						this.test(node.children[i])
+						this.recursionReply(node.children[i],replyList)
 					}
 					return
 				}
+			
 				if (node.reply.status === 0) { //0代表回复帖子的回复
-					this.str.info = node.reply.reply.info
-					this.str.replierPortrait = node.reply.headPortrait
-					this.str.replierName = node.reply.replyedUserNickName
-					this.str.createTime = node.reply.reply.createTime
+					this.firstFloorReply.info = node.reply.reply.info
+					this.firstFloorReply.replyUserPortrait = node.reply.headPortrait
+					this.firstFloorReply.replyUserName = node.reply.nickName
+					this.firstFloorReply.createTime = node.reply.reply.createTime
+					this.firstFloorReply.id = node.reply.reply.id
 					
 				}else{   //回复回复的回复
-					let replyss={}
-					// replyss.userId= node.userId
-					replyss.createTime = node.reply.reply.createTime
-					// this.replyss.replyId = node.replyId
-					replyss.info = node.reply.reply.info
-					replyss.nickName=node.reply.replyedUserNickName
-					this.str.replys.push(replyss)
+					this.firstFloorReply.replys.push(node.reply)
 				}
 				if (node.children == null) {
 					return
 				}
 				for (var i = 0; i < node.children.length; i++) {
-					this.test(node.children[i])
+					this.recursionReply(node.children[i],replyList)
 				}
 				if(node.reply.status == 0){
-					this.replyList.push(this.str)
-					this.str ={
-						replierPortrait:'',
-						replierName:'',
+					replyList.push(this.firstFloorReply)
+					this.firstFloorReply ={
+						replyUserPortrait:'',
+						replyUserName:'',
 						info:'',
 						createTime:'',
 						replys:[]	
@@ -162,27 +163,31 @@
 				}
 				
 			},
-			reply: function() { //回复消息的方法
-				this.show = true
-				// this.$api.addReply({
-				// 	info:this.detail
-				// }).then(res => {
-				// 	console.log(res)
-				// })
+			perfect: function(postId) {
+				this.$api.praise(postId).then((res) => {
+					this.requestData()
+				})
 			},
-			
+			otherReply: function(replyId) { //回复消息的方法
+			console.log(replyId)
+				this.show = true
+				this.replyForm.replyId=replyId
+				this.replyForm.type=1
+			},
+			postReply:function(){
+				this.show = true
+				this.replyForm.replyId=-1
+				this.replyForm.type = 0
+			},
 			onClose: function() { //关闭弹出层的方法
 				this.show = false
 			},
 			subreply: function(e) { //提交回复内容的方法
-				this.$api.addReply({
-					userId:1,
-					postId:1,
-					type:0,
-					replyId:null,
-					info:this.detail
-				}).then(res => {
-					console.log(res)
+				this.$api.addReply(this.replyForm).then(res => {
+					if(res.status===0){
+						this.requestReply()
+						this.resetForm()
+					}
 				})
 				
 			},
@@ -191,13 +196,21 @@
 			},
 			InputBlur(e) {
 				this.InputBottom = 0
+			},
+			resetForm(){
+				this.replyForm={
+					replyId:-1,
+					type:0,
+					postId:this.$global.postId,
+					info:''
+				}
 			}
 
 
 		},
 		created() {
-			console.log(this.$postId)
 			this.requestData()
+			this.requestReply()
 		}
 
 	}

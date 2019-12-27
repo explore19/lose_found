@@ -35,8 +35,16 @@ api.addReply=(data) =>request.post('/reply',data)
 //获得对应物品的类型的api
 api.getAllType=() =>request.get('/itemType/getAllType')
 
-//根据用户的id获取自己的发布的api
+api.getUserMessage=() =>request.get('/reply/user_message')
+
+//根据用户的id获取自己的发布的帖子
 api.queryMyPost=() =>request.get('/user/query_posts')
+
+//获取一组轮播图
+api.getRotationChart=(num) =>request.get('/rotation_chart/find_rotation',num)
+
+//点赞
+api.praise=(postId) =>request.post('/praise?postId='+postId)
 
 
 
