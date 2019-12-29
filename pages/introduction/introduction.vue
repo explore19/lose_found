@@ -104,8 +104,14 @@
 				}).then(res => {
 					if(res.status===0){
 						this.data=res.data
-						// this.image = res.data.post.image.split("&&&")
-						this.hasImg=res.data.post.image==null?false:true
+						if(res.data.post.image==null){
+							this.hasImg=false
+						}else{
+							this.hasImg=true
+							this.image = res.data.post.image.split("&&&")
+						}
+						
+						
 					}			
 				})
 

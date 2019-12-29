@@ -37,6 +37,8 @@ api.getAllType=() =>request.get('/itemType/getAllType')
 
 api.getUserMessage=() =>request.get('/reply/user_message')
 
+api.getUserReply=() =>request.get('/reply/my_reply')
+
 //根据用户的id获取自己的发布的帖子
 api.queryMyPost=() =>request.get('/user/query_posts')
 

@@ -73,9 +73,17 @@
 
 		, {
 			"path": "pages/mypost/mypost",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "我的帖子"
+			}
 		}
-	],
+	    ,{
+            "path" : "pages/my_reply/my_reply",
+           "style": {
+           	"navigationBarTitleText": "我的回复"
+           }
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

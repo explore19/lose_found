@@ -25,9 +25,9 @@
 				<text class="text-grey">我的发布</text>
 			</view>
 			</view>
-			<view class="cu-item arrow line" >
+			<view @click="toMyReply" class="cu-item arrow line" >
 			<view class="content">
-				<text class="cuIcon-comment text-grey"></text>
+				<text class="cuIcon-comment text-grey"  ></text>
 				<text class="text-grey">我的回复</text>
 			</view>
 			</view>
@@ -69,6 +69,11 @@
 					this.name=res.data.nickName
 					this.sno = res.data.sno
 					this.head_portrait=res.data.headPortrait
+				})
+			},
+			toMyReply(){
+				wx.navigateTo({
+					url:"../my_reply/my_reply"
 				})
 			}
 		},

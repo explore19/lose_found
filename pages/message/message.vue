@@ -7,7 +7,7 @@
 		  </view>
 
 			<view class="cu-list menu-avatar comment solids-top">
-				<view class="cu-item" v-for="(item,index) in data" :key="index">
+				<view @click="toPostInfo(item.message.reply.postId)" class="cu-item" v-for="(item,index) in data" :key="index">
 					<view class="cu-avatar round" :style="'background-image:url('+item.message.headPortrait+');'"></view>
 					<view class="content">
 						<view class="text-grey">{{item.message.nickName}}</view>
@@ -18,7 +18,7 @@
 							<view  class="flex">
 								<view v-if="item.type===0">{{item.data.details}}</view>
 								<view v-if="item.type===1">我:</view>
-								<view  class="flex-sub">{{item.data.info}}</view>
+								<view  v-if="item.type===1"  class="flex-sub">{{item.data.info}}</view>
 							</view>
 						</view>
 						<view class="margin-top-sm flex justify-between">
@@ -44,6 +44,12 @@
 						this.data=res.data
 					}
 				})
+			},
+			toPostInfo(postId){
+			this.$global.setPostId(postId)
+			uni.navigateTo({
+				url: "/pages/introduction/introduction"
+			})
 			}
 		},
 		created()  {   //生命周期函数
