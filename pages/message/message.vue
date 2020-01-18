@@ -5,8 +5,8 @@
 		      <text class="cuIcon-title text-orange "></text> 消息列表
 		    </view>
 		  </view>
-
-			<view class="cu-list menu-avatar comment solids-top">
+<view v-if="exist">
+	<view class="cu-list menu-avatar comment solids-top">
 				<view @click="toPostInfo(item.message.reply.postId)" class="cu-item" v-for="(item,index) in data" :key="index">
 					<view class="cu-avatar round" :style="'background-image:url('+item.message.headPortrait+');'"></view>
 					<view class="content">
@@ -27,6 +27,11 @@
 					</view>
 				</view>
 			</view>
+</view>
+<view class="text-gray text-xl text-center padding margin-top" v-else>
+					<text class="cuIcon-emoji margin-lr-ms">您没有回复的消息哦</text>
+				</view>
+			
 	</view>
 </template>
 
@@ -34,15 +39,22 @@
 	export default {
 		data() {
 			return {
+				exist:true,
 				data:[]
 			};
 		},
 		methods:{
 			requestData(){
 				this.$api.getUserMessage().then(res =>{
-					if(res.status===0){
+					if(res.data.length === 0){
+						this.exist = false
+					}else{
+						this.exist = true
+						if(res.status===0){
 						this.data=res.data
 					}
+					}
+					
 				})
 			},
 			toPostInfo(postId){

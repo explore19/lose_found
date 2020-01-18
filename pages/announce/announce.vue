@@ -79,8 +79,10 @@
 
 					</van-popup>
 
-
-					<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
+<view class="margin-top">
+	<van-button  type="primary" size="large" @click="subInfo()">发布</van-button>
+</view>
+					
 				</van-cell-group>
 
 			</van-tab>
@@ -99,7 +101,7 @@
 					</view>
 					<view class="cu-form-group ">
 						<view class="title">物品类型</view>
-						<picker @change="PickerChange" :value="pickerIndex" :range="picker" range-key="name">
+						<picker @change="PickerChange" :value="pickerIndex" :range="picker" range-key="name" >
 							<view class="picker">
 								{{picker[pickerIndex].name}}
 							</view>
@@ -162,7 +164,10 @@
 						</view>
 					</view>
 					</van-popup>
-					<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
+					<view class="margin-top">
+						<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
+					</view>
+					
 				</van-cell-group>
 
 
@@ -332,7 +337,7 @@
 				}
 				this.form.image = image
 				this.$api.addPost(this.form).then(res => {
-
+						console.log(this.form)
 					uni.showModal({
 						content: '发表成功',
 						showCancel: false,

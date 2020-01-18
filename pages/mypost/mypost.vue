@@ -1,6 +1,7 @@
 <template>
 	<view>
-				<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
+		<view v-if="exist">
+			<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 					<view style="border: #F0FFF0">
 						<view class="cu-card dynamic no-card">
 							<view class="cu-item shadow">
@@ -33,6 +34,11 @@
 					</view>
 				</view>
 				</view>
+		</view>
+				
+				<view class="text-gray text-xl text-center padding margin-top" v-else>
+					<text class="cuIcon-emoji margin-lr-ms">您未上传过帖子</text>
+				</view>
 				</view>
 </template>
 
@@ -40,13 +46,20 @@
 	export default {
 		data() {
 			return {
+				exist:false,
 				data:[]
 			}
 		},
 		methods: {
 			requestData(){
 				this.$api.queryMyPost().then(res=>{
-					this.data=res.data
+					if(res.data.length==0){
+						this.exist = false	
+					}
+					else {
+						this.exist = true
+						this.data=res.data
+					}
 				})
 			}
 		},

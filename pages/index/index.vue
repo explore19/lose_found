@@ -15,7 +15,7 @@
 		<view>
 			<van-tabs @change="onTabChange" swipeable="true">
 				<van-tab title="失物寻物">
-					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
+					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
@@ -34,10 +34,13 @@
 										<view @click="goToInfo(item.post.id)" class="text-content" style="margin: 20upx 30upx;">
 											{{item.post.details}}
 										</view>
-										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="img" :img="item.post.image!=null?'true':'false'">
+										
+											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" >
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
+										
+										
 										<view class="text-gray text-sm text-right padding">
 											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-ms">{{item.post.browsePoints}}</text>
 											<text style="font-size:140%" @click="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
@@ -69,7 +72,7 @@
 										<view class="text-content" style="margin: 20upx 30upx;">
 											{{item.post.details}}
 										</view>
-										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="img" :img="item.post.image!=null?'true':'false'">
+										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" >
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
@@ -102,7 +105,7 @@
 	export default {
 		data() {
 			return {
-				img: '',
+				hasimg: true,
 				data: [],
 				active: 'home',
 				cardCur: 0,
@@ -152,6 +155,7 @@
 					pageSize: this.pageSize,
 					postType: this.postType
 				}).then(res => {
+					console.log(res)
 					this.data = res.data.data
 				})
 			},
@@ -167,7 +171,7 @@
 						})
 
 					}
-					console.log(res)
+					
 				})
 			},
 			onTabChange(e) {

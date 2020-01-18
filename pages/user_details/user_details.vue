@@ -33,8 +33,10 @@
 					<input v-model="form.phone" disabled="true" style="text-align: right;"></input>
 				</view>
 				
-
-				<van-button type="primary" size="large" @click="Edit1">修改信息</van-button> 
+<view class="margin-top">
+	<van-button type="primary" size="large" @click="Edit1">修改信息</van-button> 
+</view>
+				
 			</van-cell-group>
 		</view>
 		
@@ -60,9 +62,9 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">性别</view>
-					<picker @change="PickerChange" :value="index" :range="picker">
+					<picker @change="PickerChange"  :value="index" :range="picker" >
 						<view class="picker">
-							{{index>-1?picker[index]:'男'}}
+							{{index>-1?picker[index]:'未知'}}
 						</view>
 					</picker>
 				</view>
@@ -74,7 +76,10 @@
 					<view class="title">手机号</view>
 					<input v-model="form.phone" name="tel"></input>
 				</view>
-				<van-button type="primary" size="large" @click="Edit2" >保存信息</van-button>
+				<view class="margin-top">
+					<van-button type="primary" size="large" @click="Edit2" >保存信息</van-button>
+				</view>
+				
 			</van-cell-group>
 		</view>
 	</view>
@@ -133,18 +138,17 @@
 			},
 			requestData() {
 				this.$api.getUserInfo().then(res => {
-					
 					this.form.headPortrait = res.data.headPortrait;
 					this.form.nickName = res.data.nickName;
 					this.form.sno = res.data.sno;
 					this.form.realName = res.data.realName;
-					if (res.data.sex == 1) {
-						this.form.sex = "男"
-					} else if (res.data.sex == 2) {
-						this.form.sex = "女"
-					}else{
-						this.form.sex = "未知"
-					}
+					if(res.data.sex === '男'){
+						this.index = 0
+						}
+						else if(res.data.sex === '女'){
+							this.index = 1
+						}
+					this.form.sex = res.data.sex;
 					this.form.phone = res.data.phone;
 					this.form.qq = res.data.qq
 					
@@ -152,6 +156,16 @@
 			},
 			PickerChange(e) {
 				this.index = e.detail.value
+				
+				if(this.picker[e.detail.value] === '男'){
+					this.form.sex = '男'
+				}else if(this.picker[e.detail.value]=== '女'){
+					this.form.sex = '女'
+				}else{
+					this.form.sex = '未知'
+				}
+				console.log(this.form.sex)
+					
 			},
 			Edit1: function() {
 				this.seen = false;
@@ -188,7 +202,6 @@
 	
 			Edit2:function(){									
 				this.$api.updateInfo(this.form).then(res=>{
-					
 					uni.navigateTo({
 						url: './user_details',
 					}).catch(resp => {
