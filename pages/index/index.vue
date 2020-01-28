@@ -35,7 +35,7 @@
 											{{item.post.details}}
 										</view>
 										
-											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" >
+											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
@@ -72,7 +72,7 @@
 										<view class="text-content" style="margin: 20upx 30upx;">
 											{{item.post.details}}
 										</view>
-										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" >
+										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
