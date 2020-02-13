@@ -6,7 +6,8 @@
 					<van-dropdown-item :value="0" :options="option" @change="searchKeyChange" />
 				</van-dropdown-menu>
 				<van-field @blur="bindTap()" placeholder="请输入要查询的内容" border="true" clearable />
-				<button class="cu-btn bg-white" @click="onSearch()">搜索</button>
+				
+				<text class="cuIcon-search margin-lr-ms" @click="onSearch()"></text>
 			</view>
 			<view v-if="seen">
 				<view>

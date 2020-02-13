@@ -31,7 +31,7 @@
 				<text class="text-grey">我的回复</text>
 			</view>
 			</view>
-			<view class="cu-item arrow line" >
+			<view  @click="feedback"class="cu-item arrow line" >
 			<view class="content">
 				<text class="cuIcon-service text-grey"></text>
 				<text class="text-grey">意见反馈</text>
@@ -75,7 +75,13 @@
 				wx.navigateTo({
 					url:"../my_reply/my_reply"
 				})
-			}
+			},
+		feedback(){
+			wx.navigateTo({
+				url:"../feedback/feedback"
+			})
+		}
+			
 		},
 		created(){
 			this.requestData()

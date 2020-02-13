@@ -30,8 +30,8 @@
 											</view>
 										</view>
 									</view>
-									<view >
-										<view @click="goToInfo(item.post.id)" class="text-content" style="margin: 20upx 30upx;">
+									<view @click="goToInfo(item.post.id)">
+										<view  class="text-content" style="margin: 20upx 30upx;">
 											{{item.post.details}}
 										</view>
 										

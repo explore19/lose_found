@@ -342,6 +342,7 @@
 						content: '发表成功',
 						showCancel: false,
 					});
+					this.form = ''
 
 				})
 			}
