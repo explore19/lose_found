@@ -8,7 +8,7 @@
 					<view  @click="otherReply(item.myReply.reply.id)" class=" text-gray text-content text-df">
 						{{item.myReply.reply.info}}
 					</view>
-					<view class="bg-grey padding-sm radius margin-top-sm  text-sm" >
+					<view class=" padding-sm radius margin-top-sm  text-sm" style="background: #F1F1F1;">
 						<view  class="flex">
 							<view v-if="item.type===0">{{item.data.details}}</view>
 							<view v-if="item.type===1">{{item.myReply.replyedUserNickName}}</view>

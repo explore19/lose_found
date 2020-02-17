@@ -18,12 +18,11 @@
 				</view>
 				<view style="margin:10upx 30upx;">丢失地点：{{data.post.lostPlace}}</view>
 				<view style="margin:10upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
-				<view style="margin:10upx 30upx;">联系方式：{{data.post.contact}}</view>
+				<view v-if="data.post.contact" style="margin:10upx 30upx;">联系方式：{{data.post.contact}}</view>
 				<view v-if="data.post.type" style="margin:10upx 30upx;">物品类型：{{data.post.type}}</view>
-				<view class="padding">详情：{{data.post.details}}</view>
+				<view style="margin:10upx 30upx;">详情：{{data.post.details}}</view>
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg">
 					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
-
 					</view>
 				</view>
 			</view>
@@ -39,16 +38,17 @@
 
 			<view class="cu-list menu-avatar comment solids-top">
 				<view class="cu-item" v-for="(item,index) in replyList" :key="index">
-					<view class="cu-avatar round" :style="'background-image:url('+item.replyUserPortrait+');'"></view>
+					<view class="cu-avatar round " :style="'background-image:url('+item.replyUserPortrait+');'"></view>
 					<view class="content">
 						<view class="text-grey">{{item.replyUserName}}</view>
-						<view @click="otherReply(item.id)" class=" text-gray text-content text-df">
+						<view @click="otherReply(item.id)" class=" text-content text-df">
 							{{item.info}}
 						</view>
-						<view class="bg-grey padding-sm radius margin-top-sm  text-sm" v-for="(item2,index2) in item.replys" :key="index2">
+						<view class="margin-top-sm  text-sm" v-for="(item2,index2) in item.replys" :key="index2">
 							<view class="flex">
-								<view v-if="item.id==item2.reply.replyId">{{item2.nickName}}:</view>
-								<view v-if="item.id!=item2.reply.replyId">{{item2.nickName}}回复{{item2.replyedUserNickName}}:</view>
+								<!-- <view class="cu-avatar round sm" :style="'background-image:url('+item2.replyUserPortrait+');'"></view> -->
+								<view class=" text-purple margin-lr-ms" v-if="item.id==item2.reply.replyId">{{item2.nickName}}:</view>
+								<view class="margin-lr-ms" v-if="item.id!=item2.reply.replyId"><text class="text-purple margin-lr-ms">{{item2.nickName}}</text>回复<text class="text-purple margin-lr-ms">{{item2.replyedUserNickName}}</text>:</view>
 								<view @click="otherReply(item2.reply.id)" class="flex-sub">{{item2.reply.info}}</view>
 							</view>
 						</view>

@@ -31,8 +31,11 @@
 										</view>
 									</view>
 									<view @click="goToInfo(item.post.id)">
-										<view  class="text-content" style="margin: 20upx 30upx;">
-											{{item.post.details}}
+										<view class="text-content" style="margin: 20upx 30upx 10upx;font-weight: bold;">
+											物品名称:{{item.post.name}}
+										</view>
+										<view  class="text-content" style="margin: 10upx 30upx;">
+											物品详情:{{item.post.details}}
 										</view>
 										
 											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
@@ -42,9 +45,9 @@
 										
 										
 										<view class="text-gray text-sm text-right padding">
-											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-ms">{{item.post.browsePoints}}</text>
-											<text style="font-size:140%" @click="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
-											<text style="font-size:140%" class="cuIcon-messagefill margin-lr">{{item.replyNumber}}</text>
+											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+											<text style="font-size:140%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+											<text style="font-size:140%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 										</view>
 									</view>
 								</view>
@@ -69,17 +72,20 @@
 										</view>
 									</view>
 									<view @click="goToInfo(item.post.id)">
-										<view class="text-content" style="margin: 20upx 30upx;">
-											{{item.post.details}}
+										<view class="text-content" style="margin: 20upx 30upx 10upx ;font-weight: bold;">
+											物品名称:{{item.post.name}}
+										</view>
+										<view class="text-content" style="margin: 10upx 30upx;">
+											物品详情:{{item.post.details}}
 										</view>
 										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
 										<view class="text-gray text-sm text-right padding">
-											<text class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-											<text @click="perfect(item.post.id)" class="cuIcon-appreciatefill margin-lr-xs">{{item.praiseNumber}}</text>
-											<text class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+											<text style="font-size:140%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+											<text style="font-size:140%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 										</view>
 									</view>
 								</view>
@@ -136,7 +142,7 @@
 			},
 			perfect: function(postId) {
 				this.$api.praise(postId).then((res) => {
-
+					this.requestData()
 				})
 			},
 			isBottom() {

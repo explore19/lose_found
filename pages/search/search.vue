@@ -6,8 +6,9 @@
 					<van-dropdown-item :value="0" :options="option" @change="searchKeyChange" />
 				</van-dropdown-menu>
 				<van-field @blur="bindTap()" placeholder="请输入要查询的内容" border="true" clearable />
-				
-				<text class="cuIcon-search margin-lr-ms" @click="onSearch()"></text>
+				<text class="cuIcon-search margin-lr-ms" @click="onSearch()  ">
+					
+				</text>
 			</view>
 			<view v-if="seen">
 				<view>
@@ -37,15 +38,15 @@
 										<view class="text-content" style="margin: 20upx 30upx;">
 											{{item.post.details}}
 										</view>
-										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'">
+										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="item.post.image!=null">
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
 									</view>
 									<view class="text-gray text-sm text-right padding">
-										<text class="cuIcon-attentionfill margin-lr-xs" @click="add()">{{item.post.browsePoints}}</text>
-										<text class="cuIcon-appreciatefill margin-lr-xs">{{item.post.praisePoints}}</text>
-										<text class="cuIcon-messagefill margin-lr-xs">{{item.post.reply}}</text>
+										<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+										<text style="font-size:140%"  @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+										<text style="font-size:140%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 									</view>
 								</view>
 							</view>
@@ -143,6 +144,10 @@
 					this.data = res.data.data
 				})
 
+			},
+			perfect: function(postId) {
+				this.$api.praise(postId).then((res) => {
+				})
 			},
 			requestType() {
 				//获取post的类型
