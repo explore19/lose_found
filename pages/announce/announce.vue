@@ -62,6 +62,7 @@
 							{{imgList.length}}/4
 						</view>
 					</view>
+					
 					<view class="cu-form-group">
 						<view class="grid col-4 grid-square flex-sub">
 							<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
@@ -231,10 +232,7 @@
 					}
 				];
 				let form = {
-					lostname: '小黄的女朋友',
-					findname: '小黄的未来女朋友',
-					contact: '13643662891',
-					QQ: '695489479'
+					
 
 
 				}

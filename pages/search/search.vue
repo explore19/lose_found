@@ -2,9 +2,12 @@
 	<view>
 		<view>
 			<view class="cu-form-group">
-				<van-dropdown-menu>
-					<van-dropdown-item :value="0" :options="option" @change="searchKeyChange" />
+				
+					<van-dropdown-menu >
+					<van-dropdown-item  :value="0" :options="option" @change="searchKeyChange" />
 				</van-dropdown-menu>
+				
+				
 				<van-field @blur="bindTap()" placeholder="请输入要查询的内容" border="true" clearable />
 				<text class="cuIcon-search margin-lr-ms" @click="onSearch()  ">
 					
@@ -35,7 +38,10 @@
 										</view>
 									</view>
 									<view @click="goToInfo(item.post.id)">
-										<view class="text-content" style="margin: 20upx 30upx;">
+										<view class="text-content" style="margin: 20upx 30upx 10upx;font-weight: bold;">
+											物品名称:{{item.post.name}}
+										</view>
+										<view class="text-content" style="margin: 10upx 30upx;">
 											{{item.post.details}}
 										</view>
 										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="item.post.image!=null">
@@ -147,6 +153,7 @@
 			},
 			perfect: function(postId) {
 				this.$api.praise(postId).then((res) => {
+					this.requestData()
 				})
 			},
 			requestType() {

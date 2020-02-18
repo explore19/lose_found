@@ -20,6 +20,7 @@
 		   wx.login({
 		   	success: (res) => {
 				this.$api.login(res.code).then((res)=>{
+					console.log(res)
 					if(res.status===0){
 						this.$api.getUserInfo().then((res)=>{
 							if(res.status===0){
@@ -41,6 +42,7 @@
 										}
 									})
 								}
+								
 								else{
 									uni.switchTab({
 										url: "/pages/index/index"

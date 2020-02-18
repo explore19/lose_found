@@ -82,7 +82,13 @@
            "style": {
            	"navigationBarTitleText": "我的回复"
            }
-        }
+        },
+		{
+		    "path" : "pages/feedback/feedback",
+		   "style": {
+		   	"navigationBarTitleText": "意见反馈"
+		   }
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

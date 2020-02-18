@@ -120,10 +120,6 @@
 									{name:"housenum", checkType : "notnull", checkRule:"",  errorMsg:"请输入宿舍号"}
 									
 				                ];
-								let form = {
-									realname:'adad'
-									
-								}
 								var formData =this.form;
 								
 								                var checkRes = graceChecker.check(formData, rule);
@@ -204,11 +200,11 @@
 				this.$api.updateInfo(this.form).then(res=>{
 					uni.navigateTo({
 						url: './user_details',
-					}).catch(resp => {
+					})
+					
+				}).catch(resp => {
 　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
 　					　});
-					
-				})
 				
 			}
 

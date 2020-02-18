@@ -161,7 +161,7 @@
 					pageSize: this.pageSize,
 					postType: this.postType
 				}).then(res => {
-					console.log(res)
+					
 					this.data = res.data.data
 				})
 			},
