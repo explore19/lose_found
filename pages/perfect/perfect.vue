@@ -64,11 +64,19 @@
 		subInfo: function() {
 			
 			this.$api.updateInfo(this.form).then(res=>{
-				 // uni.showToast({title:"完善成功！", icon:"none"})
-				 console.log(res)
-								uni.navigateTo({
-									url: '../index/index',
-								})
+				wx.showModal({
+				        title: '提示',
+						content:"完善成功！",
+						showCancel:false,
+				        confirmText:'确定',
+				        success(res){
+						  if(res.confirm){
+				           wx.switchTab({
+				           	url: '../index/index',
+				           })
+				          }
+				        }
+				      })	
 							}).catch(resp => {
 			　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
 			　					　});
@@ -83,7 +91,6 @@
 			}else{
 				this.form.sex = '未知'
 			}
-			console.log(this.form.sex)
 				
 		},
 				formSubmit:function(){
@@ -98,9 +105,7 @@
 					                ];
 									var formData =this.form;
 									                var checkRes = graceChecker.check(formData, rule);
-									                if(checkRes){
-									                    uni.showToast({title:"完善成功!", icon:"none"});
-									                }else{
+									                if(!checkRes){
 									                    uni.showToast({ title: graceChecker.error, icon: "none" });
 									                }
 									            }

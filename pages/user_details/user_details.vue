@@ -196,11 +196,22 @@
 			},
 			
 	
-			Edit2:function(){									
+			Edit2:function(){	
+				var that = this
 				this.$api.updateInfo(this.form).then(res=>{
-					uni.navigateTo({
-						url: './user_details',
-					})
+					wx.showModal({
+					        title: '提示',
+							content:"修改成功！",
+							showCancel:false,
+					        confirmText:'确定',
+					        success(res){
+							  if(res.confirm){
+					           that.seen = true;
+					           that.look = false;
+					          }
+					        }
+					      })
+					
 					
 				}).catch(resp => {
 　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});

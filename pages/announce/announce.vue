@@ -335,13 +335,20 @@
 				}
 				this.form.image = image
 				this.$api.addPost(this.form).then(res => {
-						console.log(this.form)
-					uni.showModal({
-						content: '发表成功',
-						showCancel: false,
-					});
-					this.form = ''
-
+						
+					wx.showModal({
+					        title: '提示',
+							content:"发布成功！",
+							showCancel:false,
+					        confirmText:'确定',
+					        success(res){
+							  if(res.confirm){
+					           wx.switchTab({
+					           	url: '../index/index',
+					           })
+					          }
+					        }
+					      })
 				})
 			}
 

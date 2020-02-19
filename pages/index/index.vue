@@ -31,18 +31,18 @@
 										</view>
 									</view>
 									<view @click="goToInfo(item.post.id)">
+										
+										
+											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
+											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
+											</view>
+										</view>
 										<view class="text-content" style="margin: 20upx 30upx 10upx;font-weight: bold;">
 											物品名称:{{item.post.name}}
 										</view>
 										<view  class="text-content" style="margin: 10upx 30upx;">
 											物品详情:{{item.post.details}}
 										</view>
-										
-											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
-											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
-											</view>
-										</view>
-										
 										
 										<view class="text-gray text-sm text-right padding">
 											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
@@ -72,15 +72,16 @@
 										</view>
 									</view>
 									<view @click="goToInfo(item.post.id)">
+										
+										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
+											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
+											</view>
+										</view>
 										<view class="text-content" style="margin: 20upx 30upx 10upx ;font-weight: bold;">
 											物品名称:{{item.post.name}}
 										</view>
 										<view class="text-content" style="margin: 10upx 30upx;">
 											物品详情:{{item.post.details}}
-										</view>
-										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
-											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
-											</view>
 										</view>
 										<view class="text-gray text-sm text-right padding">
 											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
