@@ -335,7 +335,7 @@
 				}
 				this.form.image = image
 				this.$api.addPost(this.form).then(res => {
-						
+					
 					wx.showModal({
 					        title: '提示',
 							content:"发布成功！",

@@ -10,13 +10,13 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">真实姓名</view>
-				<input @blur="formSubmit" v-model="form.realname" name="realname"></input>
+				<input @blur="formSubmit" v-model="form.realName" name="realName"></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">性别</view>
 					<picker @change="PickerChange"  :value="index" :range="picker" >
 						<view class="picker">
-							{{index>-1?picker[index]:'未知'}}
+							{{picker[index]}}
 						</view>
 					</picker>
 				</view>
@@ -25,8 +25,8 @@
 				<input @blur="formSubmit" v-model="form.phone"name="tel"></input>
 			</view>
 			<view class="cu-form-group">
-				<view class="title">QQ</view>
-				<input @blur="formSubmit" v-model="form.QQ"name="QQ"></input>
+				<view class="title">qq</view>
+				<input @blur="formSubmit" v-model="form.qq"name="qq"></input>
 			</view>
 			<van-button type="primary margin-top" size="large" @click="subInfo">提交</van-button>
 
@@ -36,25 +36,20 @@
 
 <script>
 
-	var sno;
-	var tel;
-	var realname;
-	var sex;
-	var QQ;
-
 		var  graceChecker = require("../../utils/graceChecker.js");
 
 	export default {
 			data() {
 				return {
-					index:-1,
+					index:0,
 					picker:['男','女'],
 					form:{
 						sno:'',
 						phone: '',
-						realname: '',
-						QQ: '',
-					    sex:''
+						realName: '',
+						qq: '',
+					    sex:'男',
+						status:0
 					}
 				
 					}
@@ -96,11 +91,11 @@
 				formSubmit:function(){
 					var rule = [
 						                {name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
-										{name:"realname", checkType : "notnull", checkRule:"",  errorMsg:"请输入真实姓名"},
-					                    {name:"realname", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
+										{name:"realName", checkType : "notnull", checkRule:"",  errorMsg:"请输入真实姓名"},
+					                    {name:"realName", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
 										{name:"phone", checkType : "notnull", checkRule:"",  errorMsg:"请输入联系方式"},
 					                    {name:"phone", checkType : "string", checkRule:"11",  errorMsg:"请输入正确格式的联系方式"},
-										{name:"QQ", checkType : "string", checkRule:"8,11",  errorMsg:"请输入QQ号"}
+										{name:"qq", checkType : "string", checkRule:"8,11",  errorMsg:"请输入qq号"}
 										
 					                ];
 									var formData =this.form;
@@ -108,12 +103,7 @@
 									                if(!checkRes){
 									                    uni.showToast({ title: graceChecker.error, icon: "none" });
 									                }
-									            }
-									           
-
-			
-		
-		
+									            }									         
 			
 		}
 		}

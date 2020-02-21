@@ -35,9 +35,12 @@
 												sex:user_info.gender,
 												status:2
 											}).then((res) =>{
-												wx.navigateTo({
-													url:'../perfect/perfect'
-												})		
+												if(res.status===0){
+													wx.navigateTo({
+														url:'../perfect/perfect'
+													})		
+												}
+											
 											})																	
 										}
 									})
