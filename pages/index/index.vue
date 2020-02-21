@@ -37,7 +37,7 @@
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
-										<view class="text-content" style="margin: 20upx 30upx 10upx;font-weight: bold;">
+										<view class="text-content" style="margin: 20upx 30upx 10upx;">
 											物品名称:{{item.post.name}}
 										</view>
 										<view  class="text-content" style="margin: 10upx 30upx;">
@@ -45,9 +45,9 @@
 										</view>
 										
 										<view class="text-gray text-sm text-right padding">
-											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-											<text style="font-size:140%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
-											<text style="font-size:140%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+											<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+											<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+											<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 										</view>
 									</view>
 								</view>
@@ -77,16 +77,16 @@
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
-										<view class="text-content" style="margin: 20upx 30upx 10upx ;font-weight: bold;">
+										<view class="text-content" style="margin: 20upx 30upx 10upx ;">
 											物品名称:{{item.post.name}}
 										</view>
 										<view class="text-content" style="margin: 10upx 30upx;">
 											物品详情:{{item.post.details}}
 										</view>
 										<view class="text-gray text-sm text-right padding">
-											<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-											<text style="font-size:140%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
-											<text style="font-size:140%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+											<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+											<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+											<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 										</view>
 									</view>
 								</view>
@@ -121,7 +121,8 @@
 				page: 1,
 				pageSize: 5,
 				postType: 0,
-				count: 0
+				count: 0,
+				img:[]
 			}
 		},
 		methods: {
@@ -162,8 +163,16 @@
 					pageSize: this.pageSize,
 					postType: this.postType
 				}).then(res => {
-					
 					this.data = res.data.data
+					console.log(res.data)
+					for(var i = 0;i<res.data.data.length;i++){
+						if(res.data.data[i].post.image!=null){
+							this.img = res.data.data[i].post.image.split("&&&")
+						this.data[i].post.image = this.img[0]
+						}
+						
+					}
+					
 				})
 			},
 			requestRotationChart() {

@@ -7,7 +7,7 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input v-model="form.name" name="name" style="text-align: right;"></input>
+						<input v-model="form.name" name="name" @blur="checkinfo" style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
@@ -52,7 +52,7 @@
 					</view>
 					<view class="cu-form-group align-start">
 						<view class="title">失物详情</view>
-						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput" name="details"></textarea>
+						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput" @blur="checkinfo" name="details"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -94,7 +94,7 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">拾物名称</view>
-						<input v-model="form.name" name="name" style="text-align: right;"></input>
+						<input v-model="form.name" name="name" @blur="checkinfo" style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">拾到地点</view>
@@ -130,7 +130,7 @@
 
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input name="contact" v-model="form.contact" style="text-align: right;"></input>
+						<input name="contact" v-model="form.contact" @blur="checkinfo" style="text-align: right;"></input>
 
 					</view>
 					<view class="cu-form-group">
@@ -141,7 +141,7 @@
 
 					<view class="cu-form-group align-start">
 						<view class="title">拾物详情</view>
-						<textarea maxlength="-1" :disabled="modalName!=null" v-model="form.details" @input="textareaBInput"></textarea>
+						<textarea maxlength="-1" :disabled="modalName!=null" @blur="checkinfo" v-model="form.details" @input="textareaBInput"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -205,51 +205,34 @@
 			}
 		},
 		methods: {
-			subInfo: function() {
+			checkinfo: function() {
 				var rule = [{
-						name: "lostname",
+						name: "name",
 						checkType: "notnull",
 						checkRule: "",
-						errorMsg: "请输入失物名称"
+						errorMsg: "名称不能为空"
+					},
+					{
+						name: "details",
+						checkType: "string",
+						checkRule: "5,60",
+						errorMsg: "详情不能少于5个字，不能大于60字"
 					},
 					{
 						name: "contact",
 						checkType: "string",
-						checkRule: "11",
-						errorMsg: "请输入正确格式的联系方式"
-					},
-					{
-						name: "findname",
-						checkType: "notnull",
-						checkRule: "",
-						errorMsg: "请输入拾物名称"
-					},
-					{
-						name: "QQ",
-						checkType: "string",
-						checkRule: "6,11",
-						errorMsg: "请输入QQ号"
+						checkRule: "11,11",
+						errorMsg: "请输入正确的手机号码"
 					}
 				];
-				let form = {
-					
-
-
-				}
 				var formData = this.form;
-
 				var checkRes = graceChecker.check(formData, rule);
-				if (checkRes) {
-					uni.showToast({
-						title: "发布成功!",
-						icon: "none"
-					});
-				} else {
+				if (!checkRes) {
 					uni.showToast({
 						title: graceChecker.error,
-						icon: " "
+						icon:"none"
 					});
-				}
+				} 
 			},
 			onClick(event) {
 				wx.showToast({
@@ -335,7 +318,6 @@
 				}
 				this.form.image = image
 				this.$api.addPost(this.form).then(res => {
-					
 					wx.showModal({
 					        title: '提示',
 							content:"发布成功！",
@@ -349,7 +331,9 @@
 					          }
 					        }
 					      })
-				})
+				}).catch(resp => {
+　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
+　					　});
 			}
 
 		},

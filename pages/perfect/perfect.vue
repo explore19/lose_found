@@ -89,13 +89,13 @@
 				
 		},
 				formSubmit:function(){
-					var rule = [
+					var rule = [{name:"sno", checkType : "notnull", checkRule:"",  errorMsg:"学号（工号）不能为空"},
 						                {name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
-										{name:"realName", checkType : "notnull", checkRule:"",  errorMsg:"请输入真实姓名"},
+										{name:"realName", checkType : "notnull", checkRule:"",  errorMsg:"真实姓名不能为空"},
 					                    {name:"realName", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
-										{name:"phone", checkType : "notnull", checkRule:"",  errorMsg:"请输入联系方式"},
+										{name:"phone", checkType : "notnull", checkRule:"",  errorMsg:"联系方式不能为空"},
 					                    {name:"phone", checkType : "string", checkRule:"11",  errorMsg:"请输入正确格式的联系方式"},
-										{name:"qq", checkType : "string", checkRule:"8,11",  errorMsg:"请输入qq号"}
+										{name:"qq", checkType : "string", checkRule:"6,11",  errorMsg:"请输入qq号"}
 										
 					                ];
 									var formData =this.form;

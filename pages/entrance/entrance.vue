@@ -25,7 +25,7 @@
 						this.$api.getUserInfo().then((res)=>{
 							if(res.status===0){
 								let user = res.data
-								if(user.status===3){          //注册后的完善信息
+								if(user.status===3){  //注册后的完善信息
 									wx.getUserInfo({
 										success: (res) => {	
 											let user_info = res.userInfo

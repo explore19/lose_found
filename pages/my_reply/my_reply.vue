@@ -22,8 +22,11 @@
 			</view>
 		</view>
 	</view>
-	<view class="text-gray text-xl text-center padding margin-top" v-else>
-		<text class="cuIcon-emoji margin-lr-ms">您未有回复</text>
+	<view class="margin-top" v-else>
+		<view class="kong">
+			<image src="../../static/images/空回复.png"  style="height: 1100upx;"></image>
+		</view>
+		
 	</view>
 </template>
 
@@ -65,5 +68,10 @@
 </script>
 
 <style>
-
+.kong{
+	
+	 display:flex;                   
+	 justify-content: center;        
+	 align-items:center;
+	  }
 </style>

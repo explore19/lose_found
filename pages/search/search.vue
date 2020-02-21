@@ -9,11 +9,11 @@
 				
 				
 				<van-field @blur="bindTap()" placeholder="请输入要查询的内容" border="true" clearable />
-				<text class="cuIcon-search margin-lr-ms" @click="onSearch()  ">
-					
+				<text class="cuIcon-search margin-lr-ms" @click="onSearch()">
 				</text>
 			</view>
-			<view v-if="seen">
+			<view v-if="exist">
+				<view v-if="seen">
 				<view>
 					<van-dropdown-menu>
 						<van-dropdown-item :options="postTypeOption" title="帖子类型" :value="-1" @change="postChange" />
@@ -21,7 +21,7 @@
 						<van-dropdown-item :options="sortOption" title="排序" :value="0" @change="sortChange" />
 					</van-dropdown-menu>
 				</view>
-				<view>
+				
 					<view v-for="item in data" :key="item.post.id">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic isCard?'no-card':''">
@@ -43,7 +43,7 @@
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
-										<view class="text-content" style="margin: 20upx 30upx 10upx;font-weight: bold;">
+										<view class="text-content" style="margin: 20upx 30upx 10upx;">
 											物品名称:{{item.post.name}}
 										</view>
 										<view class="text-content" style="margin: 10upx 30upx;">
@@ -51,9 +51,9 @@
 										</view>
 									</view>
 									<view class="text-gray text-sm text-right padding">
-										<text  style="font-size:140%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-										<text style="font-size:140%"  @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
-										<text style="font-size:140%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+										<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+										<text style="font-size:125%"  @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+										<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 									</view>
 								</view>
 							</view>
@@ -61,6 +61,14 @@
 					</view>
 				</view>
 			</view>
+			
+				<view class="margin-top" v-else>
+					<view class="kong">
+						<image src="../../static/images/空帖子.png"  style="height: 1100upx;"></image>
+					</view>
+					
+				</view>
+			
 		</view>
 	</view>
 </template>
@@ -109,7 +117,8 @@
 				data: [],
 				total: 0,
 				differ: "",
-				detail: ""
+				detail: "",
+				exist:true
 			}
 		},
 		methods: {
@@ -148,7 +157,20 @@
 			requestData() { //根据类型从后端 拿取所有的数据 
 				this.$api.queryPost(this.form).then(res => {
 					this.total = res.data.total
-					this.data = res.data.data
+					if(this.data.length!=0){
+						this.exist = true
+						this.data = res.data.data
+						for(var i = 0;i<res.data.data.length;i++){
+							if(res.data.data[i].post.image!=null){
+								this.img = res.data.data[i].post.image.split("&&&")
+							this.data[i].post.image = this.img[0]
+							}
+							
+						}
+					}
+					else{
+						this.exist = false
+					}
 				})
 
 			},
@@ -209,4 +231,10 @@
 	.tags {
 		padding-left: 20px;
 	}
+	.kong{
+		
+		 display:flex;                   
+		 justify-content: center;        
+		 align-items:center;
+		  }
 </style>

@@ -17,17 +17,21 @@
 									</view>
 								</view>
 								<view @click="goToInfo(item.post.id)">
-								<view class="text-content" style="margin: 20upx 30upx;">
-									{{item.post.details}}
-								</view>
-								<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="img" :img = "item.post.image!=null?'true':'false'" >
+								
+								<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
 									<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 									</view>
 								</view>
+								<view class="text-content" style="margin: 20upx 30upx 10upx;">
+									物品名称:{{item.post.name}}
+								</view>
+								<view  class="text-content" style="margin: 10upx 30upx;">
+									物品详情:{{item.post.details}}
+								</view>
 								<view class="text-gray text-sm text-right padding">
-									<text class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-									<text class="cuIcon-appreciatefill margin-lr-xs">{{item.praiseNumber}}</text>
-									<text class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+									<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+									<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+									<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 								</view>
 							</view>
 						</view>
@@ -36,8 +40,13 @@
 				</view>
 		</view>
 				
-				<view class="text-gray text-xl text-center padding margin-top" v-else>
-					<text class="cuIcon-emoji margin-lr-ms">您未上传过帖子</text>
+				<view class=" margin-top" v-else>
+					<view class="kong">
+						<image src="../../static/images/空帖子.png"  style="height: 1100upx; "></image>
+					</view>
+						
+						
+					</view>
 				</view>
 				</view>
 </template>
@@ -47,19 +56,34 @@
 		data() {
 			return {
 				exist:false,
-				data:[]
+				data:[],
+				img:[]
 			}
 		},
 		methods: {
 			requestData(){
 				this.$api.queryMyPost().then(res=>{
+					
 					if(res.data.length==0){
 						this.exist = false	
 					}
 					else {
 						this.exist = true
 						this.data=res.data
+						for(var i = 0;i<res.data.length;i++){
+							if(res.data[i].post.image!=null){
+								this.img = res.data[i].post.image.split("&&&")
+							this.data[i].post.image = this.img[0]
+							}
+							
+						}
 					}
+					
+				})
+			},
+			perfect: function(postId) {
+				this.$api.praise(postId).then((res) => {
+					this.requestData()
 				})
 			}
 		},
@@ -70,5 +94,10 @@
 </script>
 
 <style>
-
+.kong{
+	
+	 display:flex;                   
+	 justify-content: center;        
+	 align-items:center;
+	  }
 </style>
