@@ -30,7 +30,7 @@
 
 			<view class="text-gray text-sm text-right padding">
 				<text style="font-size:130%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
-				<text style="font-size:130%" @click="perfect(data.post.id)" :class="'cuIcon-appreciatefill '+(data.isPraise?'text-red':'')">{{data.praiseNumber}}</text>
+				<text style="font-size:130%" @click="perfect(data.post.id,data.isPraise)" :class="'cuIcon-appreciatefill '+(data.isPraise?'text-red':'')">{{data.praiseNumber}}</text>
 				<text @click="postReply" style="font-size:130%" class="cuIcon-messagefill margin-lr-xs ">{{data.replyNumber}}</text>
 			</view>
 
@@ -170,9 +170,16 @@
 				}
 
 			},
-			perfect: function(postId) {
+			perfect: function(postId,isPraise) {
 				this.$api.praise(postId).then((res) => {
-					this.requestData()
+					if(res.status===0){
+						this.data.isPraise=!isPraise
+						if(isPraise){
+							this.data.praiseNumber--
+						}else{
+							this.data.praiseNumber++
+						}
+					}
 				})
 			},
 			otherReply: function(replyId) { //回复消息的方法
