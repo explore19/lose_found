@@ -167,18 +167,21 @@
 					pageSize: this.pageSize,
 					postType: this.postType
 				}).then(res => {
-					this.data = res.data.data
-					
-					for(var i = 0;i<res.data.data.length;i++){
-						if(res.data.data[i].post.image!=null){
-						this.img = res.data.data[i].post.image.split("&&&")
-						this.data[i].post.image = this.img[0]
-						}
-						else{
-							this.data[i].post.image = null
-						}
+					if(res.status===0){
+						let data = res.data.data
+						this.total = res.data.total
+						for (var i = 0; i < data.length; i++) {
+							if (data[i].post.image != null) {
+								let img = data[i].post.image.split("&&&")
+								data[i].post.image = img[0]
+							} else {
+								data[i].post.image = null
+							}
 						
+						}
+						this.data = data
 					}
+
 					
 				})
 				this.$api.getUserInfo().then(res =>{
@@ -228,7 +231,21 @@
 				pageSize: this.pageSize,
 				postType: this.postType
 			}).then(res => {
-				this.data = this.data.concat(res.data.data)
+				if(res.status===0){
+					let data = res.data.data
+					for (var i = 0; i < data.length; i++) {
+						if (data[i].post.image != null) {
+							let img = data[i].post.image.split("&&&")
+							data[i].post.image = img[0]
+						} else {
+							data[i].post.image = null
+						}
+					
+					}
+					this.data = this.data.concat(data)
+				}
+				
+			
 			})
 		}
 
