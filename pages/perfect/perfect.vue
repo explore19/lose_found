@@ -49,7 +49,8 @@
 						realName: '',
 						qq: '',
 					    sex:'男',
-						status:0
+						status:0,
+						checkRes:false
 					}
 				
 					}
@@ -57,8 +58,11 @@
 
 			methods: {
 		subInfo: function() {
-			
-			this.$api.updateInfo(this.form).then(res=>{
+			if(!this.checkRes){
+				this.checkinfo()
+			}
+			else{
+				this.$api.updateInfo(this.form).then(res=>{
 				wx.showModal({
 				        title: '提示',
 						content:"完善成功！",
@@ -75,6 +79,8 @@
 							}).catch(resp => {
 			　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
 			　					　});
+			}
+			
 		},
 		PickerChange(e) {
 			this.index = e.detail.value
@@ -99,7 +105,7 @@
 										
 					                ];
 									var formData =this.form;
-									                var checkRes = graceChecker.check(formData, rule);
+									                this.checkRes = graceChecker.check(formData, rule);
 									                if(!checkRes){
 									                    uni.showToast({ title: graceChecker.error, icon: "none" });
 									                }

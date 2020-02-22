@@ -200,6 +200,7 @@
 					contact: '',
 					image: [],
 					postType: 0,
+					checkRes:false
 				}
 
 			}
@@ -226,8 +227,8 @@
 					}
 				];
 				var formData = this.form;
-				var checkRes = graceChecker.check(formData, rule);
-				if (!checkRes) {
+				this.checkRes = graceChecker.check(formData, rule);
+				if (!this.checkRes) {
 					uni.showToast({
 						title: graceChecker.error,
 						icon:"none"
@@ -307,7 +308,11 @@
 			},
 
 			subInfo: function() {
-				this.form.loseTime = this.date + " " + this.time + ":00"
+				if(!this.checkRes){
+					this.checkinfo()
+				}
+				else{
+					this.form.loseTime = this.date + " " + this.time + ":00"
 				let image = ''
 				for (let i = 0; i < this.imgList.length; i++) {
 					if (i === this.imgList.length - 1) {
@@ -334,6 +339,8 @@
 				}).catch(resp => {
 　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
 　					　});
+				}
+				
 			}
 
 		},

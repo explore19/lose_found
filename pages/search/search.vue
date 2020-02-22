@@ -13,6 +13,7 @@
 				</text>
 			</view>
 			<view v-if="exist">
+				
 				<view v-if="seen">
 				<view>
 					<van-dropdown-menu>
@@ -22,7 +23,7 @@
 					</van-dropdown-menu>
 				</view>
 				
-					<view v-for="item in data" :key="item.post.id">
+					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic isCard?'no-card':''">
 								<view class="cu-item shadow">
@@ -62,7 +63,14 @@
 				</view>
 			</view>
 			
-				<view class="margin-top" v-else>
+				<view  v-else>
+					<view>
+						<van-dropdown-menu>
+							<van-dropdown-item :options="postTypeOption" title="帖子类型" :value="-1" @change="postChange" />
+							<van-dropdown-item :options="itemTypeOption" title="物品类型" :value="-1" @change="itemChange" />
+							<van-dropdown-item :options="sortOption" title="排序" :value="0" @change="sortChange" />
+						</van-dropdown-menu>
+					</view>
 					<view class="kong">
 						<image src="../../static/images/空帖子.png"  style="height: 1100upx;"></image>
 					</view>
@@ -157,7 +165,8 @@
 			requestData() { //根据类型从后端 拿取所有的数据 
 				this.$api.queryPost(this.form).then(res => {
 					this.total = res.data.total
-					if(this.data.length!=0){
+					
+					if(res.data.data.length!=0){
 						this.exist = true
 						this.data = res.data.data
 						for(var i = 0;i<res.data.data.length;i++){
@@ -171,6 +180,7 @@
 					else{
 						this.exist = false
 					}
+				
 				})
 
 			},

@@ -103,7 +103,8 @@
 				qq:""
 				},
 				seen: true,
-				look: false
+				look: false,
+				checkRes:false
 			}
 		},
 		methods: {
@@ -115,7 +116,7 @@
 									
 				                ];
 								var formData =this.form;
-								                var checkRes = graceChecker.check(formData, rule);
+								                this.checkRes = graceChecker.check(formData, rule);
 								                if(!checkRes){
 								                    uni.showToast({ title: graceChecker.error, icon: "none" });
 								                }
@@ -188,7 +189,10 @@
 			
 	
 			Edit2:function(){	
-				var that = this
+				if(!this.checkRes){
+					this.checkinfo()
+				}else{
+					var that = this
 				this.$api.updateInfo(this.form).then(res=>{
 					 uni.showToast({title:"修改成功!", icon:"none"});
 					           that.seen = true;
@@ -197,6 +201,8 @@
 				}).catch(resp => {
 　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
 　					　});
+				}
+				
 				
 			}
 
