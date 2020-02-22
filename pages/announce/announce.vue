@@ -313,7 +313,7 @@
 				}
 				else{
 					this.form.loseTime = this.date + " " + this.time + ":00"
-				let image = ''
+				let image = null
 				for (let i = 0; i < this.imgList.length; i++) {
 					if (i === this.imgList.length - 1) {
 						image += this.imgList[i]
@@ -330,8 +330,13 @@
 					        confirmText:'确定',
 					        success(res){
 							  if(res.confirm){
-					           wx.switchTab({
+					           uni.reLaunch({
 					           	url: '../index/index',
+								// success(e){
+								// 	var page = getCurrentPages().pop();
+								// 	if (page == undefined || page == null) return;
+								// 	console.log(page)
+								// }
 					           })
 					          }
 					        }

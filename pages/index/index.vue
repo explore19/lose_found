@@ -15,6 +15,9 @@
 		<view>
 			<van-tabs @change="onTabChange" swipeable="true">
 				<van-tab title="失物寻物">
+					<view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
+						<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
+					</view>
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
@@ -56,6 +59,9 @@
 					</view>
 				</van-tab>
 				<van-tab title="拾物寻主">
+					<view class="popup window margin-top" v-if="userstatus">
+						<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
+					</view>
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
@@ -98,9 +104,7 @@
 			</van-tabs>
 		</view>
 
-		<view class="popup window">
-			<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
-		</view>
+		
 
 
 
@@ -112,7 +116,6 @@
 	export default {
 		data() {
 			return {
-				hasimg: true,
 				data: [],
 				active: 'home',
 				cardCur: 0,
@@ -122,7 +125,8 @@
 				pageSize: 5,
 				postType: 0,
 				count: 0,
-				img:[]
+				img:[],
+				userstatus:false
 			}
 		},
 		methods: {
@@ -164,16 +168,30 @@
 					postType: this.postType
 				}).then(res => {
 					this.data = res.data.data
-					console.log(res.data)
+					console.log(res.data.data)
 					for(var i = 0;i<res.data.data.length;i++){
 						if(res.data.data[i].post.image!=null){
-							this.img = res.data.data[i].post.image.split("&&&")
+						this.img = res.data.data[i].post.image.split("&&&")
 						this.data[i].post.image = this.img[0]
+						}
+						else{
+							this.data[i].post.image = null
 						}
 						
 					}
+					console.log(this.data)
+				})
+				this.$api.getUserInfo().then(res =>{
+					if(res.data.status == 2){
+						this.userstatus=true
+					}
+					else{
+						this.userstatus=false
+					}
+					
 					
 				})
+				
 			},
 			requestRotationChart() {
 				this.$api.getRotationChart(5).then((res) => {
