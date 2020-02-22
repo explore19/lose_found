@@ -6,11 +6,11 @@
 		
 			<view class="cu-form-group margin-top">
 				<view class="title">学号（工号）</view>
-				<input @blur="formSubmit" v-model="form.sno" name="sno"></input>
+				<input v-model="form.sno" name="sno"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">真实姓名</view>
-				<input @blur="formSubmit" v-model="form.realName" name="realName"></input>
+				<input  v-model="form.realName" name="realName"></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">性别</view>
@@ -22,11 +22,11 @@
 				</view>
 			<view class="cu-form-group">
 				<view class="title">联系方式</view>
-				<input @blur="formSubmit" v-model="form.phone"name="tel"></input>
+				<input  v-model="form.phone"name="tel"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">qq</view>
-				<input @blur="formSubmit" v-model="form.qq"name="qq"></input>
+				<input  v-model="form.qq"name="qq"></input>
 			</view>
 			<van-button type="primary margin-top" size="large" @click="subInfo">提交</van-button>
 
@@ -58,8 +58,9 @@
 
 			methods: {
 		subInfo: function() {
+			this.formSubmit()
 			if(!this.checkRes){
-				this.checkinfo()
+				this.formSubmit()
 			}
 			else{
 				this.$api.updateInfo(this.form).then(res=>{
@@ -106,7 +107,7 @@
 					                ];
 									var formData =this.form;
 									                this.checkRes = graceChecker.check(formData, rule);
-									                if(!checkRes){
+									                if(!this.checkRes){
 									                    uni.showToast({ title: graceChecker.error, icon: "none" });
 									                }
 									            }									         

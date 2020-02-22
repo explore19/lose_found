@@ -49,16 +49,16 @@
 				<view class="cu-form-group ">
 					<view class="title">昵称</view>
 					
-					<input v-model="form.nickName" @blur="checkform" name="nickName" ></input>
+					<input v-model="form.nickName"  name="nickName" ></input>
 				</view>
 				
 				<view class="cu-form-group ">
 					<view class="title">学号</view>
-					<input v-model="form.sno" @blur="checkform" name="sno" ></input>
+					<input v-model="form.sno"  name="sno" ></input>
 				</view>
 				<view class="cu-form-group  ">
 					<view class="title">真实姓名</view>
-					<input v-model="form.realName" @blur="checkform" name="realName" ></input>
+					<input v-model="form.realName"  name="realName" ></input>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">性别</view>
@@ -74,7 +74,7 @@
 				</view>
 				<view class="cu-form-group ">
 					<view class="title">手机号</view>
-					<input v-model="form.phone" @blur="checkform" name="tel"></input>
+					<input v-model="form.phone"  name="tel"></input>
 				</view>
 				<view class="margin-top">
 					<van-button type="primary" size="large" @click="Edit2" >保存信息</van-button>
@@ -113,11 +113,12 @@
 					                {name:"nickName", checkType : "notnull", checkRule:"",  errorMsg:"昵称不能为空"},
 					                {name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
 				                    {name:"realName", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
+									{name:"tel", checkType : "string", checkRule:"11",  errorMsg:"请输入11位手机号码"}
 									
 				                ];
 								var formData =this.form;
 								                this.checkRes = graceChecker.check(formData, rule);
-								                if(!checkRes){
+								                if(!this.checkRes){
 								                    uni.showToast({ title: graceChecker.error, icon: "none" });
 								                }
 								            },
@@ -189,8 +190,9 @@
 			
 	
 			Edit2:function(){	
+				this.checkform()
 				if(!this.checkRes){
-					this.checkinfo()
+					this.checkform()
 				}else{
 					var that = this
 				this.$api.updateInfo(this.form).then(res=>{

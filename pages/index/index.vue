@@ -59,7 +59,7 @@
 					</view>
 				</van-tab>
 				<van-tab title="拾物寻主">
-					<view class="popup window margin-top" v-if="userstatus">
+					<view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
@@ -168,7 +168,7 @@
 					postType: this.postType
 				}).then(res => {
 					this.data = res.data.data
-					console.log(res.data.data)
+					
 					for(var i = 0;i<res.data.data.length;i++){
 						if(res.data.data[i].post.image!=null){
 						this.img = res.data.data[i].post.image.split("&&&")
@@ -179,7 +179,7 @@
 						}
 						
 					}
-					console.log(this.data)
+					
 				})
 				this.$api.getUserInfo().then(res =>{
 					if(res.data.status == 2){

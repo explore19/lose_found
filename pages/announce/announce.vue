@@ -7,7 +7,7 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input v-model="form.name" name="name" @blur="checkinfo" style="text-align: right;"></input>
+						<input v-model="form.name" name="name"  style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
@@ -52,7 +52,7 @@
 					</view>
 					<view class="cu-form-group align-start">
 						<view class="title">失物详情</view>
-						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput" @blur="checkinfo" name="details"></textarea>
+						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput"  name="details"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -94,7 +94,7 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">拾物名称</view>
-						<input v-model="form.name" name="name" @blur="checkinfo" style="text-align: right;"></input>
+						<input v-model="form.name" name="name"  style="text-align: right;"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">拾到地点</view>
@@ -130,7 +130,7 @@
 
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input name="contact" v-model="form.contact" @blur="checkinfo" style="text-align: right;"></input>
+						<input name="contact" v-model="form.contact"  style="text-align: right;"></input>
 
 					</view>
 					<view class="cu-form-group">
@@ -141,7 +141,7 @@
 
 					<view class="cu-form-group align-start">
 						<view class="title">拾物详情</view>
-						<textarea maxlength="-1" :disabled="modalName!=null" @blur="checkinfo" v-model="form.details" @input="textareaBInput"></textarea>
+						<textarea maxlength="-1" :disabled="modalName!=null"  v-model="form.details" @input="textareaBInput"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -309,13 +309,17 @@
 			},
 
 			subInfo: function() {
+				this.checkinfo()
 				if(!this.checkRes){
 					this.checkinfo()
 				}
 				else{
 					this.form.loseTime = this.date + " " + this.time + ":00"
-				let image = null
-				for (let i = 0; i < this.imgList.length; i++) {
+					if(this.imgList.length==0){
+						this.form.image = null
+					}else{
+						let  image = ""
+						for (let i = 0; i < this.imgList.length; i++) {
 					if (i === this.imgList.length - 1) {
 						image += this.imgList[i]
 						continue
@@ -323,6 +327,9 @@
 					image += this.imgList[i] + '&&&'
 				}
 				this.form.image = image
+					}
+				
+				
 				this.$api.addPost(this.form).then(res => {
 					wx.showModal({
 					        title: '提示',
