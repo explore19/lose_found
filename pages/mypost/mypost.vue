@@ -85,6 +85,11 @@
 				this.$api.praise(postId).then((res) => {
 					this.requestData()
 				})
+			},
+			perfect: function(postId) {
+				this.$api.praise(postId).then((res) => {
+					this.requestData()
+				})
 			}
 		},
 		created() {

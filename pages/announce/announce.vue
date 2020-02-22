@@ -331,6 +331,7 @@
 				
 				
 				this.$api.addPost(this.form).then(res => {
+						this.form = ""
 					wx.showModal({
 					        title: '提示',
 							content:"发布成功！",
