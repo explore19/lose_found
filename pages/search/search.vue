@@ -12,16 +12,18 @@
 				<text class="cuIcon-search margin-lr-ms" @click="onSearch()">
 				</text>
 			</view>
+			<view v-if="seen">
+			<view>
+				<van-dropdown-menu>
+					<van-dropdown-item :options="postTypeOption" title="帖子类型" :value="-1" @change="postChange" />
+					<van-dropdown-item :options="itemTypeOption" title="物品类型" :value="-1" @change="itemChange" />
+					<van-dropdown-item :options="sortOption" title="排序" :value="0" @change="sortChange" />
+				</van-dropdown-menu>
+			</view>
+						</view>
 			<view v-if="exist">
 				
-				<view v-if="seen">
-				<view>
-					<van-dropdown-menu>
-						<van-dropdown-item :options="postTypeOption" title="帖子类型" :value="-1" @change="postChange" />
-						<van-dropdown-item :options="itemTypeOption" title="物品类型" :value="-1" @change="itemChange" />
-						<van-dropdown-item :options="sortOption" title="排序" :value="0" @change="sortChange" />
-					</van-dropdown-menu>
-				</view>
+			
 				
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
@@ -61,16 +63,9 @@
 						</view>
 					</view>
 				</view>
-			</view>
+
 			
 				<view  v-else>
-					<view>
-						<van-dropdown-menu>
-							<van-dropdown-item :options="postTypeOption" title="帖子类型" :value="-1" @change="postChange" />
-							<van-dropdown-item :options="itemTypeOption" title="物品类型" :value="-1" @change="itemChange" />
-							<van-dropdown-item :options="sortOption" title="排序" :value="0" @change="sortChange" />
-						</van-dropdown-menu>
-					</view>
 					<view class="kong">
 						<image src="../../static/images/空帖子.png"  style="height: 1100upx;"></image>
 					</view>

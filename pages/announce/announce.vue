@@ -255,22 +255,23 @@
 					success: (res) => {
 
 						const tempFilePaths = res.tempFilePaths
-						uni.uploadFile({
-							url: "http:localhost:8888/upload/img",
-							filePath: tempFilePaths[0],
-							name: "img",
-							fileType: "image",
-							// files:res.tempFiles,
-							success: (uploadFileRes) => {
-								let data = JSON.parse(uploadFileRes.data)
-
-								if (data.status === 0) {
-									this.imgList.push("http://localhost:8888/img/" + data.data)
-								} else {
-
+						for (var i = 0; i < tempFilePaths.length; i++) {
+							uni.uploadFile({
+								url: "http:localhost:8888/upload/img",
+								filePath: tempFilePaths[i],
+								name: "img",
+								fileType: "image",
+								success: (uploadFileRes) => {
+									let data = JSON.parse(uploadFileRes.data)
+									if (data.status === 0) {
+										this.imgList.push("http://localhost:8888/img/" + data.data)
+									} else {
+							
+									}
 								}
-							}
-						})
+							})
+						}
+					
 					}
 				});
 			},
