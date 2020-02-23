@@ -21,7 +21,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">联系方式</view>
-				<input v-model="form.phone" name="tel"></input>
+				<input v-model="form.phone" name="phone"></input>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">qq</view>
@@ -34,11 +34,7 @@
 </template>
 
 <script>
-	var sno;
-	var tel;
-	var realname;
-	var sex;
-	var QQ;
+	
 
 	var graceChecker = require("../../utils/graceChecker.js");
 
@@ -51,7 +47,7 @@
 					sno: '',
 					phone: '',
 					realname: '',
-					QQ: '',
+					qq: '',
 					sex: ''
 				}
 
@@ -106,22 +102,10 @@
 						errorMsg: "请输入正确格式的学号（工号）"
 					},
 					{
-						name: "realname",
-						checkType: "notnull",
-						checkRule: "",
-						errorMsg: "请输入真实姓名"
-					},
-					{
-						name: "realname",
+						name: "realName",
 						checkType: "string",
 						checkRule: "2,4",
 						errorMsg: "请输入正确的真实姓名"
-					},
-					{
-						name: "phone",
-						checkType: "notnull",
-						checkRule: "",
-						errorMsg: "请输入联系方式"
 					},
 					{
 						name: "phone",
@@ -130,9 +114,9 @@
 						errorMsg: "请输入正确格式的联系方式"
 					},
 					{
-						name: "QQ",
+						name: "qq",
 						checkType: "string",
-						checkRule: "8,11",
+						checkRule: "6,11",
 						errorMsg: "请输入QQ号"
 					}
 

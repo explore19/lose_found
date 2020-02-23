@@ -74,7 +74,7 @@
 				</view>
 				<view class="cu-form-group ">
 					<view class="title">手机号</view>
-					<input v-model="form.phone"  name="tel"></input>
+					<input v-model="form.phone"  name="phone"></input>
 				</view>
 				<view class="margin-top">
 					<van-button type="primary" size="large" @click="Edit2" >保存信息</van-button>
@@ -110,10 +110,13 @@
 		methods: {
 			checkform:function(){
 				var rule = [
+					
+									{name:"phone", checkType : "string", checkRule:"11",  errorMsg:"请输入11位数的手机号"},
 					                {name:"nickName", checkType : "notnull", checkRule:"",  errorMsg:"昵称不能为空"},
 					                {name:"sno", checkType : "string", checkRule:"10",  errorMsg:"请输入正确格式的学号（工号）"},
-				                    {name:"realName", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"},
-									{name:"tel", checkType : "string", checkRule:"11",  errorMsg:"请输入11位手机号码"}
+				                    {name:"realName", checkType : "string", checkRule:"2,4",  errorMsg:"请输入正确的真实姓名"}
+									
+									
 									
 				                ];
 								var formData =this.form;
