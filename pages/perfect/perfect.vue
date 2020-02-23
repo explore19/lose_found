@@ -48,7 +48,8 @@
 					phone: '',
 					realname: '',
 					qq: '',
-					sex: ''
+					sex: '',
+					status:0
 				}
 
 			}
@@ -68,7 +69,7 @@
 							confirmText: '确定',
 							success(res) {
 								if (res.confirm) {
-									wx.switchTab({
+									wx.reLaunch({
 										url: '../index/index',
 									})
 								}

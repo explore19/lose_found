@@ -184,16 +184,7 @@
 
 					
 				})
-				this.$api.getUserInfo().then(res =>{
-					if(res.data.status == 2){
-						this.userstatus=true
-					}
-					else{
-						this.userstatus=true
-					}
-					
-					
-				})
+	
 				
 			},
 			requestRotationChart() {
@@ -219,6 +210,16 @@
 		created() {
 			this.requestData()
 			this.requestRotationChart()
+			this.$api.getUserInfo().then(res =>{
+				if(res.data.status == 2){
+					this.userstatus=true
+				}
+				else{
+					this.userstatus=false
+				}
+				
+				
+			})
 		},
 
 		onReachBottom() {
