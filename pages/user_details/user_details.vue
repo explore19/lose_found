@@ -169,14 +169,17 @@
 					count: 1, //默认9
 					sizeType: ["compressed"],
 					success: (res) => {
-						
+						let cookie =this.$request.getCookie()
+						let header = {
+							Cookie:cookie
+						}
 						const tempFilePaths = res.tempFilePaths
 						uni.uploadFile({
-							url: "http:localhost:8888/upload/img",
+							url: "http:localhost:8888/upload/image",
 							filePath: tempFilePaths[0],
 							name: "img",
 							fileType: "image",
-							// files:res.tempFiles,
+							header:header,
 							success: (uploadFileRes) => {
 								let data = JSON.parse(uploadFileRes.data)
 								console.log(uploadFileRes)

@@ -4,6 +4,9 @@ const baseUrl = "http://localhost:8888"
 //39.108.220.199
 let cookie = ''
 
+request.getCookie=() =>{
+	return cookie
+}
 
 request.post = (url, data) => {
 	headers["Cookie"] = cookie //设置请求头cookie
