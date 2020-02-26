@@ -125,6 +125,7 @@
 				pageSize: 5,
 				postType: 0,
 				count: 0,
+				total:0,
 				img:[],
 				userstatus:false
 			}
