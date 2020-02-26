@@ -48,6 +48,9 @@ api.getRotationChart=(num) =>request.get('/rotation_chart/find_rotation',num)
 //点赞
 api.praise=(postId) =>request.post('/praise?postId='+postId)
 
+//点赞
+api.uploadImage=(img) =>request.upload('/upload/image',img)
+
 
 
 export default api

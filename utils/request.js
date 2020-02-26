@@ -1,12 +1,9 @@
 const request = {}
 const headers = {}
-const baseUrl = "http://localhost:8888"
+const baseUrl = "http://39.108.220.199:8000"
 //39.108.220.199
 let cookie = ''
 
-request.getCookie=() =>{
-	return cookie
-}
 
 request.post = (url, data) => {
 	headers["Cookie"] = cookie //设置请求头cookie
@@ -75,6 +72,23 @@ request.delete = (url, id) => {
 
 	})
 }
+
+request.upload = (url, file) => {
+	headers["Cookie"] = cookie //设置请求头cookie
+	return uni.uploadFile({
+		url:  baseUrl + url,
+		filePath: file,
+		name: "img",
+		fileType: "image",
+		header:headers
+	}).then(res => {
+		return res[1].data
+	}).catch(resp => {
+
+	})
+
+}
+
 
 
 

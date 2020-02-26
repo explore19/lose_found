@@ -169,26 +169,12 @@
 					count: 1, //默认9
 					sizeType: ["compressed"],
 					success: (res) => {
-						let cookie =this.$request.getCookie()
-						let header = {
-							Cookie:cookie
-						}
 						const tempFilePaths = res.tempFilePaths
-						uni.uploadFile({
-							url: "http:localhost:8888/upload/image",
-							filePath: tempFilePaths[0],
-							name: "img",
-							fileType: "image",
-							header:header,
-							success: (uploadFileRes) => {
-								let data = JSON.parse(uploadFileRes.data)
-								console.log(uploadFileRes)
-								if (data.status === 0) {
-									this.form.headPortrait = "http://localhost:8888/img/" + data.data
-								} else {
-			
-								}
-							}
+						this.$api.uploadImage(tempFilePaths[0]).then(resp => {
+									let res = JSON.parse(resp)
+									if (res.status === 0) {
+									this.form.headPortrait = "http:///39.108.220.199:8000/img/" + res.data
+									} 
 						})
 					}
 				});
