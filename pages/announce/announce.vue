@@ -258,7 +258,7 @@
 							this.$api.uploadImage(tempFilePaths[i]).then(resp => {
 										let res = JSON.parse(resp)
 										if (res.status === 0) {
-											this.imgList.push("http://localhost:8000/img/" + res.data)
+											this.imgList.push(this.$request.getbaseUrl() + "/img/" + res.data)
 										} 
 							})
 

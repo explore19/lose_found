@@ -171,7 +171,7 @@
 						this.$api.uploadImage(tempFilePaths[0]).then(resp => {
 									let res = JSON.parse(resp)
 									if (res.status === 0) {
-									this.form.headPortrait = "http:///39.108.220.199:8000/img/" + res.data
+									this.form.headPortrait = this.$request.getbaseUrl() + "/img/" + res.data
 									} 
 						})
 					}

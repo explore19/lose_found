@@ -1,10 +1,12 @@
 const request = {}
 const headers = {}
-const baseUrl = "http://localhost:8000"
- // const baseUrl = "http://39.108.220.199:8000"
+const baseUrl = "https://xyzliu.cn:8000"
 //39.108.220.199
 let cookie = ''
 
+request.getbaseUrl =() =>{
+ return	baseUrl
+} 
 
 request.post = (url, data) => {
 	headers["Cookie"] = cookie //设置请求头cookie
