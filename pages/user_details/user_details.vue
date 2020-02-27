@@ -153,8 +153,6 @@
 					this.form.sex = '男'
 				}else if(this.picker[e.detail.value]=== '女'){
 					this.form.sex = '女'
-				}else{
-					this.form.sex = '未知'
 				}
 				console.log(this.form.sex)
 					

@@ -57,6 +57,8 @@
 							</view>
 						</view>
 					</view>
+					
+					
 				</van-tab>
 				<van-tab title="拾物寻主">
 					<view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
@@ -99,7 +101,9 @@
 							</view>
 						</view>
 					</view>
-
+<!-- <view style="margin-bottom: 20upx; margin-top: 20upx;" v-if="reachbto1">
+						<text style="font-size:140%" class="cuIcon-emoji align-center kong">到底了</text>
+					</view> -->
 				</van-tab>
 			</van-tabs>
 		</view>
@@ -127,7 +131,9 @@
 				count: 0,
 				total:0,
 				img:[],
-				userstatus:false
+				userstatus:false,
+				reachbto0:false,
+				reachbto1:false
 			}
 		},
 		methods: {
@@ -144,7 +150,8 @@
 			},
 			goToperfect: function() { //用来跳转到信息完善界面
 				uni.navigateTo({
-					url: "/pages/perfect/perfect"
+					 url: "/pages/perfect/perfect"
+
 				})
 			},
 			perfect: function(postId) {
@@ -224,9 +231,14 @@
 		},
 
 		onReachBottom() {
+		
 			if (this.isBottom()) {
+				uni.showToast({title:"到底了", icon:"none"});
 				return
 			}
+			wx.showLoading({
+				title:'玩命加载中',
+			})
 			this.page += 1
 			this.$api.queryPost({ //用来批量获取
 				page: this.page,
@@ -246,7 +258,7 @@
 					}
 					this.data = this.data.concat(data)
 				}
-				
+				wx.hideLoading()
 			
 			})
 		}
@@ -257,4 +269,10 @@
 	.borderLine {
 		border-bottom: none;
 	}
+	.kong{
+		
+		 display:flex;                   
+		 justify-content: center;        
+		 align-items:center;
+		  }
 </style>

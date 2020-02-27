@@ -1,6 +1,7 @@
 const request = {}
 const headers = {}
-const baseUrl = "http://39.108.220.199:8000"
+const baseUrl = "http://localhost:8000"
+ // const baseUrl = "http://39.108.220.199:8000"
 //39.108.220.199
 let cookie = ''
 
@@ -63,7 +64,7 @@ request.delete = (url, id) => {
 	headers["Cookie"] = cookie //设置请求头cookie
 	return uni.request({
 		url: baseUrl + url + '/' + id,
-		method: "PUT",
+		method: "DELETE",
 		dataType: 'json',
 		header: headers
 	}).then(res => {

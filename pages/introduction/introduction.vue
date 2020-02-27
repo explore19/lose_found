@@ -64,8 +64,8 @@
 			<view class="cu-bar input reply">
 				<view class="cu-avatar round" :style="'background-image:url('+data.headPortrait+');'"></view>
 
-				<input @focus="InputFocus" @blur="InputBlur" :adjust-position="false" class="solid-bottom" maxlength="300"
-				 cursor-spacing="10" v-model="replyForm.info"></input>
+				<input  :adjust-position="true" class="solid-bottom "  maxlength="300"
+				cursor-spacing="500rpx"  v-model="replyForm.info"></input>
 
 				<button :adjust-position="true" class="cu-btn bg-green shadow-blur" @click="subreply()">发送</button>
 			</view>
@@ -95,7 +95,8 @@
 					postId: this.$global.postId,
 					info: ''
 				},
-				replyList: []
+				replyList: [],
+				
 			};
 		},
 		methods: {
@@ -104,6 +105,7 @@
 					id: this.$global.postId
 				}).then(res => {
 					if (res.status === 0) {
+						console.log(res)
 						this.data = res.data
 						if (res.data.post.image == null) {
 							this.hasImg = false
@@ -204,12 +206,6 @@
 					}
 				})
 
-			},
-			InputFocus(e) {
-				this.InputBottom = e.detail.height
-			},
-			InputBlur(e) {
-				this.InputBottom = 0
 			},
 			resetForm() {
 				this.replyForm = {

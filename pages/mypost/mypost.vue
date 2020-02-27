@@ -14,6 +14,7 @@
 												{{item.post.createTime}}
 											</view>
 										</view>
+										<text  style="font-size:125%; z-index: 100;" class=" padding-lr  cuIcon-delete text-gray" @click.stop="delPost(item.post.id)"></text>
 									</view>
 								</view>
 								<view @click="goToInfo(item.post.id)">
@@ -42,7 +43,7 @@
 				
 				<view class=" margin-top" v-else>
 					<view class="kong">
-						<image src="../../static/images/空帖子.png"  style="height: 1100upx; "></image>
+						<image src="../../static/images/空帖子.png" style="height: 1100upx;"></image>
 					</view>
 						
 						
@@ -86,9 +87,19 @@
 					this.requestData()
 				})
 			},
-			perfect: function(postId) {
-				this.$api.praise(postId).then((res) => {
-					this.requestData()
+			delPost:function(postId){
+				
+				uni.showModal({
+					content: '确认删除该帖子',
+					cancelText: '取消',
+					confirmText: '删除',
+					success: res => {
+						if (res.confirm) {
+							this.$api.removePost(postId).then((res) => {
+								this.requestData()
+							})
+						}
+					}
 				})
 			}
 		},

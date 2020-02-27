@@ -166,7 +166,7 @@
 					</view>
 					</van-popup>
 					<view class="margin-top">
-						<van-button type="primary" size="large" @click="subInfo()">发布</van-button>
+						<van-button type="primary" size="large" @click="subInfo() ">发布</van-button>
 					</view>
 					
 				</van-cell-group>
@@ -258,7 +258,7 @@
 							this.$api.uploadImage(tempFilePaths[i]).then(resp => {
 										let res = JSON.parse(resp)
 										if (res.status === 0) {
-											this.imgList.push("http://39.108.220.199:8000/img/" + res.data)
+											this.imgList.push("http://localhost:8000/img/" + res.data)
 										} 
 							})
 
