@@ -74,6 +74,7 @@
 </template>
 
 <script>
+	
 	export default {
 		data() {
 			return {
@@ -199,12 +200,20 @@
 				this.show = false
 			},
 			subreply: function(e) { //提交回复内容的方法
+			if(this.replyForm.info===""){
+				uni.showToast({
+					title: "回复消息不能为空",
+					icon: "none"
+				});
+			}else{
 				this.$api.addReply(this.replyForm).then(res => {
 					if (res.status === 0) {
 						this.requestReply()
 						this.resetForm()
 					}
 				})
+			}
+
 
 			},
 			resetForm() {
@@ -215,7 +224,6 @@
 					info: ''
 				}
 			}
-
 
 		},
 		created() {

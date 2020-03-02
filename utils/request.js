@@ -1,6 +1,7 @@
 const request = {}
 const headers = {}
-const baseUrl = "https://xyzliu.cn:8000"
+// const baseUrl = "https://xyzliu.cn:8000"
+const baseUrl = "http://localhost:8000"
 //39.108.220.199
 let cookie = ''
 

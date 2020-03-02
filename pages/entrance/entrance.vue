@@ -5,6 +5,7 @@
 		</view>
 	</view>
 	<view class="padding" v-else>
+		
 		<button class="cu-btn block bg-blue margin-tb-sm lg" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">获取用户基本信息</button>
 	</view>
 </template>
@@ -25,11 +26,9 @@
 							sex:user_info.gender,
 							status:2
 						}).then((res) =>{
-							if(res.status===0){
-								wx.navigateTo({
-									url:'../perfect/perfect'
-								})		
-							}
+							uni.switchTab({
+								url: "/pages/index/index"
+							})
 						
 						})	
 			}

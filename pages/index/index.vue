@@ -222,11 +222,11 @@
 				if(res.data.status == 2){
 					this.userstatus=true
 				}
-				else{
+				else if(res.data.status==3){
+					this.userstatus=true
+				}else{
 					this.userstatus=false
 				}
-				
-				
 			})
 		},
 

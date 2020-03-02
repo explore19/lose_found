@@ -2,12 +2,11 @@
 	<view class="">
 		<view class="user_info">
 			<view class="cu-avatar xl round margin-left" id="user_img" :style="'background-image:url('+head_portrait+');'"  ></view>
-			<view class="nick_name">
-				{{name}}
+		
+			<view class="nick_name text-xl" >
+				{{name?name:"未登录"}}
 			</view>
-			<view class="sno">
-				学号：{{sno}}
-			</view>
+			
 		</view>
 	
 	
@@ -46,6 +45,7 @@
 	export default {
 		data() {
 		return{
+			UserStatus:"",
 			name:"",
 			sno:"",
 			head_portrait:"",
@@ -66,6 +66,7 @@
 			requestData(){
 				this.$api.getUserInfo().then(res =>{
 					console.log(res)
+					this.UserStatus=res.data.status
 					this.name=res.data.nickName
 					this.sno = res.data.sno
 					this.head_portrait=res.data.headPortrait
@@ -76,6 +77,7 @@
 					url:"../my_reply/my_reply"
 				})
 			},
+		
 		feedback(){
 			wx.navigateTo({
 				url:"../feedback/feedback"
