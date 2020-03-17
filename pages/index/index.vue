@@ -16,7 +16,7 @@
 			<van-tabs @change="onTabChange" swipeable="true">
 				<van-tab title="失物寻物">
 					<view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
-						<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
+						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
 						<view style="border: #F0FFF0">
@@ -62,7 +62,7 @@
 				</van-tab>
 				<van-tab title="拾物寻主">
 					<view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
-						<van-cell title="完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
+						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
@@ -149,9 +149,8 @@
 				})
 			},
 			goToperfect: function() { //用来跳转到信息完善界面
-				uni.navigateTo({
-					 url: "/pages/perfect/perfect"
-
+				uni.reLaunch({
+					url: '../user/user',
 				})
 			},
 			perfect: function(postId) {

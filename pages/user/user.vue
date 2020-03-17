@@ -1,9 +1,14 @@
 <template>
 	<view class="">
 		<view class="user_info">
-			<view class="cu-avatar xl round margin-left" id="user_img" :style="'background-image:url('+head_portrait+');'"  ></view>
-		
-			<view class="nick_name text-xl" >
+			<view class="cu-avatar xl round " id="user_img" :style="'background-image:url('+head_portrait+');'"  ></view>
+			<view class="margin-top" v-if="UserStatus===3">
+				 <button class="cu-btn line-olive round" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" >
+		    	立即登录
+		    </button>
+			</view>
+		   
+			<view class="nick_name text-xl" v-else>
 				{{name?name:"未登录"}}
 			</view>
 			
@@ -53,6 +58,21 @@
 
 			},
 		methods: {
+			bindGetUserInfo(e){
+				console.log(e.mp.detail.userInfo)
+						let user_info = e.mp.detail.userInfo
+						this.$api.updateInfo({
+							headPortrait:user_info.avatarUrl,
+							nickName:user_info.nickName,
+							sex:user_info.gender,
+							status:2
+						}).then((res) =>{
+							uni.switchTab({
+								url: "/pages/user_details/user_details"
+							})
+						
+						})	
+			},
 			jump:function(){
 				wx.navigateTo({
 					url:"../user_details/user_details"

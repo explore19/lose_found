@@ -323,6 +323,23 @@
 				
 				
 				this.$api.addPost(this.form).then(res => {
+					console.log(res)
+					if(res.status===1){
+						wx.showModal({
+						        title: '提示',
+								content:"请先登录完善信息在进行帖子发布！",
+								showCancel:true,
+								cancelText:"取消",
+						        confirmText:'立即登录',
+						        success(res){
+								  if(res.confirm){
+						          uni.reLaunch({
+						          	url: '../user/user',
+						          })
+						          }
+						        }
+						      })
+					}else{
 						this.form = ""
 					wx.showModal({
 					        title: '提示',
@@ -333,17 +350,14 @@
 							  if(res.confirm){
 					           uni.reLaunch({
 					           	url: '../index/index',
-								// success(e){
-								// 	var page = getCurrentPages().pop();
-								// 	if (page == undefined || page == null) return;
-								// 	console.log(page)
-								// }
 					           })
 					          }
 					        }
 					      })
+					}
+						
 				}).catch(resp => {
-　　　　						 uni.showToast({title:"修改失败，请稍后再试!", icon:"none"});
+　　　　						 uni.showToast({title:"发布失败，请稍后再试!", icon:"none"});
 　					　});
 				}
 				

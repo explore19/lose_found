@@ -97,26 +97,32 @@
 					info: ''
 				},
 				replyList: [],
+				userStatus:""
 				
 			};
 		},
 		methods: {
 			requestData() {
+				let result
+				this.$api.getAllType().then(res => {
+					result = res.data
+					})
+					
 				this.$api.getPost({
 					id: this.$global.postId
 				}).then(res => {
 					if (res.status === 0) {
-						console.log(res)
 						this.data = res.data
-						if (res.data.post.image == null) {
+						if(this.data.post.type != null){
+							this.data.post.type = result[res.data.post.type].name
+						}
+						if (this.data.post.image === null) {
 							this.hasImg = false
 						} else {
 							this.hasImg = true
-							this.image = res.data.post.image.split("&&&")
+							this.image = this.data.post.image.split("&&&")
 						}
-
-
-					}
+					}0
 				})
 
 
@@ -128,7 +134,6 @@
 					if (res.status == 0) {
 						let replyList = []
 						this.recursionReply(res.data, replyList)
-						console.log(replyList)
 						this.replyList = replyList
 					}
 
@@ -200,7 +205,14 @@
 				this.show = false
 			},
 			subreply: function(e) { //提交回复内容的方法
-			if(this.replyForm.info===""){
+			
+			if(this.userStatus == 3){
+				uni.showToast({
+					title: "请先登录再发表回复！",
+					icon: "none"
+				});
+			}
+			else if(this.replyForm.info===""){
 				uni.showToast({
 					title: "回复消息不能为空",
 					icon: "none"
@@ -229,6 +241,11 @@
 		created() {
 			this.requestData()
 			this.requestReply()
+		
+			this.$api.getUserInfo().then(res =>{
+				this.userStatus = res.data.status
+				
+			})
 		}
 
 	}
