@@ -44,6 +44,7 @@ VantComponent({
                         // Use background instead of backgroundColor to make linear-gradient work
                         style += `background: ${color};`;
                     }
+										
                     // hide border when color is linear-gradient
                     if (color.indexOf('gradient') !== -1) {
                         style += 'border: 0;';

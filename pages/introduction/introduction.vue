@@ -26,7 +26,7 @@
 					</view>
 				</view>
 			</view>
-
+			
 
 			<view class="text-gray text-sm text-right padding">
 				<text style="font-size:130%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
@@ -41,15 +41,16 @@
 					<view class="cu-avatar round " :style="'background-image:url('+item.replyUserPortrait+');'"></view>
 					<view class="content">
 						<view class="text-grey">{{item.replyUserName}}</view>
-						<view @click="otherReply(item.id)" class=" text-content text-df">
-							{{item.info}}
-						</view>
+							<view hover-class="wsui-btn__hover_list" @click="otherReply(item.id, item.replyUserName)" class=" text-content text-df">
+								{{item.info}}
+							</view>
+							
 						<view class="margin-top-sm  text-sm" v-for="(item2,index2) in item.replys" :key="index2">
-							<view class="flex">
+							<view hover-class="wsui-btn__hover_list" class="flex">
 								<!-- <view class="cu-avatar round sm" :style="'background-image:url('+item2.replyUserPortrait+');'"></view> -->
 								<view class=" text-purple margin-lr-ms" v-if="item.id==item2.reply.replyId">{{item2.nickName}}:</view>
-								<view class="margin-lr-ms" v-if="item.id!=item2.reply.replyId"><text class="text-purple margin-lr-ms">{{item2.nickName}}</text>回复<text class="text-purple margin-lr-ms">{{item2.replyedUserNickName}}</text>:</view>
-								<view @click="otherReply(item2.reply.id)" class="flex-sub">{{item2.reply.info}}</view>
+								<view  class="margin-lr-ms" v-if="item.id!=item2.reply.replyId"><text class="text-purple margin-lr-ms">{{item2.nickName}}</text>回复 <text class="text-purple margin-lr-ms">{{item2.replyedUserNickName}}</text>:</view>
+								<view @click="otherReply(item2.reply.id, item2.nickName)" class="flex-sub">{{item2.reply.info}}</view>
 							</view>
 						</view>
 						<view class="margin-top-sm flex justify-between">
@@ -64,7 +65,7 @@
 			<view class="cu-bar input reply">
 				<view class="cu-avatar round" :style="'background-image:url('+data.headPortrait+');'"></view>
 
-				<input  :adjust-position="true" class="solid-bottom "  maxlength="300"
+				<input id="input1"  :adjust-position="true" class="solid-bottom "  maxlength="300" :placeholder="placeholderText"
 				cursor-spacing="500rpx"  v-model="replyForm.info"></input>
 
 				<button :adjust-position="true" class="cu-btn bg-green shadow-blur" @click="subreply()">发送</button>
@@ -97,7 +98,8 @@
 					info: ''
 				},
 				replyList: [],
-				userStatus:""
+				userStatus:"", 
+				placeholderText: "说点什么吧..."
 				
 			};
 		},
@@ -190,11 +192,13 @@
 					}
 				})
 			},
-			otherReply: function(replyId) { //回复消息的方法
+			otherReply: function(replyId, replyUsername) { //回复消息的方法
 				console.log(replyId)
+				console.log(replyUsername)
 				this.show = true
 				this.replyForm.replyId = replyId
 				this.replyForm.type = 1
+				this.placeholderText = "回复: " + replyUsername
 			},
 			postReply: function() {
 				this.show = true
@@ -210,6 +214,7 @@
 				uni.showToast({
 					title: "请先登录再发表回复！",
 					icon: "none"
+					
 				});
 			}
 			else if(this.replyForm.info===""){
@@ -252,6 +257,11 @@
 </script>
 
 <style>
+	.wsui-btn__hover_list {
+	    opacity: 0.9;
+	    background: #f7f7f7;
+	}
+	
 	.reply {
 		position: fixed;
 		bottom: 0;
