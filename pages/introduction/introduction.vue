@@ -24,6 +24,9 @@
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg">
 					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
 					</view>
+					<!-- <view v-for="(item,index) in image" :key="index">
+						<image :src="item" mode="aspectFit"></image>
+					</view> -->
 				</view>
 			</view>
 			
