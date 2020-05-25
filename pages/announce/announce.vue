@@ -7,11 +7,11 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">失物名称</view>
-						<input v-model="form.name" name="name"  style="text-align: right;"></input>
+						<input v-model="form.name" name="name"  style="text-align: right;" placeholder="例如: 一卡通(必填)"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">丢失地点</view>
-						<input v-model="form.lostPlace" name="lostplace" style="text-align: right;"></input>
+						<input v-model="form.lostPlace" name="lostplace" style="text-align: right;" placeholder="例如: 中央食堂(选填) "></input>
 					</view>
 
 					<view class="cu-form-group ">
@@ -25,7 +25,7 @@
 
 					<view class="cu-form-group">
 						<view class="title">时间选择</view>
-						<picker mode="time" v-model="time" start="09:01" end="21:01" @change="TimeChange">
+						<picker mode="time" v-model="time" start="00:00" end="23:59" @change="TimeChange">
 							<view class="picker">
 								{{time}}
 							</view>
@@ -33,7 +33,7 @@
 					</view>
 					<view class="cu-form-group">
 						<view class="title">日期选择</view>
-						<picker mode="date" v-model="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+						<picker mode="date" v-model="date" start="2015-09-01" end="2100-01-10" @change="DateChange">
 							<view class="picker">
 								{{date}}
 							</view>
@@ -43,16 +43,17 @@
 
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input v-model="form.contact" name="contact" style="text-align: right;"></input>
+						<input v-model="form.contact" name="contact" style="text-align: right;" placeholder="(选填)"></input>
 					</view>
 
 					<view class="cu-form-group">
 						<view class="title">QQ号</view>
-						<input v-model="form.QQ" name="QQ" style="text-align: right;"></input>
+						<input v-model="form.QQ" name="QQ" style="text-align: right;" placeholder="(必填)"></input>
 					</view>
 					<view class="cu-form-group align-start">
 						<view class="title">失物详情</view>
-						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput"  name="details"></textarea>
+						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput"  name="details" 
+						placeholder="(必填, 字数大于5)"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -94,11 +95,11 @@
 
 					<view class="cu-form-group margin-top">
 						<view class="title">拾物名称</view>
-						<input v-model="form.name" name="name"  style="text-align: right;"></input>
+						<input v-model="form.name" name="name"  style="text-align: right;" placeholder="例如: 一卡通(必填)"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">拾到地点</view>
-						<input v-model="form.lostPlace" name="lostPlace" style="text-align: right;"></input>
+						<input v-model="form.lostPlace" name="lostPlace" style="text-align: right;" placeholder="例如: 中央食堂(选填) "></input>
 					</view>
 					<view class="cu-form-group ">
 						<view class="title">物品类型</view>
@@ -112,15 +113,15 @@
 
 					<view class="cu-form-group">
 						<view class="title">时间选择</view>
-						<picker mode="time" v-model="time" start="09:01" end="21:01" @change="TimeChange">
+						<picker mode="time" v-model="time" start="00:00" end="23:59" @change="TimeChange">
 							<view class="picker">
 								{{time}}
 							</view>
 						</picker>
 					</view>
 					<view class="cu-form-group">
-						<view class="title">日期选择</view>
-						<picker mode="date" v-model="date" start="2015-09-01" end="2020-09-01" @change="DateChange">
+						<view class="title">日期选择</view> 
+						<picker mode="date" v-model="date" start="2015-09-01" end="2100-01-10" @change="DateChange">
 							<view class="picker">
 								{{date}}
 							</view>
@@ -130,18 +131,17 @@
 
 					<view class="cu-form-group">
 						<view class="title">手机号码</view>
-						<input name="contact" v-model="form.contact"  style="text-align: right;"></input>
-
+						<input name="contact" v-model="form.contact"  style="text-align: right;" placeholder="(选填)"></input>
 					</view>
 					<view class="cu-form-group">
 						<view class="title">QQ号</view>
-						<input v-model="form.QQ" name="QQ" style="text-align: right;"></input>
+						<input v-model="form.QQ" name="QQ" style="text-align: right;" placeholder="(必填)"></input>
 					</view>
 
 
 					<view class="cu-form-group align-start">
 						<view class="title">拾物详情</view>
-						<textarea maxlength="-1" :disabled="modalName!=null"  v-model="form.details" @input="textareaBInput"></textarea>
+						<textarea maxlength="-1" :disabled="modalName!=null"  v-model="form.details" @input="textareaBInput" placeholder="(必填, 字数大于5)"></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -182,12 +182,14 @@
 
 <script>
 	var graceChecker = require("../../utils/graceChecker.js");
+	var dateUtil = require("../../utils/dateUtil.js");
+	
 	export default {
 		data() {
 			return {
 				picker: [],
-				time: '12:01',
-				date: '2018-12-25',
+				time: dateUtil.getTime(),
+				date: dateUtil.getDate(),
 				textareaAValue: '',
 				imgList: [],
 				pickerIndex: 0,
@@ -197,7 +199,7 @@
 					type: 1,
 					loseTime: '',
 					details: '',
-					contact: '',
+					QQ: '',
 					image: [],
 					postType: 0,
 					checkRes:false
@@ -220,10 +222,10 @@
 						errorMsg: "详情不能少于5个字，不能大于60字"
 					},
 					{
-						name: "contact",
+						name: "QQ",
 						checkType: "string",
-						checkRule: "11,11",
-						errorMsg: "请输入正确的手机号码"
+						checkRule: "5,11",
+						errorMsg: "请输入正确的QQ号"
 					}
 				];
 				var formData = this.form;

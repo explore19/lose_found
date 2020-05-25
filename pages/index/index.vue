@@ -4,59 +4,86 @@
 			<van-search placeholder="请输入搜索关键词" />
 		</view>
 		<view>
-			<swiper class="screen-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
-			 :autoplay="true" interval="5000" duration="500">
-				<swiper-item v-for="(item,index) in rotationChartList" :key="index">
-					<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
-					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
-				</swiper-item>
-			</swiper>
+				<swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
+				 :autoplay="true" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" @change="cardSwiper">
+					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''">
+						<view class="swiper-item">
+							<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
+							<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+						</view>
+					</swiper-item>
+				</swiper>
+				<!-- <swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
+						 :autoplay="true" interval="5000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
+						 indicator-active-color="#0081ff">
+							<swiper-item v-for="(item,index) in swiperList" :key="index" :class="cardCur==index?'cur':''">
+								<view class="swiper-item">
+									<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
+									<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+								
+							</swiper-item>
+						</swiper> -->
 		</view>
-		<view>
+		
+		<view class="content">
+			<load-refresh
+			  ref="loadRefresh"
+			  :heightReduce="10"
+			  :backgroundCover="'#F3F5F5'"
+			  :pageNo="page"
+			  :totalPageNo="totalPageNo" 
+				@loadMore="loadMore" 
+			  @refresh="refresh">
+				<view slot="content-list">
 			<van-tabs @change="onTabChange" swipeable="true">
 				<van-tab title="失物寻物">
 					<view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
-					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
-						<view style="border: #F0FFF0">
-							<view class="cu-card dynamic no-card">
-								<view class="cu-item shadow">
-									<view class="cu-list menu-avatar">
-										<view class="cu-item borderLine">
-											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
-											<view class="content flex-sub">
-												<view>{{item.nickName}}</view>
-												<view class="text-gray text-sm flex justify-between">
-													{{item.post.createTime}}
+					
+					
+						<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
+							<view style="border: #F0FFF0">
+								<view class="cu-card dynamic no-card">
+									<view class="cu-item shadow">
+										<view class="cu-list menu-avatar">
+											<view class="cu-item borderLine">
+												<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
+												<view class="content flex-sub">
+													<view>{{item.nickName}}</view>
+													<view class="text-gray text-sm flex justify-between">
+														{{item.post.createTime}}
+													</view>
 												</view>
 											</view>
 										</view>
-									</view>
-									<view @click="goToInfo(item.post.id)">
-										
-										
-											<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
-											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
+										<view @click="goToInfo(item.post.id)">
+											
+											
+												<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'"  v-if="item.post.image!=null">
+												<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
+												</view>
 											</view>
-										</view>
-										<view class="text-content" style="margin: 20upx 30upx 10upx;">
-											物品名称:{{item.post.name}}
-										</view>
-										<view  class="text-content" style="margin: 10upx 30upx;">
-											物品详情:{{item.post.details}}
-										</view>
-										
-										<view class="text-gray text-sm text-right padding">
-											<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-											<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
-											<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+											<view class="text-content" style="margin: 20upx 30upx 10upx;">
+												物品名称:{{item.post.name}}
+											</view>
+											<view  class="text-content" style="margin: 10upx 30upx;">
+												物品详情:{{item.post.details}}
+											</view>
+											
+											<view class="text-gray text-sm text-right padding">
+												<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
+												<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+												<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+											</view>
 										</view>
 									</view>
 								</view>
 							</view>
 						</view>
-					</view>
+					
+					
+					
 					
 					
 				</van-tab>
@@ -106,7 +133,10 @@
 					</view> -->
 				</van-tab>
 			</van-tabs>
+			</view>
+			</load-refresh>
 		</view>
+		
 
 		
 
@@ -117,7 +147,10 @@
 </template>
 
 <script>
-	export default {
+	import loadRefresh from '../../components/load-refresh/load-refresh.vue'
+	
+	export default { 
+		components:{loadRefresh},
 		data() {
 			return {
 				data: [],
@@ -127,16 +160,32 @@
 				rotationChartList: [],
 				page: 1,
 				pageSize: 5,
+				totalPageNo: 0,
 				postType: 0,
 				count: 0,
 				total:0,
 				img:[],
 				userstatus:false,
 				reachbto0:false,
-				reachbto1:false
+				reachbto1:false, 
+				dotStyle:true, 
 			}
 		},
 		methods: {
+			loadMore(){
+				console.log('loadMore')
+				// 请求新数据完成后调用 组件内loadOver()方法
+				// 注意更新当前页码 currPage
+				onReachBottom()
+				this.$refs.loadRefresh.loadOver()
+			},
+			refresh() {
+				this.requestData()
+				console.log('refresh')
+			},
+			cardSwiper(e) {
+				this.cardCur = e.detail.current
+			},
 			focus: function() {
 				uni.navigateTo({
 					url: "/pages/search/search"
@@ -168,7 +217,7 @@
 				}
 				return true
 			},
-			requestData() { //用来重复刷新页面 重复像后端获取数据		
+			requestData() {	//用来重复刷新页面 重复像后端获取数据		
 				this.$api.queryPost({ //用来批量获取
 					page: this.page,
 					pageSize: this.pageSize,
@@ -184,15 +233,11 @@
 							} else {
 								data[i].post.image = null
 							}
-						
 						}
 						this.data = data
 					}
-
-					
 				})
-	
-				
+				this.totalPageNo = this.total%this.pageSize==0?(this.total/this.pageSize):(this.total/this.pageSize+1)
 			},
 			requestRotationChart() {
 				this.$api.getRotationChart(5).then((res) => {
@@ -253,14 +298,27 @@
 						} else {
 							data[i].post.image = null
 						}
-					
 					}
 					this.data = this.data.concat(data)
 				}
 				wx.hideLoading()
-			
 			})
-		}
+		}, 
+		/* onLoad:function(options){
+			this.requestData()
+			setTimeout(function () {
+			            console.log('start pulldown');
+			        }, 1000);
+			        uni.startPullDownRefresh();
+		}, 
+		onPullDownRefresh() {
+		        console.log('refresh');
+						this.requestData()
+		        setTimeout(function () {
+		            uni.stopPullDownRefresh();
+		        }, 1000);
+						
+		    } */
 
 	}
 </script>
