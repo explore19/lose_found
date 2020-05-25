@@ -18,6 +18,7 @@
 <style>
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
+	@import '/wxcomponents/lib/styles/index.wxss';
 	
 	/*每个页面公共css */
 </style>

@@ -107,12 +107,7 @@
 				</van-tab>
 			</van-tabs>
 		</view>
-
-		
-
-
-
-
+		<wux-button block loading type="light">light</wux-button>
 	</view>
 </template>
 
