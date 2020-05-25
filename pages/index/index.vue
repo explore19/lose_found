@@ -138,11 +138,7 @@
 		</view>
 		
 
-		
-
-
-
-
+		<wux-button block loading type="light">light</wux-button>
 	</view>
 </template>
 
@@ -176,7 +172,6 @@
 				console.log('loadMore')
 				// 请求新数据完成后调用 组件内loadOver()方法
 				// 注意更新当前页码 currPage
-				onReachBottom()
 				this.$refs.loadRefresh.loadOver()
 			},
 			refresh() {
