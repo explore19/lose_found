@@ -22,14 +22,14 @@
 				<view v-if="data.post.type" style="margin:10upx 30upx;">物品类型：{{data.post.type}}</view>
 				<view style="margin:10upx 30upx;">详情：{{data.post.details}}</view>
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg">
-					<view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
-					</view>
-					<!-- <view v-for="(item,index) in image" :key="index">
-						<image :src="item" mode="aspectFit"></image>
+					<!-- <view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
 					</view> -->
+					<view :v-if="item != null" class="bg-img" v-for="(item,index) in image" :key="index">
+						<image id="index" :v-if="item != null" :src="item" mode="aspectFill" v-on:click="previewImg(item, index)"></image>
+					</view>
 				</view>
 			</view>
-			
+
 
 			<view class="text-gray text-sm text-right padding">
 				<text style="font-size:130%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
@@ -44,15 +44,16 @@
 					<view class="cu-avatar round " :style="'background-image:url('+item.replyUserPortrait+');'"></view>
 					<view class="content">
 						<view class="text-grey">{{item.replyUserName}}</view>
-							<view hover-class="wsui-btn__hover_list" @click="otherReply(item.id, item.replyUserName)" class=" text-content text-df">
-								{{item.info}}
-							</view>
-							
+						<view hover-class="wsui-btn__hover_list" @click="otherReply(item.id, item.replyUserName)" class=" text-content text-df">
+							{{item.info}}
+						</view>
+
 						<view class="margin-top-sm  text-sm" v-for="(item2,index2) in item.replys" :key="index2">
 							<view hover-class="wsui-btn__hover_list" class="flex">
 								<!-- <view class="cu-avatar round sm" :style="'background-image:url('+item2.replyUserPortrait+');'"></view> -->
 								<view class=" text-purple margin-lr-ms" v-if="item.id==item2.reply.replyId">{{item2.nickName}}:</view>
-								<view  class="margin-lr-ms" v-if="item.id!=item2.reply.replyId"><text class="text-purple margin-lr-ms">{{item2.nickName}}</text>回复 <text class="text-purple margin-lr-ms">{{item2.replyedUserNickName}}</text>:</view>
+								<view class="margin-lr-ms" v-if="item.id!=item2.reply.replyId"><text class="text-purple margin-lr-ms">{{item2.nickName}}</text>回复
+									<text class="text-purple margin-lr-ms">{{item2.replyedUserNickName}}</text>:</view>
 								<view @click="otherReply(item2.reply.id, item2.nickName)" class="flex-sub">{{item2.reply.info}}</view>
 							</view>
 						</view>
@@ -68,8 +69,8 @@
 			<view class="cu-bar input reply">
 				<view class="cu-avatar round" :style="'background-image:url('+data.headPortrait+');'"></view>
 
-				<input id="input1"  :adjust-position="true" class="solid-bottom "  maxlength="300" :placeholder="placeholderText"
-				cursor-spacing="500rpx"  v-model="replyForm.info"></input>
+				<input id="input1" :adjust-position="true" class="solid-bottom " maxlength="300" :placeholder="placeholderText"
+				 cursor-spacing="500rpx" v-model="replyForm.info"></input>
 
 				<button :adjust-position="true" class="cu-btn bg-green shadow-blur" @click="subreply()">发送</button>
 			</view>
@@ -78,7 +79,7 @@
 </template>
 
 <script>
-	
+
 	export default {
 		data() {
 			return {
@@ -101,24 +102,41 @@
 					info: ''
 				},
 				replyList: [],
-				userStatus:"", 
+				userStatus: "",
 				placeholderText: "说点什么吧..."
-				
+
 			};
 		},
 		methods: {
+			previewImg: function(item, index) {
+				console.log("preview success")
+				uni.previewImage({
+					urls: this.image,
+					current: index, 
+					longPressActions: {
+						itemList: ['发送给朋友', '保存图片', '收藏'],
+						success: function() {
+							console.log('选中了第张图片');
+						},
+						fail: function() {
+							console.log("预览错误");
+						}
+					}
+				})
+			},
+
 			requestData() {
 				let result
 				this.$api.getAllType().then(res => {
 					result = res.data
-					})
-					
+				})
+
 				this.$api.getPost({
 					id: this.$global.postId
 				}).then(res => {
 					if (res.status === 0) {
 						this.data = res.data
-						if(this.data.post.type != null){
+						if (this.data.post.type != null) {
 							this.data.post.type = result[res.data.post.type].name
 						}
 						if (this.data.post.image === null) {
@@ -127,10 +145,9 @@
 							this.hasImg = true
 							this.image = this.data.post.image.split("&&&")
 						}
-					}0
+					}
+					0
 				})
-
-
 			},
 			requestReply() {
 				this.$api.queryPostReply({ //根据帖子的id查询所有的回复
@@ -183,13 +200,13 @@
 				}
 
 			},
-			perfect: function(postId,isPraise) {
+			perfect: function(postId, isPraise) {
 				this.$api.praise(postId).then((res) => {
-					if(res.status===0){
-						this.data.isPraise=!isPraise
-						if(isPraise){
+					if (res.status === 0) {
+						this.data.isPraise = !isPraise
+						if (isPraise) {
 							this.data.praiseNumber--
-						}else{
+						} else {
 							this.data.praiseNumber++
 						}
 					}
@@ -212,27 +229,26 @@
 				this.show = false
 			},
 			subreply: function(e) { //提交回复内容的方法
-			
-			if(this.userStatus == 3){
-				uni.showToast({
-					title: "请先登录再发表回复！",
-					icon: "none"
-					
-				});
-			}
-			else if(this.replyForm.info===""){
-				uni.showToast({
-					title: "回复消息不能为空",
-					icon: "none"
-				});
-			}else{
-				this.$api.addReply(this.replyForm).then(res => {
-					if (res.status === 0) {
-						this.requestReply()
-						this.resetForm()
-					}
-				})
-			}
+
+				if (this.userStatus == 3) {
+					uni.showToast({
+						title: "请先登录再发表回复！",
+						icon: "none"
+
+					});
+				} else if (this.replyForm.info === "") {
+					uni.showToast({
+						title: "回复消息不能为空",
+						icon: "none"
+					});
+				} else {
+					this.$api.addReply(this.replyForm).then(res => {
+						if (res.status === 0) {
+							this.requestReply()
+							this.resetForm()
+						}
+					})
+				}
 
 
 			},
@@ -249,10 +265,10 @@
 		created() {
 			this.requestData()
 			this.requestReply()
-		
-			this.$api.getUserInfo().then(res =>{
+
+			this.$api.getUserInfo().then(res => {
 				this.userStatus = res.data.status
-				
+
 			})
 		}
 
@@ -261,10 +277,10 @@
 
 <style>
 	.wsui-btn__hover_list {
-	    opacity: 0.9;
-	    background: #f7f7f7;
+		opacity: 0.9;
+		background: #f7f7f7;
 	}
-	
+
 	.reply {
 		position: fixed;
 		bottom: 0;
