@@ -21,12 +21,15 @@
 				this.$api.login(res.code).then((res)=>{
 					if(res.status===0){
 						this.$api.getUserInfo().then((res)=>{
-							if(res.status===0){
-								let user = res.data
 							uni.switchTab({
 										url: "/pages/index/index"
 									})
-							}
+							// if(res.status===0){
+							// 	let user = res.data
+							// uni.switchTab({
+							// 			url: "/pages/index/index"
+							// 		})
+							// }
 						})
 					
 					}

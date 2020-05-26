@@ -61,7 +61,7 @@
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
 					
-						<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
+						<view v-for="(item,index) in data" :key="index" style="margin-top: 15upx;" >
 							<view style="border: #F0FFF0">
 								<view class="cu-card dynamic no-card">
 									<view class="cu-item shadow">
@@ -86,7 +86,7 @@
 													<view class="text-gray text-sm flex justify-between">
 														{{item.post.createTime}}
 													</view>
-												</view>
+
 											</view>
 										</view>
 										<view @click="goToInfo(item.post.id)">
@@ -106,24 +106,25 @@
 											
 											<view class="text-gray text-sm text-right padding">
 												<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-												<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+												<text style="font-size:125%" @click.stop="perfect(item.post.id,index)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
 												<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 												
 											</view>
+											</view>
 										</view>
+										
 									</view>
 								</view>
 							</view>
 						</view>
-					
-					
 				</van-tab>
+				
+				
 				<van-tab title="拾物寻主">
 					<view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
-					
-					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
+					<view v-for="(item,index) in data" :key="index" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
@@ -159,8 +160,8 @@
 											物品详情:{{item.post.details}}
 										</view>
 										<view class="text-gray text-sm text-right padding">
-											<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-											<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
+											<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs" >{{item.post.browsePoints}}</text>
+											<text style="font-size:125%" @click.stop="perfect(item.post.id,index)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') " >{{item.praiseNumber}}</text>
 											<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
 										</view>
 									</view>
@@ -265,9 +266,15 @@
 					url: '../user/user',
 				})
 			},
-			perfect: function(postId) {
+			perfect: function(postId,index) {
 				this.$api.praise(postId).then((res) => {
-					this.requestData()
+					console.log(this.data)
+					this.data[index].isPraise = !this.data[index].isPraise
+					if(this.data[index].isPraise){
+						this.data[index].praiseNumber++
+					}else{
+						this.data[index].praiseNumber--
+					}	
 				})
 			},
 			isBottom() {
@@ -282,7 +289,7 @@
 			},
 			requestData() {	//用来重复刷新页面 重复像后端获取数据		
 				this.$api.queryPost({ //用来批量获取
-					page: this.page,
+					page: 1,
 					pageSize: this.pageSize,
 					postType: this.postType
 				}).then(res => {
