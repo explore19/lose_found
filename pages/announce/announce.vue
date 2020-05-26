@@ -53,7 +53,7 @@
 					<view class="cu-form-group align-start">
 						<view class="title">失物详情</view>
 						<textarea maxlength="-1" v-model="form.details" @input="textareaAInput"  name="details" 
-						placeholder="(必填, 字数大于5)"></textarea>
+						></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
@@ -139,9 +139,10 @@
 					</view>
 
 
+
 					<view class="cu-form-group align-start">
 						<view class="title">拾物详情</view>
-						<textarea maxlength="-1" :disabled="modalName!=null"  v-model="form.details" @input="textareaBInput" placeholder="(必填, 字数大于5)"></textarea>
+						<textarea maxlength="-1" :disabled="modalName!=null"  v-model="form.details" @input="textareaBInput" ></textarea>
 					</view>
 					<view class="cu-bar bg-white margin-top">
 						<view class="action">
