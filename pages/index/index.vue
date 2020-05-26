@@ -10,7 +10,7 @@
 		<wux-fab-button
 			position="bottomRight" 
 			theme="balanced" 
-			direction="horizontal" 
+			direction="vertical" 
 			spaceBetween="20" 
 			sAngle="180" 
 			eAngle="270" 

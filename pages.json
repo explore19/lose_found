@@ -125,7 +125,10 @@
 			// "van-skeleton": "/wxcomponents/vant-weapp/dist/skeleton/index"
 
 			"wux-button":"/wxcomponents/lib/button/index",
-			"wux-fab-button":"/wxcomponents/lib/fab-button/index"
+			"wux-fab-button":"/wxcomponents/lib/fab-button/index",
+			"wux-wing-blank":"/wxcomponents/lib/white-space/index",
+			"wux-white-space":"/wxcomponents/lib/wing-blank/index"
+			
 		}
 
 	},

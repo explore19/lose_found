@@ -19,6 +19,7 @@
 <style lang="scss">
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
+	// 导入wux-weapp的包内置样式
 	@import '/wxcomponents/lib/styles/index.wxss';
 	@import "cool/ui/static/css/index.scss";
 	
