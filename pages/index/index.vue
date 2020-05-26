@@ -8,6 +8,21 @@
 		  <cl-message ref="message" ></cl-message>
 		</view>
 		
+		<!--加的悬浮菜单栏-->
+		<wux-fab-button
+			position="bottomRight" 
+			theme="balanced" 
+			direction="circle" 
+			reverse="false"
+			spaceBetween="20" 
+			sAngle="180" 
+			eAngle="270" 
+			v-bind:buttons="button" 
+			@change="" 
+			@click="onClick()" 
+			v-bind:contact="onContact" 
+			v-bind:getuserinfo="onGotUserInfo" 
+		/>
 		<view>
 				<swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
 				 :autoplay="true" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" @change="cardSwiper">
@@ -141,9 +156,6 @@
 			</view>
 			</load-refresh>
 		</view>
-		
-
-		<wux-button block loading type="light">light</wux-button>
 	</view>
 </template>
 
@@ -171,6 +183,23 @@
 				reachbto0:false,
 				reachbto1:false, 
 				dotStyle:true, 
+				button:[{
+						// opnetype 是可以调用小程序自带的api
+					    //openType: 'getUserInfo',
+					    label: '消息'
+					    
+					},
+					{
+					    //openType: 'share',
+					    label: '发布'
+					    //icon,
+					},
+					{
+					    //openType: 'contact',
+					    label: '用户'
+					    //icon,
+					},     
+				]
 			}
 		},
 		methods: {
@@ -272,6 +301,37 @@
 			onTabChange(e) {
 				this.postType = e.detail.name
 				this.requestData()
+			},
+			// 悬浮菜单的调用的方法
+			onClick:function(e){
+							 console.log("click it ")
+							 console.log(e)
+							 let index = e.detail.index
+							 // 获得点击按钮的索引
+							 console.log(index)
+							 // 判斷跳转到页面
+							 if (index === 0){
+								 uni.switchTab ({
+								 	url:"../message/message",
+									success: (res) => {
+										console.log("")
+									}
+								 })
+							 }else if(index === 1){
+								 uni.switchTab({
+								 	url:"../announce/announce",
+									success: (res) => {
+										console.log("announce")
+									}
+								 })
+							 }else if(index === 2){
+								 uni.switchTab({
+								 	url:"../user/user",
+									success: (res) => {
+										console.log("user")
+									}
+								 })
+							 }
 			}
 		},
 		created() {
