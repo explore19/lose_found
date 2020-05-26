@@ -3,7 +3,9 @@
 		<view @click="focus">
 			<van-search placeholder="请输入搜索关键词" />
 		</view>
-		
+		<view class="demo">
+			<cl-message ref="message" ></cl-message>
+		</view>
 		<!--加的悬浮菜单栏-->
 		<wux-fab-button
 			position="bottomRight" 
@@ -157,6 +159,7 @@
 
 <script>
 	import loadRefresh from '../../components/load-refresh/load-refresh.vue'
+	// import clMessage from '../../cool/ui/components/message/message.vue'
 	
 	export default { 
 		components:{loadRefresh},
@@ -204,6 +207,15 @@
 			}
 		},
 		methods: {
+			onTap() {
+				this.$refs["message"].open({
+						message: "刷新成功", 
+						style: "success",
+						top: "200rpx", 
+						duration: 1000,
+				})
+			}, 
+			
 			loadMore(){
 				console.log('loadMore')
 				// 请求新数据完成后调用 组件内loadOver()方法
@@ -212,7 +224,12 @@
 			},
 			refresh() {
 				this.requestData()
-				console.log('refresh')
+				var that = this
+				setTimeout(function (){
+					that.onTap()
+				},"900");
+				
+				console.log('refresh');
 			},
 			cardSwiper(e) {
 				this.cardCur = e.detail.current

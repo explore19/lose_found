@@ -1,7 +1,10 @@
 <template>
 	<view>
+		<view class="demo">
+		  <cl-message ref="message" ></cl-message>
+		</view>
 		<view v-if="exist">
-			<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
+			<view @click="toPostInfo(item.post.id)" v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 					<view style="border: #F0FFF0">
 						<view class="cu-card dynamic no-card">
 							<view class="cu-item shadow">
@@ -62,6 +65,20 @@
 			}
 		},
 		methods: {
+			toPostInfo(postId){
+				this.$global.setPostId(postId)
+				uni.navigateTo({
+					url: "/pages/introduction/introduction"
+				})
+			},
+			onTap() {
+				this.$refs["message"].open({
+					message: "删除成功", 
+					style: "error",
+					top: "200rpx", 
+					duration: 1000,
+				})
+			}, 
 			requestData(){
 				this.$api.queryMyPost().then(res=>{
 					
@@ -99,7 +116,10 @@
 								this.requestData()
 							})
 						}
-					}
+						this.onTap()
+						
+					},
+					
 				})
 			}
 		},

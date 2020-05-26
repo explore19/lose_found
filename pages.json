@@ -126,7 +126,6 @@
 
 			"wux-button":"/wxcomponents/lib/button/index",
 			"wux-fab-button":"/wxcomponents/lib/fab-button/index"
-
 		}
 
 	},
@@ -152,6 +151,12 @@
 			"selectedIconPath": "static/images/user_fill.png",
 			"text": "我的"
 		}]
-	}
+	}, 
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+				"cl-(.*)": "@/cool/ui/components/$1/$1.vue"
+		}
+	 }
 
 }
