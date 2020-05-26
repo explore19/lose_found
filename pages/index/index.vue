@@ -438,7 +438,6 @@
 	}
 	
 	
-	
 	.padding-tbl {
 	  padding-left: 20rpx;
 	  padding-top: 20rpx;
