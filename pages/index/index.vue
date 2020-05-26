@@ -337,7 +337,7 @@
 				 let index = e.detail.index
 				 // 获得点击按钮
 				 console.log(index)
-				 if (index === 0){user
+				 if (index === 0){
 					 uni.switchTab ({
 					 	url:"../user/user",
 						success: (res) => {

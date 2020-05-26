@@ -1,5 +1,21 @@
 <template>
 	<view class="">
+		
+		<!--悬浮菜单栏-->
+		<wux-fab-button
+			position="bottomRight" 
+			theme="balanced" 
+			direction="vertical" 
+			spaceBetween="20" 
+			sAngle="180" 
+			eAngle="270" 
+			v-bind:buttons="button" 
+			@change="" 
+			@click="onClick()"
+			v-bind:contact="onContact" 
+			v-bind:getuserinfo="onGotUserInfo"
+		/>
+		
 		<view class="user_info">
 			<view class="cu-avatar xl round " id="user_img" :style="'background-image:url('+head_portrait+');'"  ></view>
 			<view class="margin-top" v-if="UserStatus===3">
@@ -51,10 +67,64 @@
 			name:"",
 			sno:"",
 			head_portrait:"",
+			// 悬浮菜单的元素的信息
+			button:[{
+				  label: '用户',
+					icon:"user.png",
+				},
+				{
+				  label: '消息',
+					icon:"message.png"
+				},
+				{
+				  label: '发布',
+					icon:"announce.png"
+				},{
+					label:"首页",
+					icon:"index.png"
+				}     
+			]
 		}
 
 			},
 		methods: {
+			// 悬浮菜单的调用的方法
+			onClick:function(e){
+				 console.log("click it ")
+				 console.log(e)
+				 let index = e.detail.index
+				 // 获得点击按钮
+				 console.log(index)
+				 if (index === 0){
+					 uni.switchTab ({
+					 	url:"../user/user",
+						success: (res) => {
+							console.log("")
+						}
+					 })
+				 }else if(index === 1){
+					 uni.switchTab({
+					 	url:"../message/message",
+							success: (res) => {
+								console.log("announce")
+							}
+					 })
+				 }else if(index === 2){
+					 uni.switchTab({
+					 	url:"../announce/announce",
+							success: (res) => {
+								console.log("user")
+							}
+					 })
+				 }else if(index === 3){
+					 uni.switchTab({
+					 	url:"../index/index",
+							success: (res) => {
+								console.log("index")
+							}
+						})
+				 }
+			},
 			bindGetUserInfo(e){
 				console.log(e.mp.detail.userInfo)
 						let user_info = e.mp.detail.userInfo
