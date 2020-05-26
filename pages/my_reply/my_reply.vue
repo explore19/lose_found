@@ -55,10 +55,10 @@
 				})
 			},
 			toPostInfo(postId){
-			this.$global.setPostId(postId)
-			uni.navigateTo({
-				url: "/pages/introduction/introduction"
-			})
+				this.$global.setPostId(postId)
+				uni.navigateTo({
+					url: "/pages/introduction/introduction"
+				})
 			}
 		},
 		created()  {   //生命周期函数

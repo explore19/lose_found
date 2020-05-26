@@ -15,10 +15,12 @@
 	}
 </script>
 
-<style>
+
+<style lang="scss">
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
 	@import '/wxcomponents/lib/styles/index.wxss';
+	@import "cool/ui/static/css/index.scss";
 	
-	/*每个页面公共css */
 </style>
+

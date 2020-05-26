@@ -2,12 +2,9 @@
 	<view>
 		<view>
 			<view class="cu-form-group">
-
 				<van-dropdown-menu>
 					<van-dropdown-item :value="0" :options="option" @change="searchKeyChange" />
 				</van-dropdown-menu>
-
-
 				<van-field @blur="bindTap()" placeholder="请输入要查询的内容" border="true" clearable />
 				<text class="cuIcon-search margin-lr-ms" @click="onSearch()">
 				</text>
@@ -21,10 +18,8 @@
 					</van-dropdown-menu>
 				</view>
 			</view>
+			
 			<view v-if="exist">
-
-
-
 				<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 					<view style="border: #F0FFF0">
 						<view class="cu-card dynamic isCard?'no-card':''">

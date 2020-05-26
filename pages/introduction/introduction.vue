@@ -1,5 +1,8 @@
 <template>
 	<view class="cu-card dynamic" :class="isCard?'no-card':''">
+		<view class="demo">
+		  <cl-message ref="message" ></cl-message>
+		</view>
 		<view class="cu-item shadow">
 			<view class="cu-list menu-avatar">
 				<view class="cu-item">
@@ -111,6 +114,15 @@
 			};
 		},
 		methods: {
+			onTap() {
+				this.$refs["message"].open({
+						message: "回复成功", 
+						style: "success",
+						top: "200rpx", 
+						duration: 1000,
+				})
+			}, 
+			
 			previewImg: function(item, index) {
 				console.log("preview success")
 				uni.previewImage({
@@ -249,6 +261,11 @@
 						if (res.status === 0) {
 							this.requestReply()
 							this.resetForm()
+							var that = this
+							setTimeout(function (){
+								that.onTap()
+							},"200");
+							
 						}
 					})
 				}
