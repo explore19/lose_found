@@ -11,10 +11,7 @@
 			<view class="nick_name text-xl" v-else>
 				{{name?name:"未登录"}}
 			</view>
-			
 		</view>
-	
-	
 	
 		<view class="cu-list menu sm-border">
 		<view class="cu-item arrow line"  @click="jump" >

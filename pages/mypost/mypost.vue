@@ -3,6 +3,21 @@
 		<view class="demo">
 		  <cl-message ref="message" ></cl-message>
 		</view>
+		<!-- <view class="cl-dialog">
+			
+			<cl-dialog title="提示" :visible.sync="visible">
+				<text
+						>云想衣裳花想容，春风拂槛露华浓。若非群玉山头见，会向瑶台月下逢。</text
+				>
+				<view class="cl-dialog__footer" slot="footer">
+					<view class="cl-confirm__footer">
+						<cl-button type="text">取消</cl-button>
+						<cl-button type="text">确认</cl-button>
+					</view>
+				</view>
+			</cl-dialog>
+		</view> -->
+		
 		<view v-if="exist">
 			<view @click="toPostInfo(item.post.id)" v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 					<view style="border: #F0FFF0">
@@ -61,7 +76,8 @@
 			return {
 				exist:false,
 				data:[],
-				img:[]
+				img:[], 
+				visible: true
 			}
 		},
 		methods: {
@@ -110,14 +126,16 @@
 					content: '确认删除该帖子',
 					cancelText: '取消',
 					confirmText: '删除',
+					confirmColor:'#0081FF',
+					title:'提示',
+					cancelColor: '#000000',
 					success: res => {
 						if (res.confirm) {
 							this.$api.removePost(postId).then((res) => {
 								this.requestData()
+								this.onTap()
 							})
 						}
-						this.onTap()
-						
 					},
 					
 				})

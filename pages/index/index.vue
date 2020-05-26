@@ -16,9 +16,9 @@
 			eAngle="270" 
 			v-bind:buttons="button" 
 			@change="" 
-			@click="onClick()" 
+			@click="onClick()"
 			v-bind:contact="onContact" 
-			v-bind:getuserinfo="onGotUserInfo" 
+			v-bind:getuserinfo="onGotUserInfo"
 		/>
 		
 		<view>
@@ -43,6 +43,8 @@
 						</swiper> -->
 		</view>
 		
+		
+		
 		<view class="content">
 			<load-refresh
 			  ref="loadRefresh"
@@ -59,7 +61,6 @@
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
 					
-					
 						<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;" >
 							<view style="border: #F0FFF0">
 								<view class="cu-card dynamic no-card">
@@ -67,8 +68,21 @@
 										<view class="cu-list menu-avatar">
 											<view class="cu-item borderLine">
 												<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
-												<view class="content flex-sub">
+												<view class="content flex-sub padding-tbl" >
+													
+													<view class="henflex">
 													<view>{{item.nickName}}</view>
+													
+													<!-- <view class="right" v-if="false">
+														<view class="cu-tag round bg-blue sm">官方</view>
+													</view> -->
+													<view class="right">
+														<view class="cu-tag round bg-orange sm">已实名</view>
+													</view>
+													<view class="huati text-orange text-bold">#失物招领#</view>
+													</view>
+													
+													
 													<view class="text-gray text-sm flex justify-between">
 														{{item.post.createTime}}
 													</view>
@@ -89,10 +103,12 @@
 												物品详情:{{item.post.details}}
 											</view>
 											
+											
 											<view class="text-gray text-sm text-right padding">
 												<text  style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
 												<text style="font-size:125%" @click.stop="perfect(item.post.id)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
 												<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+												
 											</view>
 										</view>
 									</view>
@@ -101,14 +117,12 @@
 						</view>
 					
 					
-					
-					
-					
 				</van-tab>
 				<van-tab title="拾物寻主">
 					<view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view>
+					
 					<view v-for="item in data" :key="item.post.id" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
@@ -116,8 +130,16 @@
 									<view class="cu-list menu-avatar">
 										<view class="cu-item borderLine">
 											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
-											<view class="content flex-sub">
+											<view class="content flex-sub padding-tbl">
+												<view class="henflex">
 												<view>{{item.nickName}}</view>
+												
+												<view class="right">
+													<view class="cu-tag round bg-orange sm">已实名</view>
+												</view>
+												<view class="huati text-orange text-bold">#拾物寻主#</view>
+												
+												</view>
 												<view class="text-gray text-sm flex justify-between">
 													{{item.post.createTime}}
 												</view>
@@ -157,9 +179,9 @@
 	</view>
 </template>
 
+
 <script>
 	import loadRefresh from '../../components/load-refresh/load-refresh.vue'
-	// import clMessage from '../../cool/ui/components/message/message.vue'
 	
 	export default { 
 		components:{loadRefresh},
@@ -183,22 +205,16 @@
 				dotStyle:true, 
 				// 悬浮菜单的元素的信息
 				button:[{
-						// opnetype 是可以调用小程序自带的api
-					    //openType: 'getUserInfo',
-					    label: '用户',
-						icon:"user.png"
+					  label: '用户',
+						icon:"user.png",
 					},
 					{
-					    //openType: 'share',
-					    label: '消息',
+					  label: '消息',
 						icon:"message.png"
-					    //icon,
 					},
 					{
-					    //openType: 'contact',
-					    label: '发布',
+					  label: '发布',
 						icon:"announce.png"
-					    //icon,
 					},{
 						label:"首页",
 						icon:"index.png"
@@ -215,7 +231,6 @@
 						duration: 1000,
 				})
 			}, 
-			
 			loadMore(){
 				console.log('loadMore')
 				// 请求新数据完成后调用 组件内loadOver()方法
@@ -409,10 +424,65 @@
 
 	}
 </script>
+
 <style>
 	.borderLine {
 		border-bottom: none;
 	}
+	
+	
+	
+	.padding-tbl {
+	  padding-left: 20rpx;
+	  padding-top: 20rpx;
+		padding-bottom: 20rpx;
+	}
+	.bg-orange {
+	  background-color: #f37b1d;
+	  color: #fff;
+	}
+	.bg-blue {
+		background-color: #0081ff;
+		color: #fff;
+	}
+	.text-bold {
+		font-weight: bold;
+	}
+	.huati {
+		margin-left: auto;
+		margin-right: 20upx;
+	}
+	.right {
+		margin-left: 20upx;
+	}
+	.round {
+		border-radius: 5000rpx;
+	}
+	
+	.cu-tag {
+		font-size: 28rpx;
+		vertical-align: middle;
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		padding: 0rpx 16rpx;
+		height: 48rpx;
+		font-family: Helvetica Neue, Helvetica, sans-serif;
+	}
+	.henflex {
+		display: flex;
+		flex-flow: row;
+	}
+	.cu-tag.sm {
+	  font-size: 20rpx;
+	  padding: 0rpx 12rpx;
+	  height: 42rpx;
+	}
+	
+	
+	
 	.kong{
 		
 		 display:flex;                   

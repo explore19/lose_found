@@ -265,7 +265,6 @@
 							setTimeout(function (){
 								that.onTap()
 							},"200");
-							
 						}
 					})
 				}
