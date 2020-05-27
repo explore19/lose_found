@@ -8,13 +8,12 @@
 		<view class="demo">
 			<cl-message ref="message"></cl-message>
 		</view>
+		
 		<!--加的悬浮菜单栏-->
-		<wux-fab-button position="bottomRight" theme="balanced" direction="horizontal" spaceBetween="20" sAngle="180" eAngle="270"
-		 v-bind:buttons="button" @change="" @click="onClick()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" />
+		<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
+		 v-bind:buttons="button" @click="onClick()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" />
 
 		<view class="content">
-
-
 			<view>
 				<swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
 				 :autoplay="true" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" @change="cardSwiper">
@@ -49,13 +48,12 @@
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
 									<view class="cu-list menu-avatar">
+										
 										<view class="cu-item borderLine">
 											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
 											<view class="content flex-sub padding-tbl">
-
 												<view class="henflex">
 													<view>{{item.nickName}}</view>
-
 													<!-- <view class="right" v-if="false">
 														<view class="cu-tag round bg-blue sm">官方</view>
 													</view> -->
@@ -64,17 +62,13 @@
 													</view>
 													<view class="huati text-orange text-bold">#失物招领#</view>
 												</view>
-
-
 												<view class="text-gray text-sm flex justify-between">
 													{{item.post.createTime}}
 												</view>
-
 											</view>
 										</view>
+										
 										<view @click="goToInfo(item.post.id)">
-
-
 											<view class="text-content" style="margin: 20upx 30upx 10upx;">
 												物品名称: {{item.post.name}}
 											</view>
@@ -85,17 +79,39 @@
 												<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 												</view>
 											</view>
-											
-											
-											<view class="text-gray text-sm text-right padding">
+
+
+											<!-- <view class="text-gray text-sm text-right padding">
 												<text style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
 												<text style="font-size:125%" @click.stop="perfect(item.post.id,index)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
 												<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
-
+											</view> -->
+											<view class="submain">
+												<text class="text-gray_">{{item.praiseNumber}} 喜欢</text>
+											</view>
+											
+											<view class="container text-align:center">
+											     <!-- 分割线 -->
+											  <view class="divLine"></view>
 											</view>
 										</view>
+										<!-- :class="'Heart'+(item.isPraise?'1':'') " -->
+										<view class="row" >
+											<view class="ft">
+											  <image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
+												<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
+												<view class="flex" @click="goToInfo(item.post.id)">
+													<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+													<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
+												</view>
+												<view class="flex">
+													<image class="viewNum" :src="options.viewNum" />
+													<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.post.browsePoints}}</text>
+												</view>
+											</view>
+										</view>
+										
 									</view>
-
 								</view>
 							</view>
 						</view>
@@ -143,13 +159,32 @@
 											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
 											</view>
 										</view>
-
-										<view class="text-gray text-sm text-right padding">
-											<text style="font-size:125%" class="cuIcon-attentionfill margin-lr-xs">{{item.post.browsePoints}}</text>
-											<text style="font-size:125%" @click.stop="perfect(item.post.id,index)" :class="'cuIcon-appreciatefill margin-lr-xs '+(item.isPraise?'text-red':'') ">{{item.praiseNumber}}</text>
-											<text style="font-size:125%" class="cuIcon-messagefill margin-lr-xs">{{item.replyNumber}}</text>
+										
+										<view class="submain">
+											<text class="text-gray_">{{item.praiseNumber}} 喜欢</text>
+										</view>
+										
+										<view class="container text-align:center">
+										     <!-- 分割线 -->
+										  <view class="divLine"></view>
 										</view>
 									</view>
+									
+									<view class="row" >
+										<view class="ft">
+										  <image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
+											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
+											<view class="flex" @click="goToInfo(item.post.id)">
+												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
+											</view>
+											<view class="flex">
+												<image class="viewNum" :src="options.viewNum" />
+												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.post.browsePoints}}</text>
+											</view>
+										</view>
+									</view>
+									
 								</view>
 							</view>
 						</view>
@@ -165,9 +200,30 @@
 
 
 <script>
-
 	export default {
 
+	props: {
+			dataId: {
+				type: String,
+				default: 'hm-dynamic-detail-card'
+			},
+			options: {
+				type: Object,
+				default: function() {
+					return {
+						Heart:
+							'/static/love.png',
+						Heart1:	
+							'/static/love1.png',
+						messagingspeechbub:
+							'/static/hm-dynamic-detail-card/images/img_25823_0_1.png',
+						viewNum:
+							'/static/view.png'
+					};
+				}
+			}
+		},
+		
 		data() {
 			return {
 				data: [],
@@ -205,6 +261,7 @@
 				]
 			}
 		},
+
 		methods: {
 			doMessage() {
 				var that = this
@@ -215,7 +272,9 @@
 						top: "200rpx",
 						duration: 1000,
 					})
-				}, "900");
+				}, 50);
+				
+				
 			},
 			cardSwiper(e) {
 				this.cardCur = e.detail.current
@@ -259,7 +318,7 @@
 				return true
 			},
 			requestData() { //用来重复刷新页面 重复像后端获取数据		
-			this.page = 1
+				this.page = 1
 				this.$api.queryPost({ //用来批量获取
 					page: this.page,
 					pageSize: this.pageSize,
@@ -310,7 +369,6 @@
 				// 获得点击按钮
 				console.log(index)
 				if (index === 0) {
-					user
 					uni.switchTab({
 						url: "../user/user",
 						success: (res) => {
@@ -341,6 +399,8 @@
 				}
 			}
 		},
+
+
 		created() {
 			this.requestData()
 			this.requestRotationChart()
@@ -354,7 +414,6 @@
 				}
 			})
 		},
-
 
 		onReachBottom() {
 			console.log("到底了")
@@ -404,52 +463,115 @@
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 				that.doMessage();
-			}, 800);
-
+			}, 1000);
+			
 		}
 
 	}
 </script>
 
 <style>
+	.text-gray_ {
+		color: #8a8a8a;
+	}
+	.space {
+		margin-left: 8rpx;
+		margin-top: 7.35rpx;
+		color: #7d7d7d;
+	}
+	/*分割线样式*/
+	.divLine{
+	 background: #E0E3DA;
+	 width: 90%;
+	 height: 5rpx;
+	 /* display: inline-block; */
+	 margin-left: 39rpx;
+	 margin-top: 13rpx;
+	}
+	.submain {
+	  /* position: relative; */
+	  opacity: 1;
+	  margin-top: 28.3rpx;
+	  margin-left: 32.43rpx;
+/* 	  max-width: 664.86rpx; */
+	  height: 40.54rpx;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  line-height: 40.54rpx;
+	  letter-spacing: 0.5px;
+	  white-space: pre;
+	  color: #222222;
+	  font-size: 28.38rpx;
+	  font-weight: 400;
+			flex: 1;
+	}
+	.row {
+	  position: relative;
+	  align-self: center;
+	  margin-top: 12.16;
+		margin-left: 32.43rpx;
+	  background-color: #ffffff;
+	  width: 656.76rpx;
+	  height: 50rpx;
+	}
+	.ft {
+	  display: flex;
+	  position: relative;
+	  align-items: center;
+	  align-self: center;
+	  flex-direction: row;
+	  justify-content: space-between;
+	  margin-top: 26.35rpx;
+	  width: 658.78rpx;
+	  height: 36.49rpx;
+		background-color: #ffffff;
+	}
+	.Heart {
+	  width: 53.59rpx;
+	  height: 43.49rpx;
+	}
+	.messagingspeechbub {
+	  width: 36.49rpx;
+	  height: 36.49rpx;
+		margin-top: 12.35rpx;
+	}
+	.viewNum {
+	  width: 50.46rpx;
+	  height: 40.35rpx;
+		margin-top: 10.85rpx;
+	}
+	
+	
+	
 	.borderLine {
 		border-bottom: none;
 	}
-
-
 	.padding-tbl {
 		padding-left: 20rpx;
 		padding-top: 20rpx;
 		padding-bottom: 20rpx;
 	}
-
 	.bg-orange {
 		background-color: #f37b1d;
 		color: #fff;
 	}
-
 	.bg-blue {
 		background-color: #0081ff;
 		color: #fff;
 	}
-
 	.text-bold {
 		font-weight: bold;
 	}
-
 	.huati {
 		margin-left: auto;
 		margin-right: 20upx;
 	}
-
 	.right {
 		margin-left: 20upx;
 	}
-
 	.round {
 		border-radius: 5000rpx;
 	}
-
 	.cu-tag {
 		font-size: 28rpx;
 		vertical-align: middle;
@@ -462,22 +584,16 @@
 		height: 48rpx;
 		font-family: Helvetica Neue, Helvetica, sans-serif;
 	}
-
 	.henflex {
 		display: flex;
 		flex-flow: row;
 	}
-
 	.cu-tag.sm {
 		font-size: 20rpx;
 		padding: 0rpx 12rpx;
 		height: 42rpx;
 	}
-
-
-
 	.kong {
-
 		display: flex;
 		justify-content: center;
 		align-items: center;

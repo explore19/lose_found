@@ -1,7 +1,7 @@
 <template>
 	<view class="cu-card dynamic" :class="isCard?'no-card':''">
 		<view class="demo">
-		  <cl-message ref="message" ></cl-message>
+			<cl-message ref="message"></cl-message>
 		</view>
 		<view class="cu-item shadow">
 			<view class="cu-list menu-avatar">
@@ -31,17 +31,48 @@
 						<image id="index" :v-if="item != null" :src="item" mode="aspectFill" v-on:click="previewImg(item, index)"></image>
 					</view>
 				</view>
-			</view>
-
-
-			<view class="text-gray text-sm text-right padding">
-				<text style="font-size:180%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
-				<!-- <like-button style="font-size:180%" @click="perfect(data.post.id,data.isPraise)" :class="'cuIcon-appreciatefill '+(data.isPraise?'text-red':'')"
-				>{{data.praiseNumber}}</like-button> -->
 				
-				<text style="font-size:180%" @click="perfect(data.post.id,data.isPraise)" :class="'cuIcon-appreciatefill '+(data.isPraise?'text-red':'')">{{data.praiseNumber}}</text>
-				<text @click="postReply" style="font-size:180%" class="cuIcon-messagefill margin-lr-xs ">{{data.replyNumber}}</text>
+				<view class="submain">
+					<text class="text-gray_">{{data.praiseNumber}} 喜欢</text>
+				</view>
+				
+				<view class="container text-align:center">
+				     <!-- 分割线 -->
+				  <view class="divLine"></view>
+				</view>
 			</view>
+			
+			<view class="row" >
+				<view class="ft">
+				  <image v-if="!data.isPraise" class="Heart" :src="options.Heart" @click="perfect(data.post.id,data.isPraise)" />
+					<image v-if="data.isPraise" class="Heart" :src="options.Heart1" @click="perfect(data.post.id,data.isPraise)" />
+					<view class="flex">
+						<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+						<text class="text-grey space" style="font-size: 18px; text-align: center;">{{data.replyNumber}}</text>
+					</view>
+					<view class="flex">
+						<image class="viewNum" :src="options.viewNum" />
+						<text class="text-grey space" style="font-size: 18px; text-align: center;">{{data.post.browsePoints}}</text>
+					</view>
+				</view>
+			</view>
+
+
+
+<!-- 			<view class="text-gray text-sm text-right padding">
+				<view class="flex vertical1">
+					<view class="text-gray text-sm">
+						<text style="font-size:180%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
+					</view>
+					<view class="flex text-gray text-sm vertical" @click="perfect(data.post.id,data.isPraise)">
+						<like-button></like-button>
+						<text style="font-size:180%">{{data.praiseNumber}}</text>
+					</view>
+					<view class="text-gray text-sm">
+						<text @click="postReply" style="font-size:180%" class="cuIcon-messagefill margin-lr-xs ">{{data.replyNumber}}</text>
+					</view>
+				</view>
+			</view> -->
 
 
 
@@ -85,8 +116,32 @@
 </template>
 
 <script>
-
+	import likeButton from '@/components/like-button/like-button.vue'
 	export default {
+		components: {
+			likeButton
+		},
+		props: {
+				dataId: {
+					type: String,
+					default: 'hm-dynamic-detail-card'
+				},
+				options: {
+					type: Object,
+					default: function() {
+						return {
+							Heart:
+								'/static/love.png',
+							Heart1:	
+								'/static/love1.png',
+							messagingspeechbub:
+								'/static/hm-dynamic-detail-card/images/img_25823_0_1.png',
+							viewNum:
+								'/static/view.png'
+						};
+					}
+				}
+			},
 		data() {
 			return {
 				hasImg: false,
@@ -116,18 +171,18 @@
 		methods: {
 			onTap() {
 				this.$refs["message"].open({
-						message: "回复成功", 
-						style: "success",
-						top: "200rpx", 
-						duration: 1000,
+					message: "回复成功",
+					style: "success",
+					top: "200rpx",
+					duration: 1000,
 				})
-			}, 
-			
+			},
+
 			previewImg: function(item, index) {
 				console.log("preview success")
 				uni.previewImage({
 					urls: this.image,
-					current: index, 
+					current: index,
 					longPressActions: {
 						itemList: ['发送给朋友', '保存图片', '收藏'],
 						success: function() {
@@ -262,9 +317,9 @@
 							this.requestReply()
 							this.resetForm()
 							var that = this
-							setTimeout(function (){
+							setTimeout(function() {
 								that.onTap()
-							},"200");
+							}, "200");
 						}
 					})
 				}
@@ -295,17 +350,92 @@
 </script>
 
 <style>
+	.text-gray_ {
+			color: #8a8a8a;
+		}
+		.space {
+			margin-left: 8rpx;
+			margin-top: 7.35rpx;
+			color: #7d7d7d;
+		}
+		/*分割线样式*/
+		.divLine{
+		 background: #E0E3DA;
+		 width: 90%;
+		 height: 5rpx;
+		 /* display: inline-block; */
+		 margin-left: 39rpx;
+		 margin-top: 13rpx;
+		}
+		.submain {
+		  /* position: relative; */
+		  opacity: 1;
+		  margin-top: 28.3rpx;
+		  margin-left: 32.43rpx;
+	/* 	  max-width: 664.86rpx; */
+		  height: 40.54rpx;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+		  line-height: 40.54rpx;
+		  letter-spacing: 0.5px;
+		  white-space: pre;
+		  color: #222222;
+		  font-size: 28.38rpx;
+		  font-weight: 400;
+				flex: 1;
+		}
+		.row {
+		  position: relative;
+		  align-self: center;
+		  margin-top: 12.16;
+			margin-left: 32.43rpx;
+		  background-color: #ffffff;
+		  width: 656.76rpx;
+		  height: 50rpx;
+		}
+		.ft {
+		  display: flex;
+		  position: relative;
+		  align-items: center;
+		  align-self: center;
+		  flex-direction: row;
+		  justify-content: space-between;
+		  margin-top: 26.35rpx;
+		  width: 658.78rpx;
+		  height: 36.49rpx;
+			background-color: #ffffff;
+		}
+		.Heart {
+		  width: 53.59rpx;
+		  height: 43.49rpx;
+		}
+		.messagingspeechbub {
+		  width: 36.49rpx;
+		  height: 36.49rpx;
+			margin-top: 12.35rpx;
+		}
+		.viewNum {
+		  width: 50.46rpx;
+		  height: 40.35rpx;
+			margin-top: 10.85rpx;
+		}
+	
+	
+	.vertical1 {
+		align-items: center;
+	}
+	.vertical {
+		vertical-align: center;
+	}
 	.wsui-btn__hover_list {
 		opacity: 0.9;
 		background: #f7f7f7;
 	}
-
 	.reply {
 		position: fixed;
 		bottom: 0;
 		width: 100%;
 	}
-
 	.blank {
 		height: 98rpx;
 	}

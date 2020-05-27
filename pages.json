@@ -39,7 +39,7 @@
 			"path": "pages/user/user",
 			"style": {
 				"usingComponents": {},
-				"navigationBarTitleText": "我的",
+				"navigationBarTitleText": "个人中心",
 				"navigationBarTextStyle": "black",
 				"navigationStyle": "custom"
 			}
@@ -126,7 +126,10 @@
 			// "van-skeleton": "/wxcomponents/vant-weapp/dist/skeleton/index"
 
 			"wux-button":"/wxcomponents/lib/button/index",
-			"wux-fab-button":"/wxcomponents/lib/fab-button/index"
+			"wux-fab-button":"/wxcomponents/lib/fab-button/index",
+			"wux-wing-blank":"/wxcomponents/lib/white-space/index",
+			"wux-white-space":"/wxcomponents/lib/wing-blank/index"
+			
 		}
 
 	},
