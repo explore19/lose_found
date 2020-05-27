@@ -5,7 +5,7 @@
 				<view class="cu-avatar round" :style="'background-image:url('+item.myReply.headPortrait+');'"></view>
 				<view class="content">
 					<view class="text-grey">{{item.myReply.nickName}}</view>
-					<view  @click="otherReply(item.myReply.reply.id)" class=" text-gray text-content text-df">
+					<view  @click="otherReply(item.myReply.reply.id)" class="text-content text-df">
 						{{item.myReply.reply.info}}
 					</view>
 					<view class=" padding-sm radius margin-top-sm  text-sm" style="background: #F1F1F1;">

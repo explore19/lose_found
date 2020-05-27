@@ -9,8 +9,9 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "主页"
-				// "enablePullDownRefresh": true
+				"navigationBarTitleText": "主页",
+				"enablePullDownRefresh": true
+				
 			}
 		},
 		{
