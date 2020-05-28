@@ -10,7 +10,6 @@
 			sAngle="180" 
 			eAngle="270" 
 			v-bind:buttons="button" 
-			@change="" 
 			@click="onClick()"
 			v-bind:contact="onContact" 
 			v-bind:getuserinfo="onGotUserInfo"
@@ -59,11 +58,11 @@
 				data:[],
 				// 悬浮菜单的元素的信息
 				button:[{
-					  label: '用户',
+					  label: '表白',
 						icon:"user.png",
 					},
 					{
-					  label: '消息',
+					  label: '我的发布',
 						icon:"message.png"
 					},
 					{
@@ -104,15 +103,15 @@
 				 // 获得点击按钮
 				 console.log(index)
 				 if (index === 0){
-					 uni.switchTab ({
-					 	url:"../user/user",
+					 uni.reLaunch ({
+					 	url: "../announce/announceConfession",
 						success: (res) => {
 							console.log("")
 						}
 					 })
 				 }else if(index === 1){
-					 uni.switchTab({
-					 	url:"../message/message",
+					 uni.reLaunch({
+					 	url: "../mypost/mypost",
 							success: (res) => {
 								console.log("announce")
 							}

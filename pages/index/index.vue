@@ -335,17 +335,18 @@
 				dotStyle: true,
 				// 悬浮菜单的元素的信息
 				button: [{
-						label: '用户',
+						label: '表白',
 						icon: "user.png",
 					},
 					{
-						label: '消息',
+						label: '我的发布',
 						icon: "message.png"
 					},
 					{
 						label: '发布',
 						icon: "announce.png"
-					}, {
+					}, 
+					{
 						label: "首页",
 						icon: "index.png"
 					}
@@ -472,8 +473,8 @@
 						}
 					})
 				} else if (index === 1) {
-					uni.switchTab({
-						url: "../message/message",
+					uni.navigateTo({
+						url: "../mypost/mypost",
 						success: (res) => {
 							console.log("announce")
 						}

@@ -23,7 +23,7 @@
 								<view class="henflex">
 									<view>{{name}}</view>
 									<view class="huati">
-										<button class="cu-btn lines-black round" @click="subInfo()">发布</button>
+										<button class="cu-btn lines-green round" @click="subInfo()">发布</button>
 									</view>
 								</view>
 							</view>
@@ -111,11 +111,11 @@
 				},
 				// 悬浮菜单的元素的信息
 				button: [{
-						label: '用户',
+						label: '表白',
 						icon: "user.png",
 					},
 					{
-						label: '消息',
+						label: '我的发布',
 						icon: "message.png"
 					},
 					{
@@ -164,14 +164,14 @@
 				console.log(index)
 				if (index === 0) {
 					uni.switchTab({
-						url: "../user/user",
+						url: "../announce/announceConfession",
 						success: (res) => {
 							console.log("")
 						}
 					})
 				} else if (index === 1) {
 					uni.switchTab({
-						url: "../message/message",
+						url: "../mypost/mypost",
 						success: (res) => {
 							console.log("announce")
 						}

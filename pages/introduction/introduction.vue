@@ -6,10 +6,7 @@
 
 		<view class="cu-item shadow">
 			<view class="cu-card dynamic no-card">
-				
 				<view class="cu-item shadow">
-					
-					
 					<view class="cu-list menu-avatar">
 						<view class="cu-item borderLine">
 							<view v-if="data.post.postType == 0 || data.post.postType == 1 || type == 1" class="cu-avatar round lg" :style="'background-image:url('+data.headPortrait+');'"></view>
