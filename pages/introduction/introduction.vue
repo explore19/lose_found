@@ -3,6 +3,7 @@
 		<view class="demo">
 			<cl-message ref="message"></cl-message>
 		</view>
+		
 		<view class="cu-item shadow">
 			<view class="cu-list menu-avatar">
 				<view class="cu-item">
@@ -44,16 +45,16 @@
 			
 			<view class="row" >
 				<view class="ft">
-				  <image v-if="!data.isPraise" class="Heart" :src="options.Heart" @click="perfect(data.post.id,data.isPraise)" />
-					<image v-if="data.isPraise" class="Heart" :src="options.Heart1" @click="perfect(data.post.id,data.isPraise)" />
-					<view class="flex">
-						<image class="messagingspeechbub" :src="options.messagingspeechbub" />
-						<text class="text-grey space" style="font-size: 18px; text-align: center;">{{data.replyNumber}}</text>
-					</view>
 					<view class="flex">
 						<image class="viewNum" :src="options.viewNum" />
 						<text class="text-grey space" style="font-size: 18px; text-align: center;">{{data.post.browsePoints}}</text>
 					</view>
+					<view class="flex">
+						<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+						<text class="text-grey space" style="font-size: 18px; text-align: center;">{{data.replyNumber}}</text>
+					</view>
+				  <image v-if="!data.isPraise" class="Heart" :src="options.Heart" @click="perfect(data.post.id,data.isPraise)" />
+					<image v-if="data.isPraise" class="Heart" :src="options.Heart1" @click="perfect(data.post.id,data.isPraise)" />
 				</view>
 			</view>
 
@@ -101,25 +102,46 @@
 				</view>
 			</view>
 		</view>
+			
+		<!-- <uni-popup ref="popup" :type="type" :animation="true">
+			<view class="popup-content">popup 内容，此示例没有动画效果</view>
+		</uni-popup> -->
+		<uni-popup ref="popupShare" type="share" @change="change">
+			<uni-popup-share title="请选择" @select="select"></uni-popup-share>
+		</uni-popup>
+		
 		<view class="blank">
-
 			<view class="cu-bar input reply">
 				<view class="cu-avatar round" :style="'background-image:url('+data.headPortrait+');'"></view>
-
+				<view class="action" @click="confirmShare">
+					<text class="cuIcon-roundaddfill text-grey"></text>
+				</view>
 				<input id="input1" :adjust-position="true" class="solid-bottom " maxlength="300" :placeholder="placeholderText"
 				 cursor-spacing="500rpx" v-model="replyForm.info"></input>
-
-				<button :adjust-position="true" class="cu-btn bg-green shadow-blur" @click="subreply()">发送</button>
+				<view class="action">
+					<text class="cuIcon-emojifill text-grey"></text>  
+				</view>
+				<button :adjust-position="true" class="cu-btn bg-green round shadow-blur" @click="subreply()">发送</button>
 			</view>
 		</view>
+		
 	</view>
 </template>
 
 <script>
 	import likeButton from '@/components/like-button/like-button.vue'
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	import uniPopupShare from '@/components/uni-popup/uni-popup-share.vue'
 	export default {
+		
 		components: {
-			likeButton
+			likeButton,
+			uniPopup,
+			uniPopupMessage,
+			uniPopupDialog,
+			uniPopupShare
 		},
 		props: {
 				dataId: {
@@ -144,6 +166,7 @@
 			},
 		data() {
 			return {
+				type: 'top',
 				hasImg: false,
 				isCard: true,
 				image: [],
@@ -164,11 +187,28 @@
 				},
 				replyList: [],
 				userStatus: "",
-				placeholderText: "说点什么吧..."
-
+				placeholderText: "说点什么吧...",
+				show: false
 			};
 		},
 		methods: {
+			change(e) {
+				console.log('popup ' + e.type + ' 状态', e.show)
+			},
+			select(e, done) {
+				uni.showToast({
+					title: `您选择了第${e.index+1}项：${e.item.text}`,
+					icon: 'none'
+				})
+				done()
+			},
+			confirmShare() {
+				this.$refs.popupShare.open()
+			},
+			toggle(type) {
+				this.type = type
+				this.$refs.popup.open()
+			},
 			onTap() {
 				this.$refs["message"].open({
 					message: "回复成功",
@@ -342,7 +382,6 @@
 
 			this.$api.getUserInfo().then(res => {
 				this.userStatus = res.data.status
-
 			})
 		}
 
@@ -369,9 +408,10 @@
 		}
 		.submain {
 		  /* position: relative; */
+			text-align: right;
 		  opacity: 1;
 		  margin-top: 28.3rpx;
-		  margin-left: 32.43rpx;
+		  margin-right: 40.43rpx;
 	/* 	  max-width: 664.86rpx; */
 		  height: 40.54rpx;
 		  overflow: hidden;
@@ -382,7 +422,7 @@
 		  color: #222222;
 		  font-size: 28.38rpx;
 		  font-weight: 400;
-				flex: 1;
+			flex: 1;
 		}
 		.row {
 		  position: relative;
@@ -391,7 +431,7 @@
 			margin-left: 32.43rpx;
 		  background-color: #ffffff;
 		  width: 656.76rpx;
-		  height: 50rpx;
+		  height: 70rpx;
 		}
 		.ft {
 		  display: flex;
@@ -406,8 +446,8 @@
 			background-color: #ffffff;
 		}
 		.Heart {
-		  width: 53.59rpx;
-		  height: 43.49rpx;
+		  width: 56.59rpx;
+		  height: 46.49rpx;
 		}
 		.messagingspeechbub {
 		  width: 36.49rpx;
@@ -419,7 +459,6 @@
 		  height: 40.35rpx;
 			margin-top: 10.85rpx;
 		}
-	
 	
 	.vertical1 {
 		align-items: center;
@@ -438,5 +477,10 @@
 	}
 	.blank {
 		height: 98rpx;
+	}
+	
+	.popup-content {
+		background-color: #fff;
+		padding: 15px;
 	}
 </style>

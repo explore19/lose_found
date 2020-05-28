@@ -37,7 +37,7 @@
 			</view>
 
 
-			<van-tabs @change="onTabChange" swipeable="true">
+			<van-tabs @change="onTabChange" swipeable="true" animated >
 				<van-tab title="失物寻物">
 					<view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
@@ -98,16 +98,16 @@
 										<!-- :class="'Heart'+(item.isPraise?'1':'') " -->
 										<view class="row" >
 											<view class="ft">
-											  <image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
-												<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
-												<view class="flex" @click="goToInfo(item.post.id)">
-													<image class="messagingspeechbub" :src="options.messagingspeechbub" />
-													<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
-												</view>
 												<view class="flex">
 													<image class="viewNum" :src="options.viewNum" />
 													<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.post.browsePoints}}</text>
 												</view>
+												<view class="flex" @click="goToInfo(item.post.id)">
+													<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+													<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
+												</view>
+											  <image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
+												<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
 											</view>
 										</view>
 										
@@ -172,16 +172,16 @@
 									
 									<view class="row" >
 										<view class="ft">
-										  <image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
-											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
-											<view class="flex" @click="goToInfo(item.post.id)">
-												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
-												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
-											</view>
 											<view class="flex">
 												<image class="viewNum" :src="options.viewNum" />
 												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.post.browsePoints}}</text>
 											</view>
+											<view class="flex" @click="goToInfo(item.post.id)">
+												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
+											</view>
+										  <image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
+											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
 										</view>
 									</view>
 									
@@ -356,6 +356,7 @@
 				})
 			},
 			onTabChange(e) {
+				console.log(e)
 				this.postType = e.detail.name
 				this.requestData()
 			},
@@ -490,9 +491,10 @@
 	}
 	.submain {
 	  /* position: relative; */
+		text-align:right;
 	  opacity: 1;
 	  margin-top: 28.3rpx;
-	  margin-left: 32.43rpx;
+	  margin-right: 40.43rpx;
 /* 	  max-width: 664.86rpx; */
 	  height: 40.54rpx;
 	  overflow: hidden;
@@ -503,7 +505,7 @@
 	  color: #222222;
 	  font-size: 28.38rpx;
 	  font-weight: 400;
-			flex: 1;
+		flex: 1;
 	}
 	.row {
 	  position: relative;
@@ -512,7 +514,7 @@
 		margin-left: 32.43rpx;
 	  background-color: #ffffff;
 	  width: 656.76rpx;
-	  height: 50rpx;
+	  height: 70rpx;
 	}
 	.ft {
 	  display: flex;
@@ -527,8 +529,8 @@
 		background-color: #ffffff;
 	}
 	.Heart {
-	  width: 53.59rpx;
-	  height: 43.49rpx;
+	  width: 56.59rpx;
+	  height: 46.49rpx;
 	}
 	.messagingspeechbub {
 	  width: 36.49rpx;

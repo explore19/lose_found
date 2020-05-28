@@ -168,6 +168,7 @@
 							{{imgList.length}}/4
 						</view>
 					</view>
+					
 					<view class="cu-form-group">
 						<view class="grid col-4 grid-square flex-sub">
 							<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
@@ -181,6 +182,7 @@
 							</view>
 						</view>
 					</view>
+					
 					</van-popup>
 					<view class="margin-top">
 						<van-button type="primary" size="large" @click="subInfo() ">发布</van-button>
