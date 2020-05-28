@@ -106,7 +106,7 @@
 					details: '',
 					QQ: '',
 					image: [],
-					postType: 3,//3表示表白帖, 4表示匿名表白帖
+					postType: 2,//2表示表白帖, type = 101表示匿名表白帖
 					checkRes: false
 				},
 				// 悬浮菜单的元素的信息
@@ -133,16 +133,15 @@
 			switchChange: function (e) {
 				console.log('switch1 发生 change 事件，携带值为', e.detail.value)
 				if (e.detail.value === true){
-					var result=Math.floor(Math.random()*(6+1));
+					var result=Math.floor(Math.random()*(4+1));
 					console.log(result)
 					this.head_portrait = "../../static/anonymous"+result+".png"
 					this.name = "一位路过的吃瓜群众"
-					this.postType = 4
+					this.form.type = 101
 				}
 				else{
 					this.head_portrait = this.head_portrait1
 					this.name = this.name1
-					this.postType = 3
 				}
 			},
 			requestData() {
@@ -316,7 +315,6 @@
 		},
 		created() {
 			this.requestData()
-			console.log("获取信息")
 /* 			this.$api.getAllType().then(res => {
 				let defaultItemType = [{
 					id: -1,

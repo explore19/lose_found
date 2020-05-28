@@ -145,7 +145,76 @@
 				</view>
 			</van-tab>
 			<van-tab title="表白墙">
-				表白墙
+				<view v-if="exist">
+					<view @click="toPostInfo(item.post.id)" v-if="item.post.postType==2" v-for="item in data" :key="item.post.id"
+					 style="margin-top: 15upx;">
+						<view style="border: #F0FFF0">
+							<view class="cu-card dynamic no-card">
+								<view class="cu-item shadow">
+									<view class="cu-list menu-avatar">
+										<view class="cu-item borderLine">
+											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
+											<view class="content flex-sub">
+												<view class="henflex">
+													<view>{{item.nickName}}</view>
+													<!-- <view class="right" v-if="false">
+														<view class="cu-tag round bg-blue sm">官方</view>
+													</view> -->
+													<view v-if="item.post.type == 101" class="right">
+														<view class="cu-tag round bg-orange sm">匿名</view>
+													</view>
+												</view>
+												<view class="text-gray text-sm flex justify-between">
+													{{item.post.createTime}}
+												</view>
+											</view>
+											<text style="font-size:125%; z-index: 100;" class=" padding-lr  cuIcon-delete text-gray" @click.stop="delPost(item.post.id)"></text>
+										</view>
+									</view>
+									<view>
+										<view class="text-content" style="margin: 20upx 30upx 10upx;">
+											物品名称:{{item.post.name}}
+										</view>
+										<view class="text-content" style="margin: 10upx 30upx;">
+											物品详情:{{item.post.details}}
+										</view>
+				
+										<view class="grid flex-sub padding-lr isCard?'col-3 grid-square':'col-1'" v-if="item.post.image!=null">
+											<view class="bg-img isCard?'':'only-img'" :style="'background-image:url('+item.post.image+');'">
+											</view>
+										</view>
+				
+										<view class="submain">
+											<text class="text-gray_">{{item.praiseNumber}} 喜欢</text>
+										</view>
+				
+										<view class="container text-align:center">
+											<!-- 分割线 -->
+											<view class="divLine"></view>
+										</view>
+				
+									</view>
+				
+									<view class="row">
+										<view class="ft">
+											<view class="flex">
+												<image class="viewNum" :src="options.viewNum" />
+												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.post.browsePoints}}</text>
+											</view>
+											<view class="flex">
+												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
+												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
+											</view>
+											<image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
+											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
+										</view>
+									</view>
+				
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
 			</van-tab>
 		</van-tabs>
 
@@ -248,6 +317,32 @@
 </script>
 
 <style>
+	.bg-orange {
+		background-color: #f37b1d;
+		color: #fff;
+	}
+	.round {
+		border-radius: 5000rpx;
+	}
+	.cu-tag {
+		font-size: 28rpx;
+		vertical-align: middle;
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		box-sizing: border-box;
+		padding: 0rpx 16rpx;
+		height: 48rpx;
+		font-family: Helvetica Neue, Helvetica, sans-serif;
+	}
+	.right {
+		margin-left: 20upx;
+	}
+	.henflex {
+		display: flex;
+		flex-flow: row;
+	}
 	.text-gray_ {
 		color: #8a8a8a;
 	}

@@ -8,16 +8,37 @@
 		<view class="user-wrap">
 			<view class="setting iconfont icon31shezhi"></view>
 			<view class="info">
-				<image class="avatar" mode="aspectFill" :src="head_portrait"></image>
-				<view class="margin-top" v-if="UserStatus===3">
-					<button class="cu-btn line-olive round" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
+				<image class="avatar" mode="aspectFill" v-if="UserStatus!==3" :src="head_portrait"></image>
+				<view  v-if="UserStatus===3">
+					<button class="cu-btn lines-white round lg"  @click="showpopup">
 						立即登录
 					</button>
 				</view>
-
+				
 				<view class="nick_name text-xl" v-else>
 					{{name?name:"未登录"}}
 				</view>
+				<div v-show="popup">
+					
+						<div class="modal-bg" >
+					        <div class="modal-container">
+					            <div class="modal-header" >
+					               <text class="text-xl">提示</text>
+					            </div>
+					            <div class="modal-main">
+					                <slot style="font-size: 32upx;margin: auto 0;">确认登录失物招领小程序?</slot>
+					            </div>
+					            <div class="modal-footer">
+					                <button class="cu-btn bg-grey round lg"  @click="closepopup">
+					                	取消
+					                </button>
+					                <button class="cu-btn bg-blue  round lg"  open-type="getUserInfo" @getuserinfo="bindGetUserInfo">
+					                	确认
+					                </button>
+					            </div>
+					        </div>
+					    </div>
+				</div>
 			</view>
 		</view>
 
@@ -115,6 +136,7 @@
 		},
 		data() {
 			return {
+				popup: 0,
 				UserStatus: "",
 				name: "",
 				sno: "",
@@ -187,8 +209,16 @@
 					})
 				}
 			},
+			 showpopup() {
+			      this.popup = 1;
+			    },
+			    //关闭活动规则页面
+			    closepopup() {
+			      this.popup = 0;
+			    },
 			bindGetUserInfo(e) {
-				console.log(e.mp.detail.userInfo)
+				this.popup = 0;
+				
 				let user_info = e.mp.detail.userInfo
 				this.$api.updateInfo({
 					headPortrait: user_info.avatarUrl,
@@ -196,9 +226,11 @@
 					sex: user_info.gender,
 					status: 2
 				}).then((res) => {
+					
 					uni.switchTab({
 						url: "/pages/user_details/user_details"
 					})
+					this.requestData()
 				})
 			},
 			jump: function() {
@@ -242,9 +274,84 @@
 </script>
 
 <style lang="scss">
+	
 	page {
 		background: #f2f2f2;
 	}
+	
+	.modal-bg {
+	    position: fixed;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    background: rgba(0,0,0,.5);
+	    z-index: 10;
+	}
+	.modal-container {
+	    background: #fff;
+	    border-radius: 10px;
+	    overflow: hidden;
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%,-50%);
+	}
+	.modal-header {
+	    height: 100upx;
+	    background: #409EFF;
+	    color: #fff;
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    cursor: move;
+	}
+	.modal-footer {
+	    display: flex;
+	    align-items: center;
+	    justify-content: center;
+	    height: 90upx;
+	    border-top: 6upx solid #ddd;
+	}
+	.modal-footer button {
+	    width: 100px;
+	}
+	.modal-main {
+	    padding: 40upx 80upx;
+	}
+	// //这里面可以自定义字体样式等，都是CSS基础
+	// .rule {
+	//   position: absolute;
+	//   width: 0.82rem;
+	//   height: 0.36rem;
+	//   top: 0.08rem;
+	//   right: 0rem;
+	//   background: #353535;
+	// }
+	// .login {
+	//   position: fixed;
+	//   font-size: 24px;
+	//   height: 120px;
+	//   width: 200px;
+	//   background-color: #ffffff;
+	//   border-radius: 0.25rem;
+	//   left: 50%;
+	//   top: 50%;
+	//   transform: translate(-50%, -50%);
+	//   z-index: 1000;
+	// }
+	//   .over {
+	//     position: fixed;
+	//     width: 100%;
+	//     height: 100%;
+	//     opacity: 0.7;//透明度为70%
+	//     filter: alpha(opacity=70);
+	//     top: 0;
+	//     left: 0;
+	//     z-index: 999;
+	//     background-color: #353535;
+	//   }
+
 
 	.btn-hover {
 		background: #f2f2f2 !important;
@@ -261,6 +368,7 @@
 			border-radius: 0 0 20% 20%;
 			background: url('https://handsel.oss-cn-shenzhen.aliyuncs.com/1588938371592.jpg') no-repeat;
 			background-size: cover;
+
 
 			.setting {
 				color: #fff;
