@@ -129,15 +129,14 @@
 </template>
 
 <script>
-	import likeButton from '@/components/like-button/like-button.vue'
 	import uniPopup from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import uniPopupShare from '@/components/uni-popup/uni-popup-share.vue'
 	export default {
 		
+		
 		components: {
-			likeButton,
 			uniPopup,
 			uniPopupMessage,
 			uniPopupDialog,

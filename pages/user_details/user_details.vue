@@ -6,6 +6,7 @@
 			<view class="cu-avatar xl radius margin-left" :style="'background-image:url('+form.headPortrait+');'"></view>
 		</view>
 		
+		
 			<van-cell-group>
 				<view class="cu-form-group " >
 					<view class="title">昵称</view>

@@ -199,7 +199,6 @@
 					uni.switchTab({
 						url: "/pages/user_details/user_details"
 					})
-
 				})
 			},
 			jump: function() {

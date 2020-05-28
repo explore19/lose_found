@@ -3,20 +3,6 @@
 		<view class="demo">
 			<cl-message ref="message"></cl-message>
 		</view>
-		<!-- <view class="cl-dialog">
-			
-			<cl-dialog title="提示" :visible.sync="visible">
-				<text
-						>云想衣裳花想容，春风拂槛露华浓。若非群玉山头见，会向瑶台月下逢。</text
-				>
-				<view class="cl-dialog__footer" slot="footer">
-					<view class="cl-confirm__footer">
-						<cl-button type="text">取消</cl-button>
-						<cl-button type="text">确认</cl-button>
-					</view>
-				</view>
-			</cl-dialog>
-		</view> -->
 
 		<van-tabs animated swipeable="true">
 			<van-tab title="失物寻物">

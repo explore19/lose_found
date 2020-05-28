@@ -51,6 +51,7 @@
 										
 										<view class="cu-item borderLine">
 											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
+											<!-- <image class="cu-avatar round lg" :src="item.headPortrait" mode=""></image> -->
 											<view class="content flex-sub padding-tbl">
 												<view class="henflex">
 													<view>{{item.nickName}}</view>
@@ -370,10 +371,11 @@
 				// 获得点击按钮
 				console.log(index)
 				if (index === 0) {
-					uni.switchTab({
-						url: "../user/user",
+					uni.navigateTo({
+						url: "../announce/announceConfession",
+						// url: "../user/user",
 						success: (res) => {
-							console.log("")
+							console.log("suces")
 						}
 					})
 				} else if (index === 1) {

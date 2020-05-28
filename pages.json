@@ -7,6 +7,18 @@
 			}
 		},
 		{
+			"path": "pages/confession/confession",
+			"style": {
+				"navigationBarTitleText": "表白墙"
+			}
+		},
+		{
+			"path": "pages/announce/announceConfession",
+			"style": {
+				"navigationBarTitleText": "发布表白"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "主页",
@@ -48,7 +60,7 @@
 		{
 			"path": "pages/introduction/introduction",
 			"style": {
-				"navigationBarTitleText": "搜索结果"
+				"navigationBarTitleText": "详情信息"
 			}
 
 		},
@@ -121,7 +133,9 @@
 			"van-icon": "/wxcomponents/vant-weapp/dist/icon/index",
 			"van-dropdown-menu": "/wxcomponents/vant-weapp/dist/dropdown-menu/index",
 			"van-dropdown-item": "/wxcomponents/vant-weapp/dist/dropdown-item/index",
-			"van-popup": "/wxcomponents/vant-weapp/dist/popup/index",
+			"van-nav-bar": "/wxcomponents/vant-weapp/dist/nav-bar/index",
+			"van-switch": "/wxcomponents/vant-weapp/dist/switch/index",
+			"van-divider": "/wxcomponents/vant-weapp/dist/divider/index",
 			// "van-sidebar": "/wxcomponents/vant-weapp/dist/sidebar/index",
 			// "van-sidebar-item": "/wxcomponents/vant-weapp/dist/sidebar-item/index",
 			// "van-skeleton": "/wxcomponents/vant-weapp/dist/skeleton/index"

@@ -94,9 +94,6 @@
 						</view>
 					</view>
 
-
-					</van-popup>
-
 <view class="margin-top">
 	<van-button  type="primary" size="large" @click="subInfo()">发布</van-button>
 </view>
@@ -183,7 +180,6 @@
 						</view>
 					</view>
 					
-					</van-popup>
 					<view class="margin-top">
 						<van-button type="primary" size="large" @click="subInfo() ">发布</van-button>
 					</view>
