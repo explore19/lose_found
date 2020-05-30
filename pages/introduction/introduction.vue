@@ -10,7 +10,7 @@
 					<view class="cu-list menu-avatar">
 						<view class="cu-item borderLine">
 							<view v-if="data.post.postType == 0 || data.post.postType == 1 || type == 1" class="cu-avatar round lg" :style="'background-image:url('+data.headPortrait+');'"></view>
-							<image v-if="data.post.type == 101" class="cu-avatar round lg" :src="getAnonymousProtrait(data.post.id)" mode=""></image>
+							<image v-if="data.post.type == 101" class="cu-avatar round lg" :src="getAnonymousProtrait(data.postId)" mode=""></image>
 							<view class="content flex-sub padding-tbl">
 								<view class="henflex">
 									<view>{{data.nickName}}</view>
@@ -191,6 +191,7 @@
 		},
 		data() {
 			return {
+				postId:0,
 				type: 0,
 				hasImg: false,
 				isCard: true,
@@ -282,6 +283,8 @@
 							this.typeName = result[res.data.post.type].name
 							console.log(this.typeName)
 							this.type = res.data.post.type
+							this.postId = res.data.post.id
+							console.log(this.postId)
 						}
 						if (this.data.post.image === null) {
 							this.hasImg = false
