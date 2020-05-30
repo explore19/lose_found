@@ -20,7 +20,18 @@
 				</view>
 				<div v-show="popup">
 					
-						<div class="modal-bg" >
+					    <div class="message-box-wrapper">
+					        <div class="message-box">
+					            <div class="message-box-header"></div>
+					            <div class="message-box-content">确认登录失物招领小程序?</div>
+					            <div class="message-box-btns">
+					                <button class="message-box-cancel" @click="closepopup">取消</button>
+					                <button class="message-box-confirm" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</button>
+					            </div>
+					        </div>
+					    </div>
+
+						<!-- <div class="modal-bg" >
 					        <div class="modal-container">
 					            <div class="modal-header" >
 					               <text class="text-xl">提示</text>
@@ -37,7 +48,7 @@
 					                </button>
 					            </div>
 					        </div>
-					    </div>
+					    </div> -->
 				</div>
 			</view>
 		</view>
@@ -68,7 +79,7 @@
 						<view class="cuIcon-comment text-grey item-icon"></view>
 						<view class="item-text">我的回复</view>
 					</view>
-					<view class="status-item" hover-class="btn-hover">
+					<view class="status-item" hover-class="btn-hover" @click="goToperfect()">
 						<view>
 							<van-icon name="passed" size="25" color="#aaaaaa" />
 						</view>
@@ -209,6 +220,22 @@
 					})
 				}
 			},
+			goToperfect: function() {//用来跳转到信息完善界面
+			
+			if(this.UserStatus === 3){
+				uni.showToast({
+					title: "请您先登录再完成实名认证！",
+					icon: "none"
+				
+				});
+			}
+			else{
+				uni.reLaunch({
+					url: '../perfect/perfect',
+				})
+			}
+				
+			},
 			 showpopup() {
 			      this.popup = 1;
 			    },
@@ -279,46 +306,105 @@
 		background: #f2f2f2;
 	}
 	
-	.modal-bg {
-	    position: fixed;
-	    top: 0;
-	    left: 0;
-	    width: 100%;
-	    height: 100%;
-	    background: rgba(0,0,0,.5);
-	    z-index: 10;
+	
+	        .message-box-wrapper {
+	            position: fixed;
+	            left: 0;
+	            right: 0;
+	            top: 0;
+	            bottom: 0;
+	            text-align: center;
+				z-index: 999;
+	            background-color: rgba(0, 0, 0, .3)
+	        }
+	        
+	        .message-box-wrapper::after {
+	            content: "";
+	            display: inline-block;
+	            height: 100%;
+	            width: 0;
+	            vertical-align: middle;
+	        }
+	        
+	        .message-box {
+	            display: inline-block;
+	            vertical-align: middle;
+	            position: relative;
+	            width: 500upx;
+	            height: 300upx;
+	            background: #ffffff;
+	        }
+	        
+	        .message-box-content {
+	            padding: 90upx 60upx;
+	        }
+	        
+	        .message-box-btns {
+	            position: absolute;
+	            bottom: 0;
+	            width: 100%;
+	            height: 100upx;
+	        }
+	        
+	        .message-box-cancel,
+	        .message-box-confirm {
+	            float: left;
+	            width: 50%;
+	            height: 100%;
+	            line-height: 100upx;
+	            color: #ffffff;
+				border: none;
+				border-radius:  0;
+	        }
+	        
+	        .message-box-cancel {
+	            background-color: #8f9498;
+	        }
+	        
+	        .message-box-confirm {
+	            background-color: #755aff;
+	
 	}
-	.modal-container {
-	    background: #fff;
-	    border-radius: 10px;
-	    overflow: hidden;
-	    position: fixed;
-	    top: 50%;
-	    left: 50%;
-	    transform: translate(-50%,-50%);
-	}
-	.modal-header {
-	    height: 100upx;
-	    background: #409EFF;
-	    color: #fff;
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    cursor: move;
-	}
-	.modal-footer {
-	    display: flex;
-	    align-items: center;
-	    justify-content: center;
-	    height: 90upx;
-	    border-top: 6upx solid #ddd;
-	}
-	.modal-footer button {
-	    width: 100px;
-	}
-	.modal-main {
-	    padding: 40upx 80upx;
-	}
+	// .modal-bg {
+	//     position: fixed;
+	//     top: 0;
+	//     left: 0;
+	//     width: 100%;
+	//     height: 100%;
+	//     background: rgba(0,0,0,.5);
+	//     z-index: 10;
+	// }
+	// .modal-container {
+	//     background: #fff;
+	//     border-radius: 10px;
+	//     overflow: hidden;
+	//     position: fixed;
+	//     top: 50%;
+	//     left: 50%;
+	//     transform: translate(-50%,-50%);
+	// }
+	// .modal-header {
+	//     height: 100upx;
+	//     background: #409EFF;
+	//     color: #fff;
+	//     display: flex;
+	//     align-items: center;
+	//     justify-content: center;
+	//     cursor: move;
+	// }
+	// .modal-footer {
+	//     display: flex;
+	//     align-items: center;
+	//     justify-content: center;
+	//     height: 90upx;
+	//     border-top: 6upx solid #ddd;
+	// }
+	// .modal-footer button {
+	//     width: 100px;
+	// }
+	// .modal-main {
+	//     padding: 40upx 80upx;
+	// }
 	// //这里面可以自定义字体样式等，都是CSS基础
 	// .rule {
 	//   position: absolute;

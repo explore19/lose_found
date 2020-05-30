@@ -39,9 +39,9 @@
 
 			<van-tabs @change="onTabChange" swipeable="true" animated>
 				<van-tab title="失物寻物">
-					<view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
+					<!-- <view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
-					</view>
+					</view> -->
 
 					<view v-for="(item,index) in data" :key="index"  style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
@@ -119,9 +119,9 @@
 
 
 				<van-tab title="拾物寻主">
-					<view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
+					<!-- <view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
-					</view>
+					</view> -->
 					<view v-for="(item,index) in data" :key="index" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
@@ -194,9 +194,9 @@
 				</van-tab>
 
 				<van-tab title="所谓伊人">
-					<view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
+					<!-- <view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
-					</view>
+					</view> -->
 
 					<view v-for="(item,index) in data" :key="index" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">

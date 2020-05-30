@@ -10,7 +10,7 @@
 					<view class="cu-list menu-avatar">
 						<view class="cu-item borderLine">
 							<view v-if="data.post.postType == 0 || data.post.postType == 1 || type == 1" class="cu-avatar round lg" :style="'background-image:url('+data.headPortrait+');'"></view>
-							<image v-if="data.post.type == 101" class="cu-avatar round lg" :src="getAnonymousProtrait(data.post.id)" mode=""></image>
+							<image v-if="data.post.type == 101" class="cu-avatar round lg" src="getAnonymousProtrait(data.post.id)" mode=""></image>
 							<view class="content flex-sub padding-tbl">
 								<view class="henflex">
 									<view>{{data.nickName}}</view>
@@ -297,6 +297,7 @@
 					postId: this.$global.postId
 				}).then(res => {
 					if (res.status == 0) {
+						console.log(res.data)
 						let replyList = []
 						this.recursionReply(res.data, replyList)
 						this.replyList = replyList
@@ -329,7 +330,7 @@
 				if (node.children == null) {
 					return
 				}
-				for (var i = 0; i < node.children.length; i++) {
+				for (let i = 0; i < node.children.length; i++) {
 					this.recursionReply(node.children[i], replyList)
 				}
 				if (node.reply.status == 0) {
