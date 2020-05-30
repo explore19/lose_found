@@ -10,16 +10,20 @@
 					<view class="cu-list menu-avatar">
 						<view class="cu-item borderLine">
 							<view v-if="data.post.postType == 0 || data.post.postType == 1 || type == 1" class="cu-avatar round lg" :style="'background-image:url('+data.headPortrait+');'"></view>
-							<image v-if="data.post.type == 101" class="cu-avatar round lg" :src="getAnonymousProtrait(data.postId)" mode=""></image>
+							<image v-if="data.post.type == 101" class="cu-avatar round lg" :src="getAnonymousProtrait(post_id)" mode=""></image>
 							<view class="content flex-sub padding-tbl">
 								<view class="henflex">
-									<view>{{data.nickName}}</view>
+									<view v-if="data.post.type != 101">{{data.nickName}}</view>
+									<view v-if="data.post.type == 101">一位路过的吃瓜群众</view>
 									<!-- <view class="right" v-if="false">
 										<view class="cu-tag round bg-blue sm">官方</view>
 									</view> -->
 									
+									<view v-if="data.post.type != 101" class="right">
+										<view class="cu-tag round bg-blue sm">已实名</view>
+									</view>
 									<view v-if="data.post.type == 101" class="right">
-										<view class="cu-tag round bg-blue sm">匿名</view>
+										<view class="cu-tag round bg-orange sm">匿名</view>
 									</view>
 									<view v-if="data.post.postType == 2" class="huati text-pink text-bold">#表白墙#</view>
 								</view>
@@ -42,14 +46,15 @@
 			
 			
 			<view class="flex-sub text-left">
-				<view class="solid-bottom text-lg padding">
+				<view v-if="data.post.postType != 2" class="solid-bottom text-lg padding">
 					<text class="text-black text-bold">{{data.post.name}}</text>
 				</view>
-				<view style="margin:10upx 30upx;">丢失地点：{{data.post.lostPlace}}</view>
-				<view style="margin:10upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
-				<view v-if="data.post.contact" style="margin:10upx 30upx;">联系方式：{{data.post.contact}}</view>
-				<view v-if="data.post.type" style="margin:10upx 30upx;">物品类型：{{typeName}}</view>
-				<view style="margin:10upx 30upx;">详情：{{data.post.details}}</view>
+				<view v-if="data.post.postType != 2" style="margin:10upx 30upx;">丢失地点：{{data.post.lostPlace}}</view>
+				<view v-if="data.post.postType != 2" style="margin:10upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
+				<view v-if="data.post.contact && data.post.postType != 2 " style="margin:10upx 30upx;">联系方式：{{data.post.contact}}</view>
+				<view v-if="data.post.type && data.post.postType != 2" style="margin:10upx 30upx;">物品类型：{{typeName}}</view>
+				<view v-if="data.post.postType != 2" style="margin:10upx 30upx;">详情：{{data.post.details}}</view>
+				<view v-if="data.post.postType == 2" style="margin:10upx 30upx;">{{data.post.details}}</view>
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg">
 					<!-- <view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
 					</view> -->
@@ -134,9 +139,6 @@
 			</view>
 		</view>
 
-		<!-- <uni-popup ref="popup" :type="type" :animation="true">
-			<view class="popup-content">popup 内容，此示例没有动画效果</view>
-		</uni-popup> -->
 		<uni-popup ref="popupShare" type="share" @change="change">
 			<uni-popup-share title="请选择" @select="select"></uni-popup-share>
 		</uni-popup>
@@ -191,7 +193,7 @@
 		},
 		data() {
 			return {
-				postId:0,
+				post_id:0, 
 				type: 0,
 				hasImg: false,
 				isCard: true,
@@ -278,13 +280,13 @@
 				}).then(res => {
 					if (res.status === 0) {
 						this.data = res.data
-						console.log(this.data)
 						if (this.data.post.type != null) {
-							this.typeName = result[res.data.post.type].name
-							console.log(this.typeName)
+							
+							if(this.data.post.type != 101){
+								this.typeName = result[res.data.post.type].name
+							}
 							this.type = res.data.post.type
-							this.postId = res.data.post.id
-							console.log(this.postId)
+							this.post_id = res.data.post.id
 						}
 						if (this.data.post.image === null) {
 							this.hasImg = false
@@ -300,12 +302,12 @@
 					postId: this.$global.postId
 				}).then(res => {
 					if (res.status == 0) {
+						console.log("here")
+						console.log(res)
 						let replyList = []
 						this.recursionReply(res.data, replyList)
 						this.replyList = replyList
-						console.log(this.replyList)
 					}
-
 				})
 			},
 			recursionReply: function(node, replyList) {
@@ -360,8 +362,6 @@
 				})
 			},
 			otherReply: function(replyId, replyUsername) { //回复消息的方法
-				console.log(replyId)
-				console.log(replyUsername)
 				this.show = true
 				this.replyForm.replyId = replyId
 				this.replyForm.type = 1
@@ -377,7 +377,9 @@
 				this.show = false
 			},
 			subreply: function(e) { //提交回复内容的方法
-
+			console.log("here")
+			console.log(this.replyForm)
+			
 				if (this.userStatus == 3) {
 					uni.showToast({
 						title: "请先登录再发表回复！",
@@ -394,6 +396,7 @@
 						if (res.status === 0) {
 							this.requestReply()
 							this.resetForm()
+							this.placeholderText = ""
 							var that = this
 							setTimeout(function() {
 								that.onTap()
