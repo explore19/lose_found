@@ -369,8 +369,6 @@
 						duration: 1000,
 					})
 				}, 50);
-
-
 			},
 			cardSwiper(e) {
 				this.cardCur = e.detail.current

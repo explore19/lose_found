@@ -3,6 +3,9 @@
 		<view class="demo">
 			<cl-message ref="message"></cl-message>
 		</view>
+		<uni-popup ref="popup" type="dialog">
+		  <uni-popup-dialog type="warn" message="成功消息" content="是否删除该帖子?" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
 
 		<van-tabs animated swipeable="true">
 			<van-tab title="失物寻物">
@@ -223,7 +226,16 @@
 </template>
 
 <script>
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	
 	export default {
+		components: {
+			uniPopup,
+			uniPopupMessage,
+			uniPopupDialog
+		},
 		props: {
 			dataId: {
 				type: String,
@@ -247,6 +259,7 @@
 				data: [],
 				img: [],
 				visible: true,
+				postId:0,
 			}
 		},
 		methods: {
@@ -286,13 +299,36 @@
 					this.requestData()
 				})
 			},
+			open(){
+				this.$refs.popup.open()
+			},
 			delPost: function(postId) {
+				this.open()
+				this.postId = postId;
+			},
+			close(done){
+				// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+				done()
+			},
+			/**
+			 * 点击确认按钮触发
+			 * @param {Object} done
+			 * @param {Object} value
+			 */
+			confirm(done, value){
+				this.$api.removePost(this.postId).then((res) => {
+					this.requestData()
+					this.onTap()
+					done()
+				})
+			},
+			/* delPost: function(postId) {
 				uni.showModal({
 					content: '确认删除该帖子',
 					cancelText: '取消',
 					confirmText: '删除',
 					confirmColor: '#0081FF',
-					title: '提示',
+					// title: '提示',
 					cancelColor: '#000000',
 					success: res => {
 						if (res.confirm) {
@@ -303,7 +339,7 @@
 						}
 					},
 				})
-			},
+			}, */
 			onTabChange(e) {
 				console.log(e)
 				this.postType = e.detail.name

@@ -3,7 +3,20 @@
 
 		<!--悬浮菜单栏-->
 		<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
-		 v-bind:buttons="button" @change="" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" />
+		 v-bind:buttons="button" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" />
+		 
+		 <uni-popup ref="popup" type="dialog">
+		   <uni-popup-dialog type="success" message="成功消息" content="请您先登录并且完成实名认证才能发帖" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		 </uni-popup>
+		 
+		 <uni-popup ref="popup1" type="dialog">
+		   <uni-popup-dialog type="success" message="成功消息" content="请您先完成实名认证才能发帖" :duration="2000" :before-close="true" @close="close" @confirm="confirm1"></uni-popup-dialog>
+		 </uni-popup>
+		 
+		 <view class="demo">
+		 	<cl-message ref="message"></cl-message>
+		 </view>
+		 
 
 		<van-tabs animated :active=" form.postType " @change="onChange" swipeable="true">
 			<van-tab title="我是失主">
@@ -186,10 +199,19 @@
 <script>
 	var graceChecker = require("../../utils/graceChecker.js");
 	var dateUtil = require("../../utils/dateUtil.js");
+	import uniPopup from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 
 	export default {
+		components: {
+			uniPopup,
+			uniPopupMessage,
+			uniPopupDialog
+		},
 		data() {
 			return {
+				popup: 0,
 				picker: [],
 				time: dateUtil.getTime(),
 				date: dateUtil.getDate(),
@@ -228,6 +250,55 @@
 			}
 		},
 		methods: {
+			doMessage() {
+				var that = this
+				.$refs["message"].open({
+					message: "发布成功",
+					style: "success",
+					top: "200rpx",
+					duration: 1000,
+				})
+				var that = this
+				setTimeout(function() {
+					uni.reLaunch({
+					  url: '../index/index'
+					});
+				}, 1300);
+			},
+			//关闭活动规则页面
+			closepopup() {
+				this.popup = 0;
+				uni.reLaunch({
+					url: '../index/index',
+				})
+			},
+			open(){
+				this.$refs.popup.open()
+			},
+			close(done){
+				// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+				uni.reLaunch({
+				  url: '../index/index'
+				});
+				done()
+			},
+			/**
+			 * 点击确认按钮触发
+			 * @param {Object} done
+			 * @param {Object} value
+			 */
+			confirm(done, value){
+				uni.reLaunch({
+					url: '../user/user',
+				})
+				done()
+			},
+			confirm1(done, value){
+				uni.reLaunch({
+					url: '../perfect/perfect',
+				})
+				done()
+			},
 			// 悬浮菜单的调用的方法
 			ClickChange: function(e) {
 				console.log("click it ")
@@ -398,7 +469,8 @@
 							})
 						} else {
 							this.form = ""
-							wx.showModal({
+							this.doMessage();
+							/* wx.showModal({
 								title: '提示',
 								content: "发布成功！",
 								showCancel: false,
@@ -410,7 +482,7 @@
 										})
 									}
 								}
-							})
+							}) */
 						}
 
 					}).catch(resp => {
@@ -426,52 +498,123 @@
 		},
 		created() {
 			this.$api.getAllType().then(res => {
-					let defaultItemType = [{
-						id: -1,
-						name: '不限'
-					}]
-					this.picker = defaultItemType.concat(res.data)
-				}),
-
-this.$api.getUserInfo().then(res => {
-					if (res.data.status === 3) {
-						wx.showModal({
-							title: '提示',
-							content: "请您先登录并且完成实名认证再进行帖子发布！",
-							showCancel: true,
-							cancelText: "取消",
-							confirmText: '立即登录',
-							success(res) {
-								if (res.confirm) {
-									uni.reLaunch({
-										url: '../user/user',
-									})
-								}
-							}
-						})
-					}
-					else if(res.data.status === 2){
-						wx.showModal({
-							title: '提示',
-							content: "请您先完成实名认证再进行帖子发布！",
-							showCancel: true,
-							cancelText: "取消",
-							confirmText: '立即完善',
-							success(res) {
-								if (res.confirm) {
-									uni.reLaunch({
-										url: '../perfect/perfect',
-									})
-								}
-							}
-						})
-					}
-				})
-				
-
+				let defaultItemType = [{
+					id: -1,
+					name: '不限'
+				}]
+				this.picker = defaultItemType.concat(res.data)
+			})
+		}, 
+		onShow(){
+			this.$api.getUserInfo().then(res => {
+				if (res.data.status === 3) {
+					this.open();
+				}
+				else if(res.data.status === 2){
+					this.$refs.popup1.open()
+				}
+			})
 		}
 	}
 </script>
 
 <style>
+	button::after{ border: none; }
+	.uni-popup-dialog {
+		width: 280px;
+		border-radius: 15px;
+		background-color: #fff;
+		/* position: fixed; */
+		/* #ifndef APP-NVUE */
+		/* z-index: 99; */
+		/* text-align: center; */
+		/* #endif */
+	}
+	
+	.uni-dialog-title {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		padding-top: 15px;
+		padding-bottom: 5px;
+	}
+	
+	.uni-dialog-title-text {
+		font-size: 16px;
+		font-weight: 500;
+	}
+	
+	.uni-dialog-content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 5px 15px 15px 15px;
+	}
+	
+	.uni-dialog-content-text {
+		font-size: 14px;
+		color: #6e6e6e;
+	}
+	
+	.uni-dialog-button-group {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		border-top-color: #f5f5f5;
+		border-top-style: solid;
+		border-top-width: 1px;
+	}
+	
+	.uni-dialog-button {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+	
+		flex: 1;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height: 45px;
+	}
+	
+	.uni-border-left {
+		border-left-color: #f0f0f0;
+		border-left-style: solid;
+		border-left-width: 1px;
+	}
+	
+	.uni-dialog-button-text {
+		font-size: 14px;
+	}
+	
+	.uni-button-color {
+		color: $uni-color-primary;
+	}
+	
+	.uni-dialog-input {
+		flex: 1;
+		font-size: 14px;
+	}
+	
+	.uni-popup__success {
+		color: $uni-color-success;
+	}
+	
+	.uni-popup__warn {
+		color: $uni-color-warning;
+	}
+	
+	.uni-popup__error {
+		color: $uni-color-error;
+	}
+	
+	.uni-popup__info {
+		color: #909399;
+	}
 </style>

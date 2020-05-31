@@ -9,29 +9,50 @@
 			<view class="setting iconfont icon31shezhi"></view>
 			<view class="info">
 				<image class="avatar" mode="aspectFill" v-if="UserStatus!==3" :src="head_portrait"></image>
-				<view  v-if="UserStatus===3">
-					<button class="cu-btn lines-white round lg"  @click="showpopup">
+				<view v-if="UserStatus===3">
+					<button class="cu-btn lines-white round lg" @click="showpopup">
 						立即登录
 					</button>
 				</view>
-				
+
 				<view class="nick_name text-xl" v-else>
 					{{name?name:"未登录"}}
 				</view>
-				<div v-show="popup">
-					
-					    <div class="message-box-wrapper">
-					        <div class="message-box">
-					            <div class="message-box-header"></div>
-					            <div class="message-box-content">确认登录失物招领小程序?</div>
-					            <div class="message-box-btns">
-					                <button class="message-box-cancel" @click="closepopup">取消</button>
-					                <button class="message-box-confirm" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</button>
-					            </div>
-					        </div>
-					    </div>
 
-						<!-- <div class="modal-bg" >
+				<div v-show="popup">
+					<div class="uni-popup-dialog">
+						<div class="uni-dialog-title">
+							<text class="uni-dialog-title-text uni-popup__success">提示</text>
+						</div>
+						<div class="uni-dialog-content">
+							<text class="uni-dialog-content-text">确认登录失物招领小程序?</text>
+						</div>
+						<div class="uni-dialog-button-group">
+							<div class="uni-dialog-button" @click="closepopup">
+								<text class="uni-dialog-button-text">取消</text>
+							</div>
+							<div class="uni-dialog-button uni-border-left">
+								<button class="uni-dialog-button-text uni-button-color" style="background-color: #fff; width: 140px; color: #00aaff;"  type="default"  open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</button>
+								<!-- <text class="uni-dialog-button-text uni-button-color" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</text> -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- <div v-show="popup">
+					<div class="message-box-wrapper">
+						<div class="message-box">
+							<div class="message-box-header"></div>
+							<div class="message-box-content">确认登录失物招领小程序?</div>
+							<div class="message-box-btns">
+								<button class="message-box-cancel" @click="closepopup">取消</button>
+								<button class="message-box-confirm" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</button>
+							</div>
+						</div>
+					</div>
+
+						<div class="modal-bg" >
 					        <div class="modal-container">
 					            <div class="modal-header" >
 					               <text class="text-xl">提示</text>
@@ -48,8 +69,8 @@
 					                </button>
 					            </div>
 					        </div>
-					    </div> -->
-				</div>
+					    </div>
+				</div> -->
 			</view>
 		</view>
 
@@ -220,32 +241,31 @@
 					})
 				}
 			},
-			goToperfect: function() {//用来跳转到信息完善界面
-			
-			if(this.UserStatus === 3){
-				uni.showToast({
-					title: "请您先登录再完成实名认证！",
-					icon: "none"
-				
-				});
-			}
-			else{
-				uni.reLaunch({
-					url: '../perfect/perfect',
-				})
-			}
-				
+			goToperfect: function() { //用来跳转到信息完善界面
+
+				if (this.UserStatus === 3) {
+					uni.showToast({
+						title: "请您先登录再完成实名认证！",
+						icon: "none"
+
+					});
+				} else {
+					uni.reLaunch({
+						url: '../perfect/perfect',
+					})
+				}
+
 			},
-			 showpopup() {
-			      this.popup = 1;
-			    },
-			    //关闭活动规则页面
-			    closepopup() {
-			      this.popup = 0;
-			    },
+			showpopup() {
+				this.popup = 1;
+			},
+			//关闭活动规则页面
+			closepopup() {
+				this.popup = 0;
+			},
 			bindGetUserInfo(e) {
 				this.popup = 0;
-				
+
 				let user_info = e.mp.detail.userInfo
 				this.$api.updateInfo({
 					headPortrait: user_info.avatarUrl,
@@ -253,7 +273,7 @@
 					sex: user_info.gender,
 					status: 2
 				}).then((res) => {
-					
+
 					uni.switchTab({
 						url: "/pages/user_details/user_details"
 					})
@@ -301,70 +321,172 @@
 </script>
 
 <style lang="scss">
-	
 	page {
 		background: #f2f2f2;
 	}
 	
-	
-	        .message-box-wrapper {
-	            position: fixed;
-	            left: 0;
-	            right: 0;
-	            top: 0;
-	            bottom: 0;
-	            text-align: center;
-				z-index: 999;
-	            background-color: rgba(0, 0, 0, .3)
-	        }
-	        
-	        .message-box-wrapper::after {
-	            content: "";
-	            display: inline-block;
-	            height: 100%;
-	            width: 0;
-	            vertical-align: middle;
-	        }
-	        
-	        .message-box {
-	            display: inline-block;
-	            vertical-align: middle;
-	            position: relative;
-	            width: 500upx;
-	            height: 300upx;
-	            background: #ffffff;
-	        }
-	        
-	        .message-box-content {
-	            padding: 90upx 60upx;
-	        }
-	        
-	        .message-box-btns {
-	            position: absolute;
-	            bottom: 0;
-	            width: 100%;
-	            height: 100upx;
-	        }
-	        
-	        .message-box-cancel,
-	        .message-box-confirm {
-	            float: left;
-	            width: 50%;
-	            height: 100%;
-	            line-height: 100upx;
-	            color: #ffffff;
-				border: none;
-				border-radius:  0;
-	        }
-	        
-	        .message-box-cancel {
-	            background-color: #8f9498;
-	        }
-	        
-	        .message-box-confirm {
-	            background-color: #755aff;
-	
+	button::after{ border: none; }
+	.uni-popup-dialog {
+		width: 280px;
+		border-radius: 15px;
+		background-color: #fff;
+		position: fixed;
+		/* #ifndef APP-NVUE */
+		z-index: 99;
+		left: 5%;
+		right: 0;
+		top: 150px;
+		bottom: 100;
+		text-align: center;
+		/* #endif */
 	}
+	
+	.uni-dialog-title {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		padding-top: 15px;
+		padding-bottom: 5px;
+	}
+	
+	.uni-dialog-title-text {
+		font-size: 16px;
+		font-weight: 500;
+	}
+	
+	.uni-dialog-content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		padding: 5px 15px 15px 15px;
+	}
+	
+	.uni-dialog-content-text {
+		font-size: 14px;
+		color: #6e6e6e;
+	}
+	
+	.uni-dialog-button-group {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		border-top-color: #f5f5f5;
+		border-top-style: solid;
+		border-top-width: 1px;
+	}
+	
+	.uni-dialog-button {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+	
+		flex: 1;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		height: 45px;
+	}
+	
+	.uni-border-left {
+		border-left-color: #f0f0f0;
+		border-left-style: solid;
+		border-left-width: 1px;
+	}
+	
+	.uni-dialog-button-text {
+		font-size: 14px;
+	}
+	
+	.uni-button-color {
+		color: $uni-color-primary;
+	}
+	
+	.uni-dialog-input {
+		flex: 1;
+		font-size: 14px;
+	}
+	
+	.uni-popup__success {
+		color: $uni-color-success;
+	}
+	
+	.uni-popup__warn {
+		color: $uni-color-warning;
+	}
+	
+	.uni-popup__error {
+		color: $uni-color-error;
+	}
+	
+	.uni-popup__info {
+		color: #909399;
+	}
+
+	.message-box-wrapper {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		text-align: center;
+		z-index: 999;
+		background-color: rgba(0, 0, 0, .3)
+	}
+
+	.message-box-wrapper::after {
+		content: "";
+		display: inline-block;
+		height: 100%;
+		width: 0;
+		vertical-align: middle;
+	}
+
+	.message-box {
+		display: inline-block;
+		vertical-align: middle;
+		position: relative;
+		width: 500upx;
+		height: 300upx;
+		background: #ffffff;
+	}
+
+	.message-box-content {
+		padding: 90upx 60upx;
+	}
+
+	.message-box-btns {
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		height: 100upx;
+	}
+
+	.message-box-cancel,
+	.message-box-confirm {
+		float: left;
+		width: 50%;
+		height: 100%;
+		line-height: 100upx;
+		color: #ffffff;
+		border: none;
+		border-radius: 0;
+	}
+
+	.message-box-cancel {
+		background-color: #8f9498;
+	}
+
+	.message-box-confirm {
+		background-color: #755aff;
+
+	}
+
 	// .modal-bg {
 	//     position: fixed;
 	//     top: 0;

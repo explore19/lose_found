@@ -15,7 +15,6 @@
 				<text class="uni-dialog-button-text uni-button-color">确定</text>
 			</view>
 		</view>
-
 	</view>
 </template>
 

@@ -2,7 +2,6 @@
 
 	<view class=" ">
 		<van-cell-group>
-
 			<view class="cu-form-group margin-top">
 				<view class="title">学号（工号）</view>
 				<input v-model="form.sno" name="sno"></input>
@@ -28,8 +27,12 @@
 				<input v-model="form.qq" name="qq"></input>
 			</view>
 			<van-button type="primary margin-top" size="large" @click="subInfo">提交</van-button>
-
 		</van-cell-group>
+		
+		<view class="demo">
+			<cl-message ref="message"></cl-message>
+		</view>
+		
 	</view>
 </template>
 
@@ -56,25 +59,41 @@
 		},
 
 		methods: {
+			doMessage() {
+				var that = this
+				.$refs["message"].open({
+					message: "完善成功",
+					style: "success",
+					top: "200rpx",
+					duration: 1000,
+				})
+				var that = this
+				setTimeout(function() {
+					uni.reLaunch({
+					  url: '../index/index'
+					});
+				}, 1300);
+			},
 			subInfo: function() {
 				this.formSubmit()
 				if (!this.checkRes) {
 					this.formSubmit()
 				} else {
 					this.$api.updateInfo(this.form).then(res => {
-						wx.showModal({
-							title: '提示',
-							content: "完善成功！",
-							showCancel: false,
-							confirmText: '确定',
-							success(res) {
-								if (res.confirm) {
-									wx.reLaunch({
-										url: '../index/index',
-									})
-								}
-							}
-						})
+						this.doMessage();
+						// wx.showModal({
+						// 	title: '提示',
+						// 	content: "完善成功！",
+						// 	showCancel: false,
+						// 	confirmText: '确定',
+						// 	success(res) {
+						// 		if (res.confirm) {
+						// 			wx.reLaunch({
+						// 				url: '../index/index',
+						// 			})
+						// 		}
+						// 	}
+						// })
 					}).catch(resp => {
 						uni.showToast({
 							title: "修改失败，请稍后再试!",
