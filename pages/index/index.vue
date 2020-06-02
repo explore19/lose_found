@@ -18,7 +18,7 @@
 				<swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
 				 :autoplay="true" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" @change="cardSwiper">
 					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''">
-						<view class="swiper-item">
+						<view class="swiper-item" v-on:click="jumpHtml(item)">
 							<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
 							<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
 						</view>
@@ -290,6 +290,7 @@
 
 			</van-tabs>
 		</view>
+		<web-view v-if="htmlPage" :src="rotationUrl" :bindload="successLoad()">this is a test</web-view>
 	</view>
 </template>
 
@@ -350,7 +351,10 @@
 						label: "首页",
 						icon: "index.png"
 					}
-				]
+				],
+				htmlPage: false,   //是否调用web-view
+				rotationUrl:'http://www.mercy.kim:8080' //Web-view跳转的url
+				
 			}
 		},
 
@@ -435,8 +439,15 @@
 				})
 				this.totalPageNo = this.total % this.pageSize == 0 ? (this.total / this.pageSize) : (this.total / this.pageSize + 1)
 			},
+			
+			// 用来获取轮播图的信息
 			requestRotationChart() {
 				this.$api.getRotationChart(5).then((res) => {
+					
+					let data = res.data
+					console.log("轮播图")
+					console.log(data)
+					
 					if (res.status === 0) {
 						this.rotationChartList = res.data.map((item) => {
 							return {
@@ -450,6 +461,20 @@
 
 				})
 			},
+			// 用来跳转的
+			jumpHtml:function(e){
+				this.htmlPage = true  
+				console.log("success to excute")
+				this.rotationUrl = e.url
+				//wx.miniProgram
+			},
+			
+			// 当页面加载成功时
+			successLoad(){
+				console.log("加载成功！！")
+			},
+			
+			
 			onTabChange(e) {
 				this.postType = e.detail.name
 				this.requestData()
