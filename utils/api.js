@@ -51,6 +51,7 @@ api.praise=(postId) =>request.post('/praise?postId='+postId)
 //点赞
 api.uploadImage=(img) =>request.upload('/upload/image',img)
 
-
+//意见反馈
+api.sendEmail=(data) => request.post('/feedback/send_feedback', data)
 
 export default api
