@@ -54,4 +54,7 @@ api.uploadImage=(img) =>request.upload('/upload/image',img)
 //意见反馈
 api.sendEmail=(data) => request.post('/feedback/send_feedback', data)
 
+//获取未读信息数量
+api.getDisreadMessageCounts=() => request.get('/reply/disread_message')
+
 export default api

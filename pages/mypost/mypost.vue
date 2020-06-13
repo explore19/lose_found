@@ -61,8 +61,8 @@
 												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
 												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
 											</view>
-											<image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
-											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
+											<image v-if="!item.isPraise" class="Heart" :src="options.Heart" />
+											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" />
 										</view>
 									</view>
 
@@ -131,8 +131,8 @@
 												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
 												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
 											</view>
-											<image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
-											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
+											<image v-if="!item.isPraise" class="Heart" :src="options.Heart"  />
+											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" />
 										</view>
 									</view>
 				
@@ -208,8 +208,8 @@
 												<image class="messagingspeechbub" :src="options.messagingspeechbub" />
 												<text class="text-grey space" style="font-size: 18px; text-align: center;">{{item.replyNumber}}</text>
 											</view>
-											<image v-if="!item.isPraise" class="Heart" :src="options.Heart" @click.stop="perfect(item.post.id,index)" />
-											<image v-if="item.isPraise" class="Heart" :src="options.Heart1" @click.stop="perfect(item.post.id,index)" />
+											<image v-if="!item.isPraise" class="Heart" :src="options.Heart" />
+											<image v-if="item.isPraise" class="Heart" :src="options.Heart1"  />
 										</view>
 									</view>
 				
@@ -279,7 +279,7 @@
 			},
 			requestData() {
 				this.$api.queryMyPost().then(res => {
-
+					console.log(res.data)
 					if (res.data.length == 0) {
 						this.exist = false
 					} else {
@@ -296,7 +296,12 @@
 			},
 			perfect: function(postId) {
 				this.$api.praise(postId).then((res) => {
-					this.requestData()
+					this.data[index].isPraise = !this.data[index].isPraise
+					if (this.data[index].isPraise) {
+						this.data[index].praiseNumber++
+					} else {
+						this.data[index].praiseNumber--
+					}
 				})
 			},
 			open(){

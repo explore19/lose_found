@@ -107,7 +107,8 @@
 					QQ: '',
 					image: [],
 					postType: 2,//2表示表白帖, type = 101表示匿名表白帖
-					checkRes: false
+					checkRes: false, 
+					ststus: 1
 				},
 				// 悬浮菜单的元素的信息
 				button: [{

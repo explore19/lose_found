@@ -152,7 +152,6 @@
 		"list": [{
 			"pagePath": "pages/index/index",
 			"iconPath": "static/images/主页.png",
-			
 			"selectedIconPath": "static/images/主页1.png",
 			"text": "主页"
 		}, {

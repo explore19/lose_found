@@ -18,7 +18,7 @@
 				<swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
 				 :autoplay="true" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" @change="cardSwiper">
 					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''">
-						<view class="swiper-item">
+						<view class="swiper-item" v-on:click="jumpHtml(item)">
 							<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
 							<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
 						</view>
@@ -61,7 +61,7 @@
 													<view class="right">
 														<view class="cu-tag round bg-blue sm">已实名</view>
 													</view>
-													<view class="huati text-orange text-bold">#失物招领#</view>
+													<view class="huati text-orange text-bold">#失物寻物#</view>
 												</view>
 												<view class="text-gray text-sm flex justify-between">
 													{{item.post.createTime}}
@@ -198,7 +198,7 @@
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view> -->
 
-					<view v-for="(item,index) in data" :key="index" style="margin-top: 15upx;">
+					<view v-for="(item,index) in data" v-if="item.post.status == 0" :key="index" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
@@ -290,6 +290,7 @@
 
 			</van-tabs>
 		</view>
+		<web-view v-if="htmlPage" :src="rotationUrl" :bindload="successLoad()">this is a test</web-view>
 	</view>
 </template>
 
@@ -333,6 +334,7 @@
 				reachbto0: false,
 				reachbto1: false,
 				dotStyle: true,
+				disreadMessageCounts:0,
 				// 悬浮菜单的元素的信息
 				button: [{
 						label: '表白',
@@ -350,11 +352,20 @@
 						label: "首页",
 						icon: "index.png"
 					}
-				]
+				],
+				htmlPage: false,   //是否调用web-view
+				rotationUrl:'http://www.mercy.kim:8080' //Web-view跳转的url
+				
 			}
 		},
 
 		methods: {
+			refreshDisreadMessageCounts(){
+				uni.setTabBarBadge({
+					index: 2,
+					text: this.disreadMessageCounts + ''
+				});
+			},
 			getAnonymousProtrait(id) {
 				var result = id%5
 				return "../../static/anonymous" + result + ".png"
@@ -412,6 +423,10 @@
 				return true
 			},
 			requestData() { //用来重复刷新页面 重复像后端获取数据		
+				this.$api.getDisreadMessageCounts().then((res) =>{
+					this.disreadMessageCounts = res.data
+				})
+				this.refreshDisreadMessageCounts()
 				this.page = 1
 				this.$api.queryPost({ //用来批量获取
 					page: this.page,
@@ -435,8 +450,15 @@
 				})
 				this.totalPageNo = this.total % this.pageSize == 0 ? (this.total / this.pageSize) : (this.total / this.pageSize + 1)
 			},
+			
+			// 用来获取轮播图的信息
 			requestRotationChart() {
 				this.$api.getRotationChart(5).then((res) => {
+					
+					let data = res.data
+					console.log("轮播图")
+					console.log(data)
+					
 					if (res.status === 0) {
 						this.rotationChartList = res.data.map((item) => {
 							return {
@@ -450,6 +472,20 @@
 
 				})
 			},
+			// 用来跳转的
+			jumpHtml:function( ){
+				this.htmlPage = true  
+				console.log("success to excute")
+				this.rotationUrl = e.url
+				//wx.miniProgram
+			},
+			
+			// 当页面加载成功时
+			successLoad(){
+				console.log("加载成功！！")
+			},
+			
+			
 			onTabChange(e) {
 				this.postType = e.detail.name
 				this.requestData()
@@ -551,14 +587,14 @@
 			uni.startPullDownRefresh();
 		},
 		onPullDownRefresh() {
+			
 			console.log('refresh');
-			this.requestData()
+			this.requestData()	
 			var that = this;
 			setTimeout(function() {
 				uni.stopPullDownRefresh();
 				that.doMessage();
 			}, 1000);
-
 		}
 
 	}
