@@ -24,16 +24,21 @@
 						</view>
 					</swiper-item>
 				</swiper>
+				
+				
+				
 				<!-- <swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
 						 :autoplay="true" interval="5000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
 						 indicator-active-color="#0081ff">
-							<swiper-item v-for="(item,index) in swiperList" :key="index" :class="cardCur==index?'cur':''">
+							<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''">
 								<view class="swiper-item">
 									<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
 									<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
-								
+								</view>
 							</swiper-item>
-						</swiper> -->
+				</swiper> -->
+				
+				
 			</view>
 
 
@@ -290,7 +295,7 @@
 
 			</van-tabs>
 		</view>
-		<web-view v-if="htmlPage" :src="rotationUrl" :bindload="successLoad()">this is a test</web-view>
+		<!-- <web-view v-if="htmlPage" :src="rotationUrl" :bindload="successLoad()" :bindmessage="testInfo()">this is a test</web-view>	 -->
 	</view>
 </template>
 
@@ -337,20 +342,20 @@
 				// 悬浮菜单的元素的信息
 				button: [{
 						label: '表白',
-						icon: "user.png",
-					},
-					{
-						label: '我的发布',
-						icon: "message.png"
+						icon: "Confession1.png",
 					},
 					{
 						label: '发布',
-						icon: "announce.png"
-					}, 
-					{
-						label: "首页",
-						icon: "index.png"
+						icon: "message.png"
 					}
+					// {
+					// 	label: '发布',
+					// 	icon: "announce.png"
+					// }, 
+					// {
+					// 	label: "首页",
+					// 	icon: "index.png"
+					// }
 				],
 				htmlPage: false,   //是否调用web-view
 				rotationUrl:'http://www.mercy.kim:8080' //Web-view跳转的url
@@ -463,8 +468,14 @@
 			},
 			// 用来跳转的
 			jumpHtml:function(e){
-				this.htmlPage = true  
+				//this.htmlPage = true  
 				console.log("success to excute")
+				uni.navigateTo({
+					url:"../testWebView/testWebView",
+					success: (res) => {
+						this.$global.setrotationChartUrl(e.url)
+					}
+				})
 				this.rotationUrl = e.url
 				//wx.miniProgram
 			},
@@ -472,6 +483,12 @@
 			// 当页面加载成功时
 			successLoad(){
 				console.log("加载成功！！")
+
+			},
+			
+			// 测试用的方法
+			testInfo(e){
+				//console.log(e)
 			},
 			
 			
@@ -497,7 +514,7 @@
 					})
 				} else if (index === 1) {
 					uni.navigateTo({
-						url: "../mypost/mypost",
+						url: "../announce/announce",
 						success: (res) => {
 							console.log("announce")
 						}
@@ -519,7 +536,6 @@
 				}
 			}
 		},
-
 		created() {
 			this.requestData()
 			this.requestRotationChart()
