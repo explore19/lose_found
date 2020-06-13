@@ -15,7 +15,7 @@
 
 		<view class="content">
 			<view>
-				<swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
+				<!-- <swiper class="card-swiper" :indicator-dots="true" :circular="true" :class="dotStyle?'square-dot':'round-dot'"
 				 :autoplay="true" interval="5000" duration="500" indicator-color="#8799a3" indicator-active-color="#0081ff" @change="cardSwiper">
 					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''">
 						<view class="swiper-item" v-on:click="jumpHtml(item)">
@@ -23,20 +23,16 @@
 							<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
 						</view>
 					</swiper-item>
-				</swiper>
-				
-				
-				
-				<!-- <swiper class="card-swiper" :class="dotStyle?'square-dot':'round-dot'" :indicator-dots="true" :circular="true"
-						 :autoplay="true" interval="5000" duration="500" @change="cardSwiper" indicator-color="#8799a3"
-						 indicator-active-color="#0081ff">
-							<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''">
-								<view class="swiper-item">
-									<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
-									<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
-								</view>
-							</swiper-item>
 				</swiper> -->
+				
+				
+				
+				<swiper class="['screen-swiper',dotStyle?'square-dot':'round-dot']" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" @change="cardSwiper">
+					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''" v-on:click="jumpHtml(item)">
+							<image :src="item.url" mode="aspectFill"></image>
+							<video :src="item.url" autoplay loop muted="true" show-play-btn="false" controls="false" objectFit="cover" v-if="item.type == 'video'"></video>
+					</swiper-item>
+				</swiper>
 				
 				
 			</view>
