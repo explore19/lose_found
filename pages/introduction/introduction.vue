@@ -212,7 +212,8 @@
 					replyId: -1,
 					type: 0,
 					postId: this.$global.postId,
-					info: ''
+					info: '', 
+					isRead: 0
 				},
 				replyList: [],
 				userStatus: "",
@@ -404,8 +405,6 @@
 						}
 					})
 				}
-
-
 			},
 			resetForm() {
 				this.replyForm = {

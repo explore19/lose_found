@@ -102,6 +102,12 @@
 		   "style": {
 		   	"navigationBarTitleText": "意见反馈"
 		   }
+		},
+		{
+		    "path" : "pages/testWebView/testWebView",
+		   "style": {
+		   	"navigationBarTitleText": "轮播图"
+		   }
 		}
     ],
 	"globalStyle": {
@@ -154,12 +160,14 @@
 			"iconPath": "static/images/主页.png",
 			"selectedIconPath": "static/images/主页1.png",
 			"text": "主页"
-		}, {
-			"pagePath": "pages/announce/announce",
-			"iconPath": "static/images/发布.png",
-			"selectedIconPath": "static/images/发布1.png",
-			"text": "发布"
-		}, {
+		},
+		// {
+		// 	"pagePath": "pages/announce/announce",
+		// 	"iconPath": "static/images/发布.png",
+		// 	"selectedIconPath": "static/images/发布1.png",
+		// 	"text": "发布"
+		// },
+		{
 			"pagePath": "pages/message/message",
 			"iconPath": "static/images/消息.png",
 			"selectedIconPath": "static/images/消息1.png",

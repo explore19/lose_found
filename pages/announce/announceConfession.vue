@@ -112,18 +112,16 @@
 				},
 				// 悬浮菜单的元素的信息
 				button: [{
-						label: '表白',
+						label: '用户',
 						icon: "user.png",
 					},
 					{
-						label: '我的发布',
+						label: '消息',
 						icon: "message.png"
-					},
+					}
+					,
 					{
-						label: '发布',
-						icon: "announce.png"
-					}, {
-						label: "首页",
+						label: '首页',
 						icon: "index.png"
 					}
 				]
@@ -163,23 +161,23 @@
 				let index = e.detail.index
 				// 获得点击按钮
 				console.log(index)
-				if (index === 0) {
+				if (index === 2) {
 					uni.switchTab({
-						url: "../announce/announceConfession",
+						url: "../index/index",
 						success: (res) => {
 							console.log("")
 						}
 					})
 				} else if (index === 1) {
 					uni.switchTab({
-						url: "../mypost/mypost",
+						url: "../message/message",
 						success: (res) => {
 							console.log("announce")
 						}
 					})
-				} else if (index === 2) {
+				} else if (index === 0) {
 					uni.switchTab({
-						url: "../announce/announce",
+						url: "../user/user",
 						success: (res) => {
 							console.log("user")
 						}

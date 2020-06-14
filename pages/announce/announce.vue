@@ -231,20 +231,22 @@
 				},
 				// 悬浮菜单的元素的信息
 				button: [{
-						label: '寻人',
+						label: '用户',
 						icon: "user.png",
 					},
 					{
-						label: '我的发布',
+						label: '消息',
 						icon: "message.png"
-					},
+					}
+					,
 					{
-						label: '发布',
-						icon: "announce.png"
-					}, {
-						label: "首页",
+						label: '首页',
 						icon: "index.png"
 					}
+					//, {
+					// 	label: "首页",
+					// 	icon: "index.png"
+					// }
 				]
 
 			}
@@ -301,28 +303,28 @@
 			},
 			// 悬浮菜单的调用的方法
 			ClickChange: function(e) {
-				console.log("click it ")
+				console.log("click it")
 				console.log(e)
 				let index = e.detail.index
 				// 获得点击按钮
 				console.log(index)
-				if (index === 0) {
-					uni.reLaunch({
-						url: "../announce/announceConfession",
+				if (index === 2) {
+					uni.switchTab({
+						url: "../index/index",
 						success: (res) => {
 							console.log("")
 						}
 					})
 				} else if (index === 1) {
-					uni.reLaunch({
-						url: "../mypost/mypost",
+					uni.switchTab({
+						url: "../message/message",
 						success: (res) => {
 							console.log("announce")
 						}
 					})
-				} else if (index === 2) {
+				} else if (index === 0) {
 					uni.switchTab({
-						url: "../announce/announce",
+						url: "../user/user",
 						success: (res) => {
 							console.log("user")
 						}

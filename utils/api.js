@@ -57,4 +57,7 @@ api.sendEmail=(data) => request.post('/feedback/send_feedback', data)
 //获取未读信息数量
 api.getDisreadMessageCounts=() => request.get('/reply/disread_message')
 
+//更新用户未读信息
+api.updateDisreadMessage=() => request.put('/reply/update_disreadMessage')
+
 export default api

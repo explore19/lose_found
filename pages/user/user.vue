@@ -176,19 +176,20 @@
 				// 悬浮菜单的元素的信息
 				button: [{
 						label: '表白',
-						icon: "user.png",
-					},
-					{
-						label: '我的发布',
-						icon: "message.png"
+						icon: "Confession2.png",
 					},
 					{
 						label: '发布',
-						icon: "announce.png"
-					}, {
-						label: "首页",
-						icon: "index.png"
+						icon: "message.png"
 					}
+					// ,
+					// {
+					// 	label: '发布',
+					// 	icon: "announce.png"
+					// }, {
+					// 	label: "首页",
+					// 	icon: "index.png"
+					// }
 				],
 				userList: [{
 						title: '我的收藏',
@@ -212,15 +213,15 @@
 				// 获得点击按钮
 				console.log(index)
 				if (index === 0) {
-					uni.reLaunch({
+					uni.navigateTo({
 						url: "../announce/announceConfession",
 						success: (res) => {
 							console.log("")
 						}
 					})
 				} else if (index === 1) {
-					uni.reLaunch({
-						url: "../mypost/mypost",
+					uni.navigateTo({
+						url: "../announce/announce",
 						success: (res) => {
 							console.log("announce")
 						}
@@ -250,7 +251,7 @@
 
 					});
 				} else {
-					uni.reLaunch({
+					uni.navigateTo({
 						url: '../perfect/perfect',
 					})
 				}
