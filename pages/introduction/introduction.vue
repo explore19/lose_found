@@ -191,6 +191,7 @@
 				}
 			}
 		},
+		
 		data() {
 			return {
 				post_id:0, 
@@ -219,9 +220,22 @@
 				userStatus: "",
 				placeholderText: "说点什么吧...",
 				show: false,
-				headPortrait: ""
+				headPortrait: "", 
+				postData:{
+					postId: this.$global.postId,
+					type:0, 
+					postType: 0, 
+					nickName: '', 
+					browsePoints: 0, 
+					replyNumber: 0, 
+					praiseNumber: 0, 
+					name: '',
+					details: '', 
+					updateTime: '' 
+				},
 			};
 		},
+		
 		methods: {
 			getAnonymousProtrait(id) {
 				var result = id%5
@@ -268,7 +282,6 @@
 					}
 				})
 			},
-
 			requestData() {
 				let result
 				this.$api.getAllType().then(res => {
@@ -277,7 +290,6 @@
 
 				this.$api.getPost({
 					id: this.$global.postId,
-					
 				}).then(res => {
 					if (res.status === 0) {
 						this.data = res.data
@@ -295,6 +307,24 @@
 							this.hasImg = true
 							this.image = this.data.post.image.split("&&&")
 						}
+						
+						this.postData.type = this.data.post.type
+						this.postData.postType = this.data.post.postType
+						this.postData.nickName = this.data.nickName
+						this.postData.browsePoints = this.data.post.browsePoints
+						this.postData.praiseNumber = this.data.praiseNumber
+						this.postData.details = this.data.post.details
+						this.postData.name = this.data.post.name
+						this.postData.updateTime = this.data.post.updateTime
+						console.log(this.postData)
+						var that = this
+						uni.setStorage({
+							key: this.$global.postId + '',
+							data: this.postData,
+							success: function () {
+								console.log("cookie success")
+							}
+						});
 					}
 				})
 			},
@@ -303,8 +333,6 @@
 					postId: this.$global.postId
 				}).then(res => {
 					if (res.status == 0) {
-						console.log("here")
-						console.log(res)
 						let replyList = []
 						this.recursionReply(res.data, replyList)
 						this.replyList = replyList
@@ -328,7 +356,6 @@
 					this.firstFloorReply.replyUserName = node.reply.nickName
 					this.firstFloorReply.createTime = node.reply.reply.createTime
 					this.firstFloorReply.id = node.reply.reply.id
-
 				} else { //回复回复的回复
 					this.firstFloorReply.replys.push(node.reply)
 				}
@@ -378,8 +405,6 @@
 				this.show = false
 			},
 			subreply: function(e) { //提交回复内容的方法
-			console.log("here")
-			console.log(this.replyForm)
 			
 				if (this.userStatus == 3) {
 					uni.showToast({
@@ -423,8 +448,13 @@
 				this.headPortrait = res.data.headPortrait
 				this.userStatus = res.data.status
 			})
-		}
+		}, 
 
+
+		onBackPress(options) {
+			console.log("hree")
+			
+		}
 	}
 </script>
 

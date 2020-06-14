@@ -25,16 +25,12 @@
 					</swiper-item>
 				</swiper> -->
 				
-				
-				
 				<swiper class="['screen-swiper',dotStyle?'square-dot':'round-dot']" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" @change="cardSwiper">
 					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''" v-on:click="jumpHtml(item)">
 							<image :src="item.url" mode="aspectFill"></image>
 							<video :src="item.url" autoplay loop muted="true" show-play-btn="false" controls="false" objectFit="cover" v-if="item.type == 'video'"></video>
 					</swiper-item>
 				</swiper>
-				
-				
 			</view>
 
 
@@ -345,18 +341,9 @@
 						label: '发布',
 						icon: "message.png"
 					}
-					// {
-					// 	label: '发布',
-					// 	icon: "announce.png"
-					// }, 
-					// {
-					// 	label: "首页",
-					// 	icon: "index.png"
-					// }
 				],
 				htmlPage: false,   //是否调用web-view
 				rotationUrl:'http://www.mercy.kim:8080' //Web-view跳转的url
-				
 			}
 		},
 
@@ -623,6 +610,7 @@
 		margin-left: 39rpx;
 		margin-top: 13rpx;
 	}
+
 
 	.submain {
 		/* position: relative; */

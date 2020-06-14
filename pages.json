@@ -23,7 +23,7 @@
 			"style": {
 				"navigationBarTitleText": "主页",
 				"enablePullDownRefresh": true
-				
+
 			}
 		},
 		{
@@ -90,26 +90,31 @@
 			"style": {
 				"navigationBarTitleText": "我的帖子"
 			}
-		}
-	    ,{
-            "path" : "pages/my_reply/my_reply",
-           "style": {
-           	"navigationBarTitleText": "我的回复"
-           }
-        },
-		{
-		    "path" : "pages/feedback/feedback",
-		   "style": {
-		   	"navigationBarTitleText": "意见反馈"
-		   }
+		}, {
+			"path": "pages/my_reply/my_reply",
+			"style": {
+				"navigationBarTitleText": "我的回复"
+			}
 		},
 		{
-		    "path" : "pages/testWebView/testWebView",
-		   "style": {
-		   	"navigationBarTitleText": "轮播图"
-		   }
+			"path": "pages/feedback/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+		},
+		{
+			"path": "pages/testWebView/testWebView",
+			"style": {
+				"navigationBarTitleText": "轮播图"
+			}
+		}, 
+		{
+			"path": "pages/history/history",
+			"style": {
+				"navigationBarTitleText": "我的足迹"
+			}
 		}
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -146,44 +151,45 @@
 			// "van-sidebar-item": "/wxcomponents/vant-weapp/dist/sidebar-item/index",
 			// "van-skeleton": "/wxcomponents/vant-weapp/dist/skeleton/index"
 
-			"wux-button":"/wxcomponents/lib/button/index",
-			"wux-fab-button":"/wxcomponents/lib/fab-button/index",
-			"wux-wing-blank":"/wxcomponents/lib/white-space/index",
-			"wux-white-space":"/wxcomponents/lib/wing-blank/index"
-			
+			"wux-button": "/wxcomponents/lib/button/index",
+			"wux-fab-button": "/wxcomponents/lib/fab-button/index",
+			"wux-wing-blank": "/wxcomponents/lib/white-space/index",
+			"wux-white-space": "/wxcomponents/lib/wing-blank/index"
+
 		}
 
 	},
 	"tabBar": {
 		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/images/主页.png",
-			"selectedIconPath": "static/images/主页1.png",
-			"text": "主页"
-		},
-		// {
-		// 	"pagePath": "pages/announce/announce",
-		// 	"iconPath": "static/images/发布.png",
-		// 	"selectedIconPath": "static/images/发布1.png",
-		// 	"text": "发布"
-		// },
-		{
-			"pagePath": "pages/message/message",
-			"iconPath": "static/images/消息.png",
-			"selectedIconPath": "static/images/消息1.png",
-			"text": "消息"
-		}, {
-			"pagePath": "pages/user/user",
-			"iconPath": "static/images/我的.png",
-			"selectedIconPath": "static/images/我的1.png",
-			"text": "我的"
-		}]
-	}, 
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/主页.png",
+				"selectedIconPath": "static/images/主页1.png",
+				"text": "主页"
+			},
+			// {
+			// 	"pagePath": "pages/announce/announce",
+			// 	"iconPath": "static/images/发布.png",
+			// 	"selectedIconPath": "static/images/发布1.png",
+			// 	"text": "发布"
+			// },
+			{
+				"pagePath": "pages/message/message",
+				"iconPath": "static/images/消息.png",
+				"selectedIconPath": "static/images/消息1.png",
+				"text": "消息"
+			}, {
+				"pagePath": "pages/user/user",
+				"iconPath": "static/images/我的.png",
+				"selectedIconPath": "static/images/我的1.png",
+				"text": "我的"
+			}
+		]
+	},
 	"easycom": {
 		"autoscan": true,
 		"custom": {
-				"cl-(.*)": "@/cool/ui/components/$1/$1.vue"
+			"cl-(.*)": "@/cool/ui/components/$1/$1.vue"
 		}
-	 }
+	}
 
 }

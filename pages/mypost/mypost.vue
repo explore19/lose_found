@@ -277,6 +277,7 @@
 					duration: 1000,
 				})
 			},
+			
 			requestData() {
 				this.$api.queryMyPost().then(res => {
 					console.log(res.data)

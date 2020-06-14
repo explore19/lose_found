@@ -32,7 +32,8 @@
 								<text class="uni-dialog-button-text">取消</text>
 							</div>
 							<div class="uni-dialog-button uni-border-left">
-								<button class="uni-dialog-button-text uni-button-color" style="background-color: #fff; width: 140px; color: #00aaff;"  type="default"  open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</button>
+								<button class="uni-dialog-button-text uni-button-color" style="background-color: #fff; width: 140px; color: #00aaff;"
+								 type="default" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</button>
 								<!-- <text class="uni-dialog-button-text uni-button-color" open-type="getUserInfo" @getuserinfo="bindGetUserInfo">确定</text> -->
 							</div>
 						</div>
@@ -116,20 +117,26 @@
  			<com-nav :list="list" :col="4"></com-nav>
  		</view> -->
 
+
 		<!-- 用户功能 -->
-		<!-- <view class="com-item">
+		<view class="com-item">
 			<view class="com-wrap">
-				<view class="cell" v-for="(item, index) in userList" :key="index">
+				<view class="cell">
 					<view class="cell-left">
-						<image class="cell-icon" :src="item.icon" mode="aspectFill"></image>
-						<view class="cell-text">{{ item.title }}</view>
+						<image class="cell-icon" src="/static/images/user/icon-collect.png" mode="aspectFill"></image>
+						<view class="cell-text">我的收藏</view>
+					</view>
+					<view class="iconfont iconmore1"></view>
+				</view>
+				<view class="cell" @click="toHistory">
+					<view class="cell-left">
+						<image class="cell-icon" src="/static/images/user/icon-foot.png" mode="aspectFill"></image>
+						<view class="cell-text">我的足迹</view>
 					</view>
 					<view class="iconfont iconmore1"></view>
 				</view>
 			</view>
-		</view> -->
-
-
+		</view>
 
 		<!-- 用户服务 -->
 		<view class="com-item">
@@ -182,14 +189,6 @@
 						label: '发布',
 						icon: "message.png"
 					}
-					// ,
-					// {
-					// 	label: '发布',
-					// 	icon: "announce.png"
-					// }, {
-					// 	label: "首页",
-					// 	icon: "index.png"
-					// }
 				],
 				userList: [{
 						title: '我的收藏',
@@ -199,7 +198,7 @@
 					{
 						title: '我的足迹',
 						icon: '/static/images/user/icon-foot.png',
-						path: 'browse-list'
+						path: '../my_history/play_history'
 					}
 				]
 			};
@@ -305,19 +304,21 @@
 					url: "../my_reply/my_reply"
 				})
 			},
-
 			feedback() {
 				wx.navigateTo({
 					url: "../feedback/feedback"
 				})
+			},
+			toHistory() {
+				console.log("click")
+				wx.navigateTo({
+					url: "../history/history"
+				})
 			}
-
 		},
 		created() {
 			this.requestData()
 		}
-
-
 	};
 </script>
 
@@ -325,8 +326,11 @@
 	page {
 		background: #f2f2f2;
 	}
-	
-	button::after{ border: none; }
+
+	button::after {
+		border: none;
+	}
+
 	.uni-popup-dialog {
 		width: 280px;
 		border-radius: 15px;
@@ -341,7 +345,7 @@
 		text-align: center;
 		/* #endif */
 	}
-	
+
 	.uni-dialog-title {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -351,12 +355,12 @@
 		padding-top: 15px;
 		padding-bottom: 5px;
 	}
-	
+
 	.uni-dialog-title-text {
 		font-size: 16px;
 		font-weight: 500;
 	}
-	
+
 	.uni-dialog-content {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -366,12 +370,12 @@
 		align-items: center;
 		padding: 5px 15px 15px 15px;
 	}
-	
+
 	.uni-dialog-content-text {
 		font-size: 14px;
 		color: #6e6e6e;
 	}
-	
+
 	.uni-dialog-button-group {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -381,50 +385,50 @@
 		border-top-style: solid;
 		border-top-width: 1px;
 	}
-	
+
 	.uni-dialog-button {
 		/* #ifndef APP-NVUE */
 		display: flex;
 		/* #endif */
-	
+
 		flex: 1;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		height: 45px;
 	}
-	
+
 	.uni-border-left {
 		border-left-color: #f0f0f0;
 		border-left-style: solid;
 		border-left-width: 1px;
 	}
-	
+
 	.uni-dialog-button-text {
 		font-size: 14px;
 	}
-	
+
 	.uni-button-color {
 		color: $uni-color-primary;
 	}
-	
+
 	.uni-dialog-input {
 		flex: 1;
 		font-size: 14px;
 	}
-	
+
 	.uni-popup__success {
 		color: $uni-color-success;
 	}
-	
+
 	.uni-popup__warn {
 		color: $uni-color-warning;
 	}
-	
+
 	.uni-popup__error {
 		color: $uni-color-error;
 	}
-	
+
 	.uni-popup__info {
 		color: #909399;
 	}
