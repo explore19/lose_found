@@ -117,7 +117,7 @@
  		</view> -->
 
 		<!-- 用户功能 -->
-		<view class="com-item">
+		<!-- <view class="com-item">
 			<view class="com-wrap">
 				<view class="cell" v-for="(item, index) in userList" :key="index">
 					<view class="cell-left">
@@ -127,7 +127,7 @@
 					<view class="iconfont iconmore1"></view>
 				</view>
 			</view>
-		</view>
+		</view> -->
 
 
 
