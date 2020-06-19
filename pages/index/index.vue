@@ -40,7 +40,7 @@
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view> -->
 
-					<view v-for="(item,index) in data" :key="index"  style="margin-top: 15upx;">
+					<view v-for="(item,index) in data" :key="index" v-if="item.post.postType==0"  style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
@@ -60,9 +60,13 @@
 													</view>
 													<view class="huati text-orange text-bold">#失物寻物#</view>
 												</view>
-												<view class="text-gray text-sm flex justify-between">
-													{{item.post.createTime}}
+												
+												<view class="henflex">
+													<view class="text-gray text-sm flex justify-between">
+														{{item.post.createTime}}
+													</view>
 												</view>
+												
 											</view>
 										</view>
 
@@ -119,7 +123,7 @@
 					<!-- <view class="popup window " v-if="userstatus" style="margin-top: 5upx;">
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view> -->
-					<view v-for="(item,index) in data" :key="index" style="margin-top: 15upx;">
+					<view v-for="(item,index) in data" :key="index" v-if="item.post.postType==1" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
@@ -195,7 +199,7 @@
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view> -->
 
-					<view v-for="(item,index) in data" v-if="item.post.status == 0" :key="index" style="margin-top: 15upx;">
+					<view v-for="(item,index) in data" v-if="item.post.status == 0 && item.post.postType==2" :key="index" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">

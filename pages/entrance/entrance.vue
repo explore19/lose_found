@@ -14,28 +14,17 @@
 			};
 		},
 		methods:{
+			
 		},
 		created()  {   //生命周期函数
-		   wx.login({
-		   	success: (res) => {
-				this.$api.login(res.code).then((res)=>{
-					if(res.status===0){
-						this.$api.getUserInfo().then((res)=>{
-							uni.switchTab({
-										url: "/pages/index/index"
-									})
-							// if(res.status===0){
-							// 	let user = res.data
-							// uni.switchTab({
-							// 			url: "/pages/index/index"
-							// 		})
-							// }
-						})
-					
-					}
-				})
-		   	}
-		   })
+			this.$WXlogin.wxlogin()
+			uni.setStorage({
+				key: 'NoLongerRemind',
+				data: '0',
+				success: function() {
+					console.log('cookie success');
+				}
+			});
 		}
 	}
 </script>

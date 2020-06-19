@@ -6,13 +6,13 @@
 		<view class="padding bg-white">
 			<input hidden v-model="form.author" name="author" id="author" type="text">
 			<view class="text-cut padding radius bg-white" style="width:220px;">您的问题或者建议：</view>
-			<textarea v-model="form.text" name="text" class="padding myStyle" type="text" value="bug!!!!" placeholder="输入个人的意见反馈,字数在200字以内" maxlength="200"/>
+			<textarea v-model="form.text" name="text" class="padding myStyle" type="text"placeholder="输入个人的意见反馈,字数在200字以内" maxlength="200"/>
 			<view class="text-cut padding radius bg-white" style="width:220px;">您的联系方式：</view>
 			<view class="padding">
-				<input v-model="form.mobile" name="mobile" class="myStyle" type="text" value="18633189276" placeholder="输入电话号码" maxlength="30"/>
+				<input v-model="form.mobile" name="mobile" class="myStyle" type="text" placeholder="输入电话号码" maxlength="30"/>
 			</view>
 			<view class="padding">
-				<input v-model="form.from" name="from" class="myStyle" type="text" value="1347006977@qq.com" placeholder="输入电子邮箱" maxlength="30"/>
+				<input v-model="form.from" name="from" class="myStyle" type="text" placeholder="输入电子邮箱" maxlength="30"/>
 			</view>
 			<view class="text-cut padding radius bg-white" >留下的您的联系方式，以便我们了解问题<br>及时反馈和结果，我们会保护好您的隐私</view>
 			<view class="padding flex flex-direction">

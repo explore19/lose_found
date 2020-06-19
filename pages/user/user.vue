@@ -259,7 +259,7 @@
 			showpopup() {
 				this.popup = 1;
 			},
-			//关闭活动规则页面
+			//关闭授权弹框
 			closepopup() {
 				this.popup = 0;
 			},

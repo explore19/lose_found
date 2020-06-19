@@ -1,3 +1,5 @@
+import WXlogin from './WXlogin.js'
+
 const request = {}
 const headers = {}
 // const baseUrl = "https://xyzliu.cn:8000"
@@ -19,6 +21,16 @@ request.post = (url, data) => {
 		dataType: 'json',
 		header: headers
 	}).then(res => {
+		if(res[1].statusCode == 423){
+			console.log("重新登陆")
+			uni.showLoading({
+			    title: '正在重新登陆...', 
+			});
+			WXlogin.wxlogin()
+			setTimeout(function () {
+			    uni.hideLoading();
+			}, 2000);
+		}
 		if (res[1].header['Set-Cookie']) {
 			let cookies = res[1].header['Set-Cookie'].split(';')
 			for (let i = 0; i < cookies.length; i++) {
@@ -30,7 +42,6 @@ request.post = (url, data) => {
 		}
 		return res[1].data
 	}).catch(resp => {
-
 	})
 }
 
@@ -43,6 +54,10 @@ request.get = (url, parmas) => {
 		dataType: 'json',
 		header: headers
 	}).then(res => {
+		if(res[1].statusCode == 423){
+			console.log("重新登陆")
+			WXlogin.wxlogin()
+		}
 		return res[1].data
 	}).catch(resp => {
 
@@ -58,6 +73,10 @@ request.put = (url, data) => {
 		dataType: 'json',
 		header: headers
 	}).then(res => {
+		if(res[1].statusCode == 423){
+			console.log("重新登陆")
+			WXlogin.wxlogin()
+		}
 		return res[1].data
 	}).catch(resp => {
 
@@ -72,6 +91,10 @@ request.delete = (url, id) => {
 		dataType: 'json',
 		header: headers
 	}).then(res => {
+		if(res[1].statusCode == 423){
+			console.log("重新登陆")
+			WXlogin.wxlogin()
+		}
 		return res[1].data
 	}).catch(resp => {
 
@@ -87,6 +110,10 @@ request.upload = (url, file) => {
 		fileType: "image",
 		header:headers
 	}).then(res => {
+		if(res[1].statusCode == 423){
+			console.log("重新登陆")
+			WXlogin.wxlogin()
+		}
 		return res[1].data
 	}).catch(resp => {
 

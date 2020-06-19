@@ -89,10 +89,10 @@
 				});
 			},
 		},
-		onShow: async function(options) {
+		onShow: function(options) {
 			this.requestData()
 		},
-		async created() {
+		created() {
 			this.requestData()
 		}
 	}

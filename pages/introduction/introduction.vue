@@ -27,9 +27,13 @@
 									</view>
 									<view v-if="data.post.postType == 2" class="huati text-pink text-bold">#表白墙#</view>
 								</view>
-						
-								<view class="text-gray text-sm flex justify-between">
-									{{data.post.createTime}}
+								
+								<view class="henflex">
+									<view class="text-gray text-sm flex justify-between">
+										{{data.post.createTime}}
+									</view>
+									<view v-if="data.post.type == 102" class="huati text-cyan text-bold">#物品已送到大活221#</view>
+									
 								</view>
 							</view>
 						</view>
@@ -49,12 +53,16 @@
 				<view v-if="data.post.postType != 2" class="solid-bottom text-lg padding">
 					<text class="text-black text-bold">{{data.post.name}}</text>
 				</view>
-				<view v-if="data.post.postType != 2" style="margin:10upx 30upx;">丢失地点：{{data.post.lostPlace}}</view>
-				<view v-if="data.post.postType != 2" style="margin:10upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
-				<view v-if="data.post.contact && data.post.postType != 2 " style="margin:10upx 30upx;">联系方式：{{data.post.contact}}</view>
-				<view v-if="data.post.type && data.post.postType != 2" style="margin:10upx 30upx;">物品类型：{{typeName}}</view>
-				<view v-if="data.post.postType != 2" style="margin:10upx 30upx;">详情：{{data.post.details}}</view>
-				<view v-if="data.post.postType == 2" style="margin:10upx 30upx;">{{data.post.details}}</view>
+				
+				<view v-if="data.post.postType != 2 && data.post.postType === 0" style="margin:20upx 30upx;">丢失地点：{{data.post.lostPlace}}</view>
+				<view v-if="data.post.postType != 2 && data.post.postType === 0" style="margin:20upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
+				<view v-if="data.post.postType != 2 && data.post.postType === 1" style="margin:20upx 30upx;">拾取地点：{{data.post.lostPlace}}</view>
+				<view v-if="data.post.postType != 2 && data.post.postType === 1" style="margin:20upx 30upx;">拾取时间：{{data.post.loseTime}}</view>
+				<view v-if="data.post.contact && data.post.postType != 2 " style="margin:20upx 30upx;">手机&emsp;号：{{data.post.contact}}</view>
+				<view v-if="data.post.qq && data.post.postType != 2 " style="margin:20upx 30upx;">q&emsp;q&emsp;号：{{data.post.qq}}</view>
+				<view v-if="data.post.type && data.post.postType != 2" style="margin:20upx 30upx;">物品类型：{{typeName}}</view>
+				<view v-if="data.post.postType != 2" style="margin:20upx 30upx;">详&emsp;&emsp;情：{{data.post.details}}</view>
+				<view v-if="data.post.postType == 2" style="margin:20upx 30upx;">{{data.post.details}}</view>
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg">
 					<!-- <view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
 					</view> -->
@@ -112,9 +120,10 @@
 					<view class="cu-avatar round " :style="'background-image:url('+item.replyUserPortrait+');'"></view>
 					<view class="content">
 						<view class="text-grey">{{item.replyUserName}}</view>
-						<view hover-class="wsui-btn__hover_list" @click="otherReply(item.id, item.replyUserName)" class=" text-content text-df">
+						<view hover-class="wsui-btn__hover_list" @click="otherReply(item.id, item.replyUserName)" class=" text-content text-df" style="margin:10upx 0upx 30upx 0upx;">
 							{{item.info}}
 						</view>
+						
 						<view class="text-sm">
 							{{item.createTime}}
 						</view>
@@ -123,7 +132,7 @@
 							<view class=" text-sm" v-for="(item2,index2) in item.replys" :key="index2" style="margin-left: 20upx;margin-bottom: 10upx;">
 								<view hover-class="wsui-btn__hover_list" class="flex">
 									<!-- <view class="cu-avatar round sm" :style="'background-image:url('+item2.replyUserPortrait+');'"></view> -->
-									<view class=" text-purple margin-lr-ms" v-if="item.id==item2.reply.replyId">{{item2.nickName}}:</view>
+									<view class=" text-purple margin-lr-ms" v-if="item.id==item2.reply.replyId">{{item2.nickName}}:&nbsp;</view>
 									<view class="margin-lr-ms" v-if="item.id!=item2.reply.replyId"><text class="text-purple margin-lr-ms">{{item2.nickName}}</text>回复
 										<text class="text-purple margin-lr-ms">{{item2.replyedUserNickName}}</text>:</view>
 									<view @click="otherReply(item2.reply.id, item2.nickName)" class="flex-sub">{{item2.reply.info}}</view>
@@ -450,7 +459,6 @@
 			})
 		}, 
 
-
 		onBackPress(options) {
 			console.log("hree")
 			
@@ -459,6 +467,12 @@
 </script>
 
 <style>
+	.Myalign {
+		text-align-last: justify;
+		text-align: justify;
+		text-justify: distribute-all-lines;
+	}
+	
 	.text-bold {
 		font-weight: bold;
 	}

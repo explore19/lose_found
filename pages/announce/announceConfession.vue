@@ -32,7 +32,6 @@
 						<view>
 							<textarea v-model="form.details" @input="textareaAInput" maxlength="-1"  style="font-size: 12px;" value="" placeholder="大声对喜欢的那个他(她)表白吧~" />
 
-
 							<view class="cu-bar bg-white margin-top">
 									<view class="action">
 										图片上传
@@ -64,10 +63,7 @@
 											<switch color="#FFCC33" @change="switchChange" style="transform:scale(0.7)" />
 									</view>
 								</view>
-								
-								
-								
-								
+
 		 					</view>
 		 				</view>
 		 			</view>
@@ -127,7 +123,6 @@
 		},
 		methods: {
 			switchChange: function (e) {
-				console.log('switch1 发生 change 事件，携带值为', e.detail.value)
 				if (e.detail.value === true){
 					var result=Math.floor(Math.random()*(4+1));
 					console.log(result)
