@@ -58,10 +58,11 @@
 				<view v-if="data.post.postType != 2 && data.post.postType === 0" style="margin:20upx 30upx;">丢失时间：{{data.post.loseTime}}</view>
 				<view v-if="data.post.postType != 2 && data.post.postType === 1" style="margin:20upx 30upx;">拾取地点：{{data.post.lostPlace}}</view>
 				<view v-if="data.post.postType != 2 && data.post.postType === 1" style="margin:20upx 30upx;">拾取时间：{{data.post.loseTime}}</view>
-				<view v-if="data.post.contact && data.post.postType != 2 " style="margin:20upx 30upx;">手机&emsp;号：{{data.post.contact}}</view>
-				<view v-if="data.post.qq && data.post.postType != 2 " style="margin:20upx 30upx;">q&emsp;q&emsp;号：{{data.post.qq}}</view>
 				<view v-if="data.post.type && data.post.postType != 2" style="margin:20upx 30upx;">物品类型：{{typeName}}</view>
-				<view v-if="data.post.postType != 2" style="margin:20upx 30upx;">详&emsp;&emsp;情：{{data.post.details}}</view>
+				<view v-if="data.post.contact && data.post.postType != 2 " style="margin:20upx 30upx;">手机号：{{data.post.contact}}</view>
+				<view v-if="data.post.qq && data.post.postType != 2 " style="margin:20upx 30upx;">QQ：{{data.post.qq}}</view>
+				
+				<view v-if="data.post.postType != 2" style="margin:20upx 30upx;">详情：{{data.post.details}}</view>
 				<view v-if="data.post.postType == 2" style="margin:20upx 30upx;">{{data.post.details}}</view>
 				<view class="grid flex-sub padding-lr col-3 grid-square" v-if="hasImg">
 					<!-- <view class="bg-img" :style="'background-image:url('+item+');'" v-for="(item,index) in image" :key="index">
@@ -158,8 +159,8 @@
 				<view class="action" @click="confirmShare">
 					<text class="cuIcon-roundaddfill text-grey"></text>
 				</view>
-				<input id="input1" :adjust-position="true" class="solid-bottom " maxlength="300" :placeholder="placeholderText"
-				 cursor-spacing="500rpx" v-model="replyForm.info"></input>
+				<input id="input1" :adjust-position="true" :confirm-type:"send" class="solid-bottom " maxlength="300" :placeholder="placeholderText"
+				 cursor-spacing="20rpx" v-model="replyForm.info"></input>
 				<view class="action">
 					<text class="cuIcon-emojifill text-grey"></text>
 				</view>

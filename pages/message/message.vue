@@ -180,10 +180,13 @@
 		onHide: function(options) {
 			this.$api.updateDisreadMessage().then((res) => {
 				this.disreadMessageCounts = 0
-				uni.setTabBarBadge({
+				// uni.setTabBarBadge({
+				// 	index: 1,
+				// 	text: this.disreadMessageCounts + ''
+				// });
+				wx.removeTabBarBadge({
 					index: 1,
-					text: this.disreadMessageCounts + ''
-				});
+				})
 			})
 		},
 	}

@@ -24,11 +24,12 @@
 						</view>
 					</swiper-item>
 				</swiper> -->
-				
-				<swiper class="['screen-swiper',dotStyle?'square-dot':'round-dot']" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" @change="cardSwiper">
+
+				<swiper class="['screen-swiper',dotStyle?'square-dot':'round-dot']" indicator-dots="true" circular="true" autoplay="true"
+				 interval="5000" duration="500" @change="cardSwiper">
 					<swiper-item v-for="(item,index) in rotationChartList" :key="index" :class="cardCur==index?'cur':''" v-on:click="jumpHtml(item)">
-							<image :src="item.url" mode="aspectFill"></image>
-							<video :src="item.url" autoplay loop muted="true" show-play-btn="false" controls="false" objectFit="cover" v-if="item.type == 'video'"></video>
+						<image :src="item.url" mode="aspectFill"></image>
+						<video :src="item.url" autoplay loop muted="true" show-play-btn="false" controls="false" objectFit="cover" v-if="item.type == 'video'"></video>
 					</swiper-item>
 				</swiper>
 			</view>
@@ -40,7 +41,7 @@
 						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
 					</view> -->
 
-					<view v-for="(item,index) in data" :key="index" v-if="item.post.postType==0"  style="margin-top: 15upx;">
+					<view v-for="(item,index) in data" :key="index" v-if="item.post.postType==0" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
 							<view class="cu-card dynamic no-card">
 								<view class="cu-item shadow">
@@ -60,13 +61,13 @@
 													</view>
 													<view class="huati text-orange text-bold">#失物寻物#</view>
 												</view>
-												
+
 												<view class="henflex">
 													<view class="text-gray text-sm flex justify-between">
 														{{item.post.createTime}}
 													</view>
 												</view>
-												
+
 											</view>
 										</view>
 
@@ -225,10 +226,10 @@
 												</view>
 											</view>
 										</view>
-										
+
 										<view v-if="item.post.type == 101" class="cu-item borderLine">
 											<!-- <view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view> -->
-										<image class="cu-avatar round lg" :src="getAnonymousProtrait(item.post.id)" mode=""></image>
+											<image class="cu-avatar round lg" :src="getAnonymousProtrait(item.post.id)" mode=""></image>
 											<view class="content flex-sub padding-tbl">
 												<view class="henflex">
 													<view>一位路过的吃瓜群众</view>
@@ -240,7 +241,7 @@
 													</view>
 													<view class="huati text-pink text-bold">#表白墙#</view>
 												</view>
-										
+
 												<view class="text-gray text-sm flex justify-between">
 													{{item.post.createTime}}
 												</view>
@@ -346,14 +347,14 @@
 						icon: "message.png"
 					}
 				],
-				htmlPage: false,   //是否调用web-view
-				rotationUrl:'http://www.mercy.kim:8080' //Web-view跳转的url
+				htmlPage: false, //是否调用web-view
+				rotationUrl: 'http://www.mercy.kim:8080' //Web-view跳转的url
 			}
 		},
 
 		methods: {
 			getAnonymousProtrait(id) {
-				var result = id%5
+				var result = id % 5
 				return "../../static/anonymous" + result + ".png"
 			},
 			doMessage() {
@@ -382,7 +383,7 @@
 				})
 			},
 
-			goToperfect: function() {//用来跳转到信息完善界面
+			goToperfect: function() { //用来跳转到信息完善界面
 				uni.reLaunch({
 					url: '../user/user',
 				})
@@ -409,7 +410,7 @@
 				return true
 			},
 			requestData() { //用来重复刷新页面 重复像后端获取数据		
-				this.$api.getDisreadMessageCounts().then((res) =>{
+				this.$api.getDisreadMessageCounts().then((res) => {
 					this.disreadMessageCounts = res.data
 					this.refreshDisreadMessageCounts()
 				})
@@ -436,21 +437,28 @@
 				})
 				this.totalPageNo = this.total % this.pageSize == 0 ? (this.total / this.pageSize) : (this.total / this.pageSize + 1)
 			},
-			refreshDisreadMessageCounts(){
-				uni.setTabBarBadge({
-					index: 1,
-					text: this.disreadMessageCounts + ''
-				});
+			refreshDisreadMessageCounts() {
+				if (this.disreadMessageCounts === 0) {
+					wx.removeTabBarBadge({
+						index: 1,
+					})
+				} else {
+					uni.setTabBarBadge({
+						index: 1,
+						text: this.disreadMessageCounts + ''
+					});
+				}
+
 				// uni.$emit('refreshCounts',{disreadMessageCounts: this.disreadMessageCounts})
 			},
 			// 用来获取轮播图的信息
 			requestRotationChart() {
 				this.$api.getRotationChart(5).then((res) => {
-					
+
 					let data = res.data
 					console.log("轮播图")
 					console.log(data)
-					
+
 					if (res.status === 0) {
 						this.rotationChartList = res.data.map((item) => {
 							return {
@@ -463,10 +471,10 @@
 				})
 			},
 			// 用来跳转的
-			jumpHtml:function(e){
+			jumpHtml: function(e) {
 				console.log("success to excute")
 				uni.navigateTo({
-					url:"../testWebView/testWebView",
+					url: "../testWebView/testWebView",
 					success: (res) => {
 						this.$global.setrotationChartUrl(e.url)
 					}
@@ -474,17 +482,17 @@
 				this.rotationUrl = e.url
 				//wx.miniProgram
 			},
-			
+
 			// 当页面加载成功时
-			successLoad(){
+			successLoad() {
 				console.log("加载成功！！")
 			},
-			
+
 			// 测试用的方法
-			testInfo(e){
+			testInfo(e) {
 				//console.log(e)
 			},
-			
+
 			onTabChange(e) {
 				this.postType = e.detail.name
 				this.requestData()
