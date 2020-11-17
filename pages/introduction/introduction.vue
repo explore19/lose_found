@@ -1,8 +1,8 @@
 <template>
 	<view class="cu-card dynamic" :class="isCard?'no-card':''">
-		<view class="demo">
+<!-- 		<view class="demo">
 			<cl-message ref="message"></cl-message>
-		</view>
+		</view> -->
 
 		<view class="cu-item shadow">
 			<view class="cu-card dynamic no-card">
@@ -99,22 +99,6 @@
 		</view>
 
 
-			<!-- 			<view class="text-gray text-sm text-right padding">
-				<view class="flex vertical1">
-					<view class="text-gray text-sm">
-						<text style="font-size:180%" class="cuIcon-attentionfill margin-lr-xs">{{data.post.browsePoints}}</text>
-					</view>
-					<view class="flex text-gray text-sm vertical" @click="perfect(data.post.id,data.isPraise)">
-						<like-button></like-button>
-						<text style="font-size:180%">{{data.praiseNumber}}</text>
-					</view>
-					<view class="text-gray text-sm">
-						<text @click="postReply" style="font-size:180%" class="cuIcon-messagefill margin-lr-xs ">{{data.replyNumber}}</text>
-					</view>
-				</view>
-			</view> -->
-
-
 			<!-- 回复 -->
 			<view class="cu-list menu-avatar comment solids-top">
 				<view class="cu-item" v-for="(item,index) in replyList" :key="index">
@@ -140,30 +124,26 @@
 								</view>
 							</view>
 						</view>
-
-						<!-- 	<view class="margin-top-sm flex justify-between">
-							<view class="text-gray text-df">{{item.reply.createTime}}</view>
-						</view> -->
 					</view>
 				</view>
 			</view>
 		</view>
-
+<!-- 
 		<uni-popup ref="popupShare" type="share" @change="change">
 			<uni-popup-share title="请选择" @select="select"></uni-popup-share>
-		</uni-popup>
+		</uni-popup> -->
 
 		<view class="blank">
 			<view class="cu-bar input reply">
 				<view class="cu-avatar round" :style="'background-image:url('+headPortrait+');'"></view>
-				<view class="action" @click="confirmShare">
+	<!-- 			<view class="action" @click="confirmShare">
 					<text class="cuIcon-roundaddfill text-grey"></text>
-				</view>
-				<input id="input1" :adjust-position="true" :confirm-type:"send" class="solid-bottom " maxlength="300" :placeholder="placeholderText"
+				</view> -->
+				<input id="input1" :adjust-position="true" class="solid-bottom " maxlength="300" :placeholder="placeholderText"
 				 cursor-spacing="20rpx" v-model="replyForm.info"></input>
-				<view class="action">
+				<!-- <view class="action">
 					<text class="cuIcon-emojifill text-grey"></text>
-				</view>
+				</view> -->
 				<button :adjust-position="true" class="cu-btn bg-green round shadow-blur" @click="subreply()">发送</button>
 			</view>
 		</view>
@@ -251,9 +231,6 @@
 				var result = id%5
 				return "../../static/anonymous" + result + ".png"
 			},
-			change(e) {
-				console.log('popup ' + e.type + ' 状态', e.show)
-			},
 			select(e, done) {
 				uni.showToast({
 					title: `您选择了第${e.index+1}项：${e.item.text}`,
@@ -276,7 +253,6 @@
 					duration: 1000,
 				})
 			},
-
 			previewImg: function(item, index) {
 				uni.previewImage({
 					urls: this.image,
@@ -326,7 +302,6 @@
 						this.postData.details = this.data.post.details
 						this.postData.name = this.data.post.name
 						this.postData.updateTime = this.data.post.updateTime
-						console.log(this.postData)
 						var that = this
 						uni.setStorage({
 							key: this.$global.postId + '',
@@ -461,8 +436,7 @@
 		}, 
 
 		onBackPress(options) {
-			console.log("hree")
-			
+
 		}
 	}
 </script>

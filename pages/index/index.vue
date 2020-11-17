@@ -419,8 +419,8 @@
 					page: this.page,
 					pageSize: this.pageSize,
 					postType: this.postType,
+					status:0,
 				}).then(res => {
-					console.log(res)
 					if (res.status === 0) {
 						let data = res.data.data
 						this.total = res.data.total
