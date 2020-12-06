@@ -419,7 +419,6 @@
 					page: this.page,
 					pageSize: this.pageSize,
 					postType: this.postType,
-					status:0,
 				}).then(res => {
 					if (res.status === 0) {
 						let data = res.data.data
@@ -500,11 +499,8 @@
 
 			// 悬浮菜单的调用的方法
 			onClick: function(e) {
-				console.log("click it ")
-				console.log(e)
 				let index = e.detail.index
 				// 获得点击按钮
-				console.log(index)
 				if (index === 0) {
 					uni.navigateTo({
 						url: "../announce/announceConfession",
@@ -552,8 +548,6 @@
 		},
 
 		onReachBottom() {
-			console.log("到底了")
-			console.log(this.page)
 			if (this.isBottom()) {
 				uni.showToast({
 					title: "到底了",
