@@ -92,10 +92,11 @@
 				data: [],
 				disreadMessageCounts: 0,
 				// 悬浮菜单的元素的信息
-				button: [{
-						label: '表白',
-						icon: "Confession2.png",
-					},
+				button: [
+					// {
+					// 	label: '表白',
+					// 	icon: "Confession2.png",
+					// },
 					{
 						label: '发布',
 						icon: "message.png"
@@ -132,7 +133,7 @@
 				console.log(index)
 				if (index === 0) {
 					uni.navigateTo({
-						url: "../announce/announceConfession",
+						url: "../announce/announce",
 						success: (res) => {
 							console.log("")
 						}

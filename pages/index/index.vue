@@ -195,10 +195,7 @@
 					</view> -->
 				</van-tab>
 
-				<van-tab title="所谓伊人">
-					<!-- <view class="popup window margin-top" v-if="userstatus" style="margin-top: 5upx;">
-						<van-cell title="登录完善信息才能发布帖子,点击完善" is-link @click="goToperfect" position:margin-top />
-					</view> -->
+		<!-- 		<van-tab title="所谓伊人">
 
 					<view v-for="(item,index) in data" v-if="item.post.status == 0 && item.post.postType==2" :key="index" style="margin-top: 15upx;">
 						<view style="border: #F0FFF0">
@@ -208,13 +205,9 @@
 
 										<view v-if="item.post.type == 1" class="cu-item borderLine">
 											<view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view>
-											<!-- <image class="cu-avatar round lg" :src="item.headPortrait" mode=""></image> -->
 											<view class="content flex-sub padding-tbl">
 												<view class="henflex">
 													<view>{{item.nickName}}</view>
-													<!-- <view class="right" v-if="false">
-														<view class="cu-tag round bg-blue sm">官方</view>
-													</view> -->
 													<view class="right">
 														<view class="cu-tag round bg-blue sm">已实名</view>
 													</view>
@@ -228,14 +221,10 @@
 										</view>
 
 										<view v-if="item.post.type == 101" class="cu-item borderLine">
-											<!-- <view class="cu-avatar round lg" :style="'background-image:url('+item.headPortrait+');'"></view> -->
 											<image class="cu-avatar round lg" :src="getAnonymousProtrait(item.post.id)" mode=""></image>
 											<view class="content flex-sub padding-tbl">
 												<view class="henflex">
 													<view>一位路过的吃瓜群众</view>
-													<!-- <view class="right" v-if="false">
-														<view class="cu-tag round bg-blue sm">官方</view>
-													</view> -->
 													<view class="right">
 														<view class="cu-tag round bg-orange sm">匿名</view>
 													</view>
@@ -262,11 +251,9 @@
 											</view>
 
 											<view class="container text-align:center">
-												<!-- 分割线 -->
 												<view class="divLine"></view>
 											</view>
 										</view>
-										<!-- :class="'Heart'+(item.isPraise?'1':'') " -->
 										<view class="row">
 											<view class="ft">
 												<view class="flex">
@@ -286,7 +273,7 @@
 							</view>
 						</view>
 					</view>
-				</van-tab>
+				</van-tab> -->
 
 
 
@@ -338,10 +325,11 @@
 				dotStyle: true,
 				disreadMessageCounts: 0,
 				// 悬浮菜单的元素的信息
-				button: [{
-						label: '表白',
-						icon: "Confession1.png",
-					},
+				button: [
+					// {
+					// 	label: '表白',
+					// 	icon: "Confession1.png",
+					// },
 					{
 						label: '发布',
 						icon: "message.png"
@@ -503,7 +491,7 @@
 				// 获得点击按钮
 				if (index === 0) {
 					uni.navigateTo({
-						url: "../announce/announceConfession",
+						url: "../announce/announce",
 						// url: "../user/user",
 						success: (res) => {
 							console.log("suces")

@@ -2,8 +2,8 @@
 	<view class="">
 
 		<!--悬浮菜单栏-->
-		<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
-		 v-bind:buttons="button" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" />
+	<!-- 	<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
+		 v-bind:buttons="button" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" /> -->
 
 		<!-- 		 <van-nav-bar title="标题" left-text="返回" left-arrow placeholder=true>
 		   <template #right>

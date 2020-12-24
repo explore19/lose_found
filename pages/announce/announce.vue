@@ -2,8 +2,8 @@
 	<view class="">
 
 		<!--悬浮菜单栏-->
-		<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
-		 v-bind:buttons="button" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" />
+	<!-- 	<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
+		 v-bind:buttons="button" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" /> -->
 
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog type="success" message="成功消息" content="请您先登录并且完成实名认证才能发帖" :duration="2000" :before-close="true"
@@ -307,11 +307,9 @@
 			},
 			// 悬浮菜单的调用的方法
 			ClickChange: function(e) {
-				console.log("click it")
-				console.log(e)
 				let index = e.detail.index
 				// 获得点击按钮
-				console.log(index)
+				console.log('11'+index)
 				if (index === 2) {
 					uni.switchTab({
 						url: "../index/index",
