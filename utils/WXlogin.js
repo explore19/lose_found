@@ -7,13 +7,13 @@ WXlogin.wxlogin = () => {
 	 wx.login({
 		success: (res) => {
 		api.login(res.code).then((res)=>{
-			if(res.status===0){
+
 				api.getUserInfo().then((res)=>{
 					uni.switchTab({
 						url: "/pages/index/index"
 					})
 				})
-			}
+			
 		})
 		}
 	})

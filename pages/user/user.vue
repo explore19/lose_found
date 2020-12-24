@@ -143,7 +143,7 @@
 		data() {
 			return {
 				popup: 0,
-				UserStatus: "",
+				UserStatus: 3,
 				name: "",
 				sno: "",
 				head_portrait: "",

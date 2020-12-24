@@ -2,9 +2,9 @@ import WXlogin from './WXlogin.js'
 
 const request = {}
 const headers = {}
-// const baseUrl = "https://guetlf.guet.edu.cn"
+const baseUrl = "https://guetlf.guet.edu.cn"
 
-const baseUrl = "http://172.16.65.172:8000"
+// const baseUrl = "http://172.16.65.172:8000"
 
 //39.108.220.199
 let cookie = ''
