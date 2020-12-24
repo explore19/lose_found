@@ -57,12 +57,12 @@
 								
 								<van-divider />
 								
-								<view class="uni-list">
+								<!-- <view class="uni-list">
 									<view class="uni-list-cell uni-list-cell-pd">
 											<view class="uni-list-cell-db">是否匿名</view>
 											<switch color="#FFCC33" @change="switchChange" style="transform:scale(0.7)" />
 									</view>
-								</view>
+								</view> -->
 
 		 					</view>
 		 				</view>
