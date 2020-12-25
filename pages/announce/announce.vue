@@ -2,7 +2,7 @@
 	<view class="">
 
 		<!--悬浮菜单栏-->
-	<!-- 	<wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
+		<!-- <wux-fab-button position="bottomRight" theme="balanced" direction="vertical" spaceBetween="20" sAngle="180" eAngle="270"
 		 v-bind:buttons="button" @click="ClickChange()" v-bind:contact="onContact" v-bind:getuserinfo="onGotUserInfo" /> -->
 
 		<uni-popup ref="popup" type="dialog">
@@ -149,14 +149,14 @@
 						<input v-model="form.qq" name="qq" style="text-align: right;" placeholder="(必填)"></input>
 					</view>
 
-					<view class="cu-form-group">
+<!-- 					<view class="cu-form-group">
 						<view class="uni-list">
 							<view class="uni-list-cell uni-list-cell-pd">
 								<view class="uni-list-cell-db">是否将拾物送到活动中心221</view>
 								<switch color="#FFCC33" @change="switchChange" style="transform:scale(0.7)" />
 							</view>
 						</view>
-					</view>
+					</view> -->
 
 					<view class="cu-form-group align-start">
 						<view class="title">拾物详情</view>
@@ -249,13 +249,6 @@
 			}
 		},
 		methods: {
-			switchChange: function(e) {
-				if (e.detail.value === true) {
-					this.form.type = 102
-				} else {
-					this.form.type = 1
-				}
-			},
 			doMessage() {
 				var that = this
 					.$refs["message"].open({
@@ -307,9 +300,11 @@
 			},
 			// 悬浮菜单的调用的方法
 			ClickChange: function(e) {
+				console.log("click it")
+				console.log(e)
 				let index = e.detail.index
 				// 获得点击按钮
-				console.log('11'+index)
+				console.log(index)
 				if (index === 2) {
 					uni.switchTab({
 						url: "../index/index",

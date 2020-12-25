@@ -87,11 +87,11 @@
 						value: -1
 					}, {
 						text: '拾物',
-						value: 0
+						value: 1
 					},
 					{
 						text: '失物',
-						value: 1
+						value: 0
 					}
 				],
 				itemTypeOption: [], //物品的类型
